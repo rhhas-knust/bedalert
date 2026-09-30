@@ -1,84 +1,78 @@
-# Deployment & Team Sharing Guide
+# Deploying BedAlert
 
-Two separate things, do both:
+Three free services, each used once:
 
-- **GitHub** → your team can see, edit, and run the code
-- **Live URLs (Render + Vercel)** → pilot testers can use the app with zero setup, just a link
+| Service | Hosts | Free-tier limit that matters |
+|---|---|---|
+| **Supabase** | Postgres database + staff login (Supabase Auth) | 2 active projects per account; pauses after 7 days of no activity |
+| **Render** | The API (`backend/`) | Sleeps after inactivity, 30–60 s to wake |
+| **Vercel** | The web apps (`frontend/`), all from **one** project | — |
 
-Both are free for this scale of use.
+The separate citizen / hospital / dispatch apps planned for Phase 2 will be
+built from the same Vercel project (separate pages and bundles), so we never
+need more than one project on each service.
 
----
+> Before real patients depend on BedAlert, move Supabase and Render to paid
+> plans. A bed service that sleeps or pauses is not safe in an emergency.
 
-## Part A — Share the code with your team via GitHub
+## 1. Supabase (database + staff login)
 
-1. Create a GitHub account if you don't have one, then create a new repo
-   (e.g. `bedalert`) at github.com/new. Keep it **private** for now, add your
-   teammates under Settings → Collaborators.
+Free accounts can have 2 active projects. If both are in use, pause one
+(Project → Settings → General → Pause project) or upgrade.
 
-2. In VS Code, open a terminal at the project root (`bedalert-app/`):
+1. Create a project named `bedalert`. Pick the region closest to Ghana
+   (e.g. `eu-west` / London).
+2. Apply the schema, either:
+   - `supabase link --project-ref <ref> && supabase db push` from the repo root, or
+   - set `DATABASE_URL` to the project's connection string and run
+     `python -m scripts.migrate` in `backend/` (Render does this on every start).
+3. Authentication → Providers: enable **Email**. Turn off public sign-ups
+   if you want to invite staff only.
+4. Note the JWKS URL: `https://<ref>.supabase.co/auth/v1/.well-known/jwks.json`.
+5. Create your own account (Authentication → Users → Add user), copy its
+   user id, and make yourself the first network admin:
+
    ```bash
-   git init
-   git add .
-   git commit -m "BedAlert v0.2 — pilot-ready web app + USSD"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/bedalert.git
-   git push -u origin main
+   cd backend
+   DATABASE_URL=<supabase connection string> \
+     python -m scripts.grant_role --user-id <uuid> --email you@example.com --role network_admin
    ```
 
-3. Your teammates run:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/bedalert.git
-   ```
-   then follow the existing README to run backend + frontend locally.
+Every table has row level security switched on with no policies, so the
+Supabase browser keys cannot read or write BedAlert data directly. Only the
+API can.
 
-4. Add a `.gitignore` first so you don't commit dependency folders (see below).
+## 2. Render (API)
 
----
+1. New → Blueprint → pick this repo. `render.yaml` sets everything up.
+2. Fill the variables marked "sync: false":
+   - `DATABASE_URL`: Supabase connection string (session pooler)
+   - `CORS_ORIGINS`: your Vercel URL, e.g. `https://bedalert.vercel.app`
+   - `SUPABASE_JWKS_URL`: from step 1.4
+   - `AT_USERNAME` / `AT_API_KEY`: Africa's Talking (use `sandbox` to start)
+3. Render generates `CITIZEN_TOKEN_SECRET`, `HASH_PEPPER` and
+   `USSD_CALLBACK_SECRET`. **Never change `HASH_PEPPER` later**; it would
+   invalidate every hospital API key.
+4. Check `https://<your-api>.onrender.com/v1/health`.
 
-## Part B — Deploy live so pilot testers don't need VS Code
+The API refuses to start in production if a secret is missing or
+`SMS_PROVIDER` is still `console`.
 
-### Backend → Render
+## 3. USSD + SMS (Africa's Talking)
 
-1. Go to render.com, sign up (free), connect your GitHub repo.
-2. New → Web Service → select your `bedalert` repo.
-3. Render should detect `render.yaml` automatically. If not, set manually:
-   - Root directory: `backend`
-   - Build command: `pip install -r requirements.txt`
-   - Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-4. Deploy. You'll get a URL like `https://bedalert-backend.onrender.com`.
-5. Test it: visit `https://bedalert-backend.onrender.com/docs` — you should
-   see the FastAPI docs page.
+1. Create an Africa's Talking account; start in the sandbox.
+2. USSD → create a channel. Callback URL:
+   `https://<your-api>.onrender.com/v1/ussd?key=<USSD_CALLBACK_SECRET>`
+3. Test with the Africa's Talking simulator. A dedicated short code on
+   MTN / Telecel / AT takes weeks to provision, so apply early.
 
-Note: Render's free tier sleeps after inactivity and takes ~30–60 seconds to
-wake up on the first request. Warn your pilot testers, or open the URL
-yourself 2 minutes before a session starts.
+## 4. Vercel (web apps)
 
-### Frontend → Vercel
+Import the repo, set root directory to `frontend`, and set
+`VITE_API_URL=https://<your-api>.onrender.com`. (Phase 2 will add the
+Supabase URL and publishable key for staff login.)
 
-1. Go to vercel.com, sign up (free), import your GitHub repo.
-2. Set root directory to `frontend`.
-3. Add an environment variable:
-   - `VITE_API_URL` = `https://bedalert-backend.onrender.com` (your Render URL from above, no trailing slash)
-4. Deploy. You'll get a URL like `https://bedalert.vercel.app`.
+## Local development
 
-That URL is what you send to pilot testers and what you present on Demo Day —
-no localhost, no setup, works on their phone browser too.
-
-### Redeploying after changes
-
-Both Render and Vercel auto-redeploy when you `git push` to `main`. So the
-workflow becomes: edit code in VS Code → commit → push → both services update
-automatically within a minute or two.
-
----
-
-## .gitignore (add this before your first commit)
-
-```
-node_modules/
-dist/
-venv/
-__pycache__/
-*.pyc
-.env
-```
+See the README. No Supabase needed: in `BEDALERT_ENV=dev` the API issues
+its own demo staff tokens.

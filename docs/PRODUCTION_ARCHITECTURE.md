@@ -1,6 +1,6 @@
 # BedAlert — From Demo to Real-World System
 
-**Status:** proposal, September 2026
+**Status:** Phase 1 built (see README); Phases 2–4 proposed. September 2026
 **Problem:** "No bed syndrome." Patients in Ghana, often in emergencies, are
 driven from hospital to hospital and turned away because there is no bed.
 Some die on the way. Nobody (patient, relative, ambulance crew) knows where
@@ -198,15 +198,17 @@ bedalert/
   docs/                    This file, API reference for hospitals, pilot plan
 ```
 
-Each app is its own Vercel project with its own URL (for example
-`bedalert.gh`, `dispatch.bedalert.gh`, `hospital.bedalert.gh`), so the public
-never even loads the dispatcher or hospital code.
+**Hosting within free-tier limits:** all web apps are built from ONE Vercel
+project as separate pages with separate bundles (e.g. `/`, `/hospital`,
+`/dispatch`), so the public never loads staff code, and we only ever need one
+Supabase project, one Render service and one Vercel project. Security does
+not depend on the split: every API route checks the caller's role.
 
 ---
 
 ## 4. Build plan (phased)
 
-**Phase 1 — Real foundation (≈2–3 weeks)**
+**Phase 1 — Real foundation ✅ done**
 1. Postgres schema: `hospitals`, `wards`, `bed_snapshots`, `holds`,
    `users`, `memberships` (user ↔ hospital/agency + role), `api_keys`,
    `audit_log`.
@@ -244,12 +246,12 @@ never even loads the dispatcher or hospital code.
 
 ## 5. Decisions needed from the team
 
-1. **Auth provider:** Supabase Auth (fastest, gives phone OTP) vs. building
-   it in FastAPI. *Recommendation: Supabase Postgres + Supabase Auth, keep
-   FastAPI for business logic.*
+1. ~~Auth provider~~ Decided: Supabase Postgres + Supabase Auth for staff;
+   citizen phone OTP is run by BedAlert itself so it can use a Ghanaian SMS
+   provider (Africa's Talking).
 2. **First pilot district** and which hospital to approach first.
 3. **SMS/USSD aggregator** (Africa's Talking vs. Hubtel vs. Arkesel):
    compare pricing and short-code lead time.
-4. **Which phase to start coding.** *Recommendation: Phase 1*, because
-   splitting the apps without auth and a real database just gives you four
-   insecure demos instead of one.
+4. ~~Which phase first~~ Phase 1 done. Next: Phase 2 (split the apps).
+5. **A Supabase slot:** the free plan allows 2 active projects; BedAlert
+   needs one of them (or Supabase Pro).
