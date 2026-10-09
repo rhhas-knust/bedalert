@@ -66,3 +66,17 @@ Listed on the final slide of the video and here:
 3. 120–150% occupancy at major hospitals: GRNMA statement (Mar 2026).
 4. About 42 ambulances available in Greater Accra: National Ambulance Service
    dispatch head, Citi Newsroom (Jun 2025). Population: Ghana 2021 Census.
+
+## 60-second teaser
+
+Cut from a rendered full video at line boundaries, with crossfades:
+
+```bash
+python teaser.py out/bedalert-no-bed-syndrome-vertical-robert.mp4 out/bedalert-teaser-vertical-robert.mp4 \
+  0.0-5.7 7.4-15.7 23.0-48.4 93.5-102.9 186.7-189.6 235.85-245.1
+```
+
+Hook → accident → ambulance turned away three times (118 minutes) →
+BedAlert reveal → "Together, we can end no bed syndrome" → Robert's closing
+line and logo. Times are for Robert's voiced render; take new ones from
+`build/timings.json` if the narration changes.
