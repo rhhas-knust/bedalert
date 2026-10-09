@@ -1,6 +1,8 @@
 """Render scenes.html + narration into an MP4.
 
-    python render.py <build_dir> <fonts_dir> <out.mp4> [--preview t1,t2,...]
+    python render.py <build_dir> <fonts_dir> <out.mp4> [--portrait] [--preview t1,t2,...]
+
+--portrait renders the vertical 1080x1920 (TikTok / Reels / Shorts) layout.
 
 build_dir must contain narration.wav and timings.json (from narrate.py).
 """
@@ -14,8 +16,13 @@ import imageio_ffmpeg
 from playwright.sync_api import sync_playwright
 
 HERE = pathlib.Path(__file__).parent
-build, fonts, out = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2]), pathlib.Path(sys.argv[3])
-preview = [float(x) for x in sys.argv[5].split(",")] if len(sys.argv) > 5 and sys.argv[4] == "--preview" else None
+args = sys.argv[1:]
+portrait = "--portrait" in args
+if portrait:
+    args.remove("--portrait")
+build, fonts, out = pathlib.Path(args[0]), pathlib.Path(args[1]), pathlib.Path(args[2])
+preview = [float(x) for x in args[4].split(",")] if len(args) > 4 and args[3] == "--preview" else None
+W, H = (1080, 1920) if portrait else (1920, 1080)
 FPS = 30
 CHROME = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
@@ -30,7 +37,7 @@ duration = timings["duration"]
 
 with sync_playwright() as pw:
     browser = pw.chromium.launch(executable_path=CHROME if pathlib.Path(CHROME).exists() else None)
-    page = browser.new_page(viewport={"width": 1920, "height": 1080})
+    page = browser.new_page(viewport={"width": W, "height": H})
     page.add_init_script(f"window.TIMINGS = {json.dumps(timings)};")
     page.on("pageerror", lambda e: print("PAGE ERROR:", e))
     page.on("console", lambda m: print("CONSOLE:", m.text) if m.type == "error" else None)
@@ -39,7 +46,7 @@ with sync_playwright() as pw:
     if preview:
         for t in preview:
             page.evaluate(f"render({t})")
-            page.screenshot(path=str(build / f"preview_{t:06.1f}.png"))
+            page.screenshot(path=str(build / f"preview{'_v' if portrait else ''}_{t:06.1f}.png"))
         print("previews written")
         sys.exit(0)
     video_only = build / "video_only.mp4"

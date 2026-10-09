@@ -3,7 +3,8 @@
 A ~3-minute animated explainer: what "no bed syndrome" is, the numbers behind it, and
 what BedAlert is building. Narrated (AI voice) with on-screen captions.
 
-- `NARRATION.md`: the script, to re-record in your own voice
+- `RECORDING_SCRIPT.md`: numbered lines + instructions for recording your own voice
+- `NARRATION.md`: the same script with performance notes
 - `script.json`: the same text, plus how the AI voice should pronounce it
 - `scenes.html`: the scenes and their timing
 - `anim.js`: the animated illustrations (street, car, ambulance, avatars, maps)
@@ -25,6 +26,29 @@ python narrate.py kokoro-v1.0.onnx voices-v1.0.bin build/          # voice + tim
 python pad.py <duration> <solution-scene-start> build/pad.wav   # both from build/timings.json
 python render.py build/ <fonts-folder> out/bedalert-no-bed-syndrome.mp4
 ```
+
+Vertical (9:16) version for TikTok / Reels / Shorts: add `--portrait`:
+
+```bash
+python render.py build/ <fonts-folder> out/bedalert-no-bed-syndrome-vertical.mp4 --portrait
+```
+
+## Using your own voice
+
+1. Record `RECORDING_SCRIPT.md` on your phone: every numbered line in order,
+   with about 2 seconds of silence between lines, in one take.
+2. Put the file in `media/intro-video/voice/` (any audio format).
+3. Replace step 1 of the rebuild (`narrate.py`) with:
+
+```bash
+python import_voice.py voice/<your-file> build/
+```
+
+It cleans up the audio, cuts it at your pauses, matches each piece to its
+line, and writes the same `narration.wav` + `timings.json`, so the
+animation and captions follow your pacing. Then run `pad.py` and
+`render.py` as usual. If it can't match the lines (a line skipped, or a long
+pause in the middle of a line), it tells you what it found.
 
 To change a name or a sentence, edit `script.json` (and `scenes.html` for
 on-screen text such as the credits), then rebuild all three steps.
