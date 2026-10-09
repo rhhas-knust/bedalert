@@ -62,7 +62,7 @@ with sync_playwright() as pw:
 subprocess.run(
     [FFMPEG, "-y", "-loglevel", "error", "-i", str(video_only), "-i", str(build / "narration.wav"), "-i", str(build / "pad.wav"),
      "-filter_complex",
-     "[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[v];[2:a]volume=0.22,aresample=48000[m];"
+     "[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[v];[2:a]volume=0.26,aresample=48000[m];"
      "[v][m]amix=inputs=2:duration=first:normalize=0[a]",
      "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out)],
     check=True,

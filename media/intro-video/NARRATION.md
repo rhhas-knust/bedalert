@@ -1,6 +1,6 @@
 # BedAlert — No Bed Syndrome (narration script)
 
-Read at a calm pace; about 3 minutes 15 seconds. Pause where marked so the animation can play (the ambulance drives between hospitals). Captions in the video use this exact text.
+About 3 minutes 30 seconds. Read the first half (the story and the numbers) calmly; from "So we are building BedAlert" on, lift the energy: warmer, faster, hopeful. Pause where marked so the animation can play. Captions in the video use this exact text.
 
 ## Opening
 
@@ -30,38 +30,41 @@ But beds are only part of the problem. The deeper failure is information.
 When an ambulance leaves the scene, nobody knows which hospital has a free bed.
 Crews find out by driving there. Every wrong stop costs minutes a patient may not have.
 
-## BedAlert
+## BedAlert (energy up from here)
 
-That is why we are building BedAlert: a live, shared view of free hospital beds across Ghana.
+So we are building BedAlert: one live view of every free hospital bed, so nobody has to search blind ever again!
 
 ## For hospitals
 
-Hospitals update their free beds with one tap, or connect their own systems so the numbers update automatically.
+Hospitals update their free beds in one tap, or connect their own systems so the numbers update automatically.
+And when a patient is on the way, the ward gets an alert, and accepts or declines with a single tap.
+The bed is ready before the ambulance even arrives.  *(pause 2 s)*
 
 ## For dispatchers
 
-Ambulance dispatchers see the nearest hospital with a confirmed free bed, and hold it before the ambulance moves.
-If a hospital declines, BedAlert immediately holds a bed at the next one.
+Ambulance dispatchers see the nearest hospital with a confirmed free bed, and lock it in before the ambulance even moves.
+And if a hospital declines? BedAlert instantly finds the next one.
 
 ## For families
 
-Families can find and hold a bed from a phone browser.
-And people without smartphones or data can dial a USSD code, and get their confirmation by SMS.
+Families can find a free bed near them, and hold it, right from their phone.  *(pause 2 s)*
+No smartphone? No data? No problem. Dial a short code, and the confirmation arrives by SMS.  *(pause 2 s)*
 
 ## Built to be trusted
 
-A held bed is released automatically if the patient doesn't arrive, so beds are never locked away.
-Out-of-date numbers are flagged, not hidden. And BedAlert shares bed counts, never patient records.
+Held beds are released automatically if the patient doesn't come, so no bed sits empty.
+Old numbers are flagged, never hidden. And we share bed counts, never patient records.
 
 ## Where we are
 
 The core system is already built and tested.
-Next: the hospital, dispatcher and citizen apps, real SMS and USSD, and a pilot with hospitals and an ambulance station in one district.
+Next, we launch the apps for hospitals, dispatchers and families, connect real SMS and USSD, and pilot in our first district.
 
 ## Join us
 
-We are looking for partner hospitals, the National Ambulance Service, and health leaders ready to end no bed syndrome.
-No patient should die looking for a bed.
+We are looking for partner hospitals, the National Ambulance Service, and health leaders who believe this can change.
+Together, we can end no bed syndrome.
+Because no patient should ever die looking for a bed.
 
 ## Credits
 

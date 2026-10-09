@@ -105,63 +105,80 @@
    "pad": 0.8,
    "lines": [
     {
-     "text": "That is why we are building BedAlert: a live, shared view of free hospital beds across Ghana.",
-     "say": "That is why we are building Bed Alert. A live, shared view of free hospital beds across Ghana."
+     "text": "So we are building BedAlert: one live view of every free hospital bed, so nobody has to search blind ever again!",
+     "say": "So we are building Bed Alert! One live view of every free hospital bed, so nobody has to search blind, ever again!"
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "hospitals",
    "pad": 0.6,
    "lines": [
     {
-     "text": "Hospitals update their free beds with one tap, or connect their own systems so the numbers update automatically.",
-     "say": "Hospitals update their free beds with one tap, or connect their own systems, so the numbers update automatically."
+     "text": "Hospitals update their free beds in one tap, or connect their own systems so the numbers update automatically.",
+     "say": "Hospitals update their free beds in one tap, or connect their own systems, so the numbers update automatically.",
+     "gap": 0.8
+    },
+    {
+     "text": "And when a patient is on the way, the ward gets an alert, and accepts or declines with a single tap.",
+     "say": "And when a patient is on the way, the ward gets an alert, and accepts or declines with a single tap.",
+     "gap": 0.5
+    },
+    {
+     "text": "The bed is ready before the ambulance even arrives.",
+     "say": "The bed is ready before the ambulance even arrives.",
+     "gap": 1.6
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "dispatch",
    "pad": 0.6,
    "lines": [
     {
-     "text": "Ambulance dispatchers see the nearest hospital with a confirmed free bed, and hold it before the ambulance moves.",
-     "say": "Ambulance dispatchers see the nearest hospital with a confirmed free bed, and hold it before the ambulance moves."
+     "text": "Ambulance dispatchers see the nearest hospital with a confirmed free bed, and lock it in before the ambulance even moves.",
+     "say": "Ambulance dispatchers see the nearest hospital with a confirmed free bed, and lock it in before the ambulance even moves."
     },
     {
-     "text": "If a hospital declines, BedAlert immediately holds a bed at the next one.",
-     "say": "If a hospital declines, Bed Alert immediately holds a bed at the next one."
+     "text": "And if a hospital declines? BedAlert instantly finds the next one.",
+     "say": "And if a hospital declines? Bed Alert instantly finds the next one!"
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "citizens",
    "pad": 0.6,
    "lines": [
     {
-     "text": "Families can find and hold a bed from a phone browser.",
-     "say": "Families can find and hold a bed from a phone browser.",
-     "speed": 0.88
+     "text": "Families can find a free bed near them, and hold it, right from their phone.",
+     "say": "Families can find a free bed near them, and hold it, right from their phone.",
+     "gap": 2.2
     },
     {
-     "text": "And people without smartphones or data can dial a USSD code, and get their confirmation by SMS.",
-     "say": "And people without smartphones or data can dial a U S S D code, and get their confirmation by S M S."
+     "text": "No smartphone? No data? No problem. Dial a short code, and the confirmation arrives by SMS.",
+     "say": "No smartphone? No data? No problem! Dial a short code, and the confirmation arrives by S M S.",
+     "gap": 1.8
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "trust",
    "pad": 0.8,
    "lines": [
     {
-     "text": "A held bed is released automatically if the patient doesn't arrive, so beds are never locked away.",
-     "say": "A held bed is released automatically if the patient doesn't arrive, so beds are never locked away."
+     "text": "Held beds are released automatically if the patient doesn't come, so no bed sits empty.",
+     "say": "Held beds are released automatically if the patient doesn't come, so no bed sits empty."
     },
     {
-     "text": "Out-of-date numbers are flagged, not hidden. And BedAlert shares bed counts, never patient records.",
-     "say": "Out of date numbers are flagged, not hidden. And Bed Alert shares bed counts, never patient records."
+     "text": "Old numbers are flagged, never hidden. And we share bed counts, never patient records.",
+     "say": "Old numbers are flagged, never hidden. And we share bed counts, never patient records."
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "roadmap",
@@ -170,28 +187,37 @@
     {
      "text": "The core system is already built and tested.",
      "say": "The core system is already built and tested.",
-     "speed": 0.88
+     "speed": 0.95
     },
     {
-     "text": "Next: the hospital, dispatcher and citizen apps, real SMS and USSD, and a pilot with hospitals and an ambulance station in one district.",
-     "say": "Next, the hospital, dispatcher and citizen apps, real S M S and U S S D, and a pilot with hospitals and an ambulance station in one district."
+     "text": "Next, we launch the apps for hospitals, dispatchers and families, connect real SMS and USSD, and pilot in our first district.",
+     "say": "Next, we launch the apps for hospitals, dispatchers and families, connect real S M S and U S S D, and pilot in our first district!"
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "ask",
    "pad": 1.2,
    "lines": [
     {
-     "text": "We are looking for partner hospitals, the National Ambulance Service, and health leaders ready to end no bed syndrome.",
-     "say": "We are looking for partner hospitals, the National Ambulance Service, and health leaders ready to end no bed syndrome."
+     "text": "We are looking for partner hospitals, the National Ambulance Service, and health leaders who believe this can change.",
+     "say": "We are looking for partner hospitals, the National Ambulance Service, and health leaders who believe this can change.",
+     "gap": 0.5
     },
     {
-     "text": "No patient should die looking for a bed.",
-     "say": "No patient should die looking for a bed.",
-     "speed": 0.8
+     "text": "Together, we can end no bed syndrome.",
+     "say": "Together, we can end no bed syndrome!",
+     "speed": 0.9,
+     "gap": 0.6
+    },
+    {
+     "text": "Because no patient should ever die looking for a bed.",
+     "say": "Because no patient should ever die looking for a bed.",
+     "speed": 0.82
     }
-   ]
+   ],
+   "speed": 1.0
   },
   {
    "id": "credits",

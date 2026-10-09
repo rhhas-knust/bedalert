@@ -6,7 +6,7 @@ what BedAlert is building. Narrated (AI voice) with on-screen captions.
 - `NARRATION.md`: the script, to re-record in your own voice
 - `script.json`: the same text, plus how the AI voice should pronounce it
 - `scenes.html`: the scenes and their timing
-- `anim.js`: the animated illustrations (street, car, ambulance, people, maps)
+- `anim.js`: the animated illustrations (street, car, ambulance, avatars, maps)
 - `narrate.py`, `pad.py`, `render.py`: build steps
 
 The rendered MP4 is not committed (`out/` is ignored).
@@ -22,7 +22,7 @@ and unpack them into one folder.
 
 ```bash
 python narrate.py kokoro-v1.0.onnx voices-v1.0.bin build/          # voice + timings
-python pad.py "$(python -c "import json;print(json.load(open('build/timings.json'))['duration'])")" build/pad.wav
+python pad.py <duration> <solution-scene-start> build/pad.wav   # both from build/timings.json
 python render.py build/ <fonts-folder> out/bedalert-no-bed-syndrome.mp4
 ```
 

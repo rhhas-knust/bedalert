@@ -39,6 +39,24 @@
   .endnote2 { position: absolute; left: 0; right: 0; top: 470px; text-align: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 84px; opacity: 0; }
   .topfade { position: absolute; left: 0; right: 0; top: 0; height: 330px; background: linear-gradient(#071a33ee, #071a3300); }
   #tstreet { opacity: .9; }
+  #hope { position: absolute; inset: 0; opacity: 0; background: radial-gradient(1300px 800px at 60% 25%, rgba(15,110,110,.55), rgba(15,110,110,0) 70%), radial-gradient(900px 600px at 15% 90%, rgba(232,163,61,.18), rgba(232,163,61,0) 70%); }
+  .headcard { position: absolute; left: 110px; top: 80px; background: rgba(7,26,51,.82); border-radius: 26px; padding: 30px 40px; opacity: 0; }
+  .headcard h2 { font-size: 64px; line-height: 1.04; margin-top: 12px; }
+  .portal { position: absolute; left: 1200px; top: 70px; width: 620px; background: #0b2545; border: 2px solid rgba(255,255,255,.18); border-radius: 26px; padding: 26px 30px; opacity: 0; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+  .ptop { display: flex; justify-content: space-between; font-family: "Plex Mono"; font-size: 21px; color: var(--muted); margin-bottom: 12px; }
+  .prow { display: flex; justify-content: space-between; font-size: 30px; font-weight: 600; padding: 14px 0; border-top: 1px solid var(--line); }
+  .pn { font-family: "Plex Mono"; font-weight: 700; color: var(--mint); }
+  .psync { font-family: "Plex Mono"; font-size: 19px; color: var(--mint); margin-top: 8px; opacity: 0; }
+  .alert { position: relative; margin-top: 18px; border-radius: 18px; background: #3a1e2a; border: 3px solid var(--coral); padding: 20px 22px; opacity: 0; overflow: hidden; }
+  .atop { font-family: "Plex Mono"; font-weight: 700; font-size: 24px; color: #ffb3b3; letter-spacing: .06em; }
+  .abody { font-size: 28px; font-weight: 600; margin-top: 8px; line-height: 1.35; }
+  .abody .mono { font-size: 23px; color: #ffd0d0; }
+  .abtns { display: flex; gap: 16px; margin-top: 16px; }
+  .abtns .b { flex: 1; text-align: center; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 26px; }
+  .b.acc { background: var(--mint); color: var(--navy); }
+  .b.dec { background: rgba(255,255,255,.12); color: var(--paper); }
+  .aok { display: none; margin-top: 16px; font-weight: 700; font-size: 26px; color: var(--mint); }
+  .ripple { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 4px solid #fff; opacity: 0; pointer-events: none; }
   /* title */
   #title h1 { font-size: 180px; line-height: .95; margin-top: 30px; }
   #title h1 .red { color: var(--coral); }
@@ -178,6 +196,7 @@
 </head>
 <body>
 <div class="stage">
+  <div id="hope"></div>
   <div class="brand" id="brand"><span class="dot"></span>BedAlert</div>
 
   <!-- 1. title -->
@@ -246,6 +265,7 @@
 
   <!-- 5. solution -->
   <section class="scene" id="solution">
+    <svg id="burst" class="full" viewBox="0 0 1920 1080"></svg>
     <div class="kicker">What we are building</div>
     <div class="logo" id="sol-logo"><span class="dot"></span><span class="word">BedAlert</span></div>
     <div class="tag" id="sol-tag">A live, shared view of free<br>hospital beds across Ghana.</div>
@@ -257,20 +277,23 @@
   </section>
 
   <!-- 6. hospitals -->
-  <section class="scene" id="hospitals">
-    <div class="split">
-      <div>
-        <div class="kicker">For hospitals</div>
-        <h2>One tap to update. Or fully automatic.</h2>
-        <p class="lead">Staff update free beds from the portal, or the hospital’s own system syncs through a secure API key.</p>
-        <svg id="beds" viewBox="0 0 760 190" width="760" height="190" style="margin-top:36px;overflow:visible"></svg>
-      </div>
-      <div class="panel" id="hp">
-        <div class="ward"><span>Emergency</span><span class="ctl"><span class="btn">−</span><span class="n" id="w-er">2</span><span class="btn" id="w-plus">+</span></span></div>
-        <div class="ward"><span>ICU</span><span class="ctl"><span class="btn">−</span><span class="n">0</span><span class="btn">+</span></span></div>
-        <div class="ward"><span>Maternity</span><span class="ctl"><span class="btn">−</span><span class="n">5</span><span class="btn">+</span></span></div>
-        <div class="ward"><span>General ward</span><span class="ctl"><span class="btn">−</span><span class="n" id="w-gen">14</span><span class="btn">+</span></span></div>
-        <div class="sync" id="sync">⇄ Synced from hospital system · just now</div>
+  <section class="scene" id="hospitals" style="padding:0">
+    <svg id="ward" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="headcard" id="hd-head">
+      <div class="kicker">For hospitals</div>
+      <h2>One tap to update.<br>One tap to accept.</h2>
+    </div>
+    <div class="portal" id="portal">
+      <div class="ptop"><span>BedAlert · Ward portal</span><span class="live">LIVE</span></div>
+      <div class="prow"><span>Emergency</span><span class="pn">2 free</span></div>
+      <div class="prow"><span>Ward A</span><span class="pn" id="pw-a">0 free</span></div>
+      <div class="psync" id="psync">⇄ Synced from hospital system · just now</div>
+      <div class="alert" id="alert">
+        <div class="atop">🚑 INCOMING PATIENT</div>
+        <div class="abody">Critical · Road accident<br><span class="mono">ETA 8 min · Code K7P2QX</span></div>
+        <div class="abtns"><span class="b acc" id="b-acc">Accept</span><span class="b dec" id="b-dec">Decline</span></div>
+        <div class="aok" id="a-ok">✓ Accepted · Bed 2 is being prepared</div>
+        <div class="ripple" id="ripple"></div>
       </div>
     </div>
   </section>
@@ -291,23 +314,24 @@
   </section>
 
   <!-- 8. citizens -->
-  <section class="scene" id="citizens">
-    <div class="kicker">For families · smartphone or not</div>
-    <h2 style="font-size:86px;margin-top:16px;line-height:1.02">Find a bed.<br>Hold it. Go.</h2>
-    <div class="phones" style="position:absolute;right:180px;top:110px">
-      <div class="smart" id="ph1">
-        <div class="ttl">ER beds near you</div>
-        <div class="hc">Hospital A · 2.1 km<div class="f">3 free · updated 4 min ago</div></div>
-        <div class="hc">Hospital B · 3.4 km<div class="f">1 free · updated 9 min ago</div></div>
-        <div class="cta" id="cta">Hold a bed at Hospital A</div>
-        <div class="code" id="code"><div style="font-size:22px;color:var(--muted)">Your code</div><div class="c">K7P2QX</div></div>
-      </div>
-      <div class="feature" id="ph2">
-        <div class="scr" id="ussd">*920#</div>
-        <div class="keys"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></div>
-      </div>
+  <section class="scene" id="citizens" style="padding:0">
+    <svg id="cscene" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="headcard" id="c-head">
+      <div class="kicker">For families · smartphone or not</div>
+      <h2>Find a bed.<br>Hold it. Go.</h2>
     </div>
-    <div class="sms" id="sms" style="left:140px;top:430px">BedAlert: ER bed held at Hospital A. Code <b>K7P2QX</b>. Go now. Emergency? Also call 112.</div>
+    <div class="smart" id="ph1" style="position:absolute;left:560px;top:185px;transform-origin:left center">
+      <div class="ttl">ER beds near you</div>
+      <div class="hc">Hospital A · 2.1 km<div class="f">3 free · updated 4 min ago</div></div>
+      <div class="hc">Hospital B · 3.4 km<div class="f">1 free · updated 9 min ago</div></div>
+      <div class="cta" id="cta">Hold a bed at Hospital A</div>
+      <div class="code" id="code"><div style="font-size:22px;color:var(--muted)">Your code</div><div class="c">K7P2QX</div></div>
+    </div>
+    <div class="feature" id="ph2" style="position:absolute;left:1440px;top:330px">
+      <div class="scr" id="ussd">*920#</div>
+      <div class="keys"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></div>
+    </div>
+    <div class="sms" id="sms" style="left:1300px;top:150px">BedAlert: ER bed held at Hospital A. Code <b>K7P2QX</b>. Go now. Emergency? Also call 112.</div>
   </section>
 
   <!-- 9. trust -->
@@ -396,6 +420,7 @@ const FADE = 0.5;
 })();
 
 const A = window.ANIM;
+const C_MINT = "#8FE3C6";
 const scene = id => T.scenes.find(s => s.id === id);
 const lineAt = (id, i) => scene(id).lines[i].start - scene(id).start;  // line start, relative to scene
 const lineEnd = (id, i) => scene(id).lines[i].end - scene(id).start;
@@ -461,20 +486,81 @@ const X = {};
   X.dm = [A.hospitalMarker(dm, ...D.a, "Hospital A", { small: true }), A.hospitalMarker(dm, ...D.b, "Hospital B", { small: true }), A.hospitalMarker(dm, ...D.c, "Hospital C", { small: true })];
   X.dAmb = A.makeTopAmbulance(dm);
 
-  // hospitals: ward beds
-  const bd = $("beds"); A.defs(bd); X.beds = [];
-  for (let i = 0; i < 6; i++) {
-    const g = A.E("g", { transform: `translate(${i * 124},40)` }, bd);
-    const frame = A.E("rect", { x: 0, y: 0, width: 104, height: 120, rx: 14, fill: "#17375c", stroke: "#2d5583", "stroke-width": 3 }, g);
-    A.E("rect", { x: 18, y: 10, width: 68, height: 22, rx: 8, fill: "#c9d6e3" }, g);
-    const occ = A.E("g", {}, g);
-    A.E("circle", { cx: 52, cy: 46, r: 14, fill: "#d9b48f" }, occ);
-    A.E("rect", { x: 10, y: 60, width: 84, height: 52, rx: 10, fill: "#5d7896" }, occ);
-    const free = A.E("text", { x: 52, y: 84, "text-anchor": "middle", fill: A.C.mint, "font-family": "Plex Mono", "font-weight": 700, "font-size": 22, opacity: 0 }, g);
-    free.textContent = "FREE";
-    X.beds.push({ g, frame, occ, free, empty: i === 4 });
+  // hospitals: an illustrated ward with a nurses' station
+  const W = $("ward"); A.defs(W);
+  A.E("rect", { x: 0, y: 0, width: 1920, height: 790, fill: "#cfe2e6" }, W);
+  A.E("rect", { x: 0, y: 520, width: 1920, height: 14, fill: "#b4ccd2" }, W);
+  A.E("rect", { x: 0, y: 770, width: 1920, height: 20, fill: "#8fa9b0" }, W);
+  A.E("rect", { x: 0, y: 790, width: 1920, height: 290, fill: "#9fbcc2" }, W);
+  for (let x = -200; x < 2100; x += 160) A.E("line", { x1: x, y1: 790, x2: x - 120, y2: 1080, stroke: "#b6cfd4", "stroke-width": 3 }, W);
+  for (let y = 840; y < 1080; y += 70) A.E("line", { x1: 0, y1: y, x2: 1920, y2: y, stroke: "#b6cfd4", "stroke-width": 3 }, W);
+  // window onto the street, where the ambulance will arrive
+  const clip = A.E("clipPath", { id: "winclip" }, W); A.E("rect", { x: 880, y: 110, width: 280, height: 270, rx: 10 }, clip);
+  const win = A.E("g", { "clip-path": "url(#winclip)" }, W);
+  A.E("rect", { x: 880, y: 110, width: 280, height: 270, fill: "url(#night)" }, win);
+  for (let i = 0; i < 6; i++) A.E("rect", { x: 880 + i * 50, y: 220 + (i % 3) * 20, width: 40, height: 140, fill: "#0b1d36" }, win);
+  A.E("rect", { x: 880, y: 330, width: 280, height: 50, fill: "#1b2533" }, win);
+  X.winAmb = A.makeAmbulance(win, true);
+  A.E("rect", { x: 870, y: 100, width: 300, height: 290, rx: 14, fill: "none", stroke: "#f1f6f7", "stroke-width": 16 }, W);
+  A.E("line", { x1: 1020, y1: 104, x2: 1020, y2: 386, stroke: "#f1f6f7", "stroke-width": 8 }, W);
+  A.E("text", { x: 1020, y: 430, "text-anchor": "middle", fill: "#5d7f88", "font-family": "Inter", "font-weight": 600, "font-size": 22 }, W).textContent = "Ambulance bay";
+  // beds
+  X.bed = [];
+  [90, 440, 790].forEach((x0, i) => {
+    const g = A.E("g", {}, W);
+    A.E("rect", { x: x0 + 150, y: 520, width: 8, height: 260, fill: "#9ab" }, g);            // IV pole
+    A.E("rect", { x: x0 + 132, y: 520, width: 44, height: 60, rx: 10, fill: "#e9f6ff", stroke: "#9ab", "stroke-width": 3 }, g);
+    A.E("rect", { x: x0, y: 600, width: 22, height: 170, rx: 8, fill: "#6d8f99" }, g);       // headboard
+    A.E("rect", { x: x0 + 10, y: 730, width: 300, height: 26, rx: 8, fill: "#6d8f99" }, g);   // frame
+    for (const lx of [x0 + 34, x0 + 284]) { A.E("rect", { x: lx, y: 756, width: 10, height: 64, fill: "#6d8f99" }, g); A.E("circle", { cx: lx + 5, cy: 826, r: 10, fill: "#3d5560" }, g); }
+    A.E("rect", { x: x0 + 14, y: 700, width: 296, height: 34, rx: 12, fill: "#f7fbfc" }, g); // mattress
+    A.E("ellipse", { cx: x0 + 64, cy: 694, rx: 44, ry: 16, fill: "#ffffff", stroke: "#dbe7ea", "stroke-width": 2 }, g);
+    const head = A.E("circle", { cx: x0 + 70, cy: 676, r: 24, fill: ["#6b4226", "#8d5524", "#5a3a22"][i] }, g);
+    const blanket = A.E("rect", { x: x0 + 90, y: 676, width: 214, height: 38, rx: 18, fill: ["#457b9d", "#e76f51", "#2a9d8f"][i] }, g);
+    const fresh = A.E("rect", { x: x0 + 100, y: 684, width: 204, height: 22, rx: 10, fill: "#ffffff", stroke: C_MINT, "stroke-width": 4, opacity: 0 }, g);
+    const tag = A.E("g", { opacity: 0, transform: `translate(${x0 + 160},610)` }, g);
+    A.E("rect", { x: -110, y: -26, width: 220, height: 46, rx: 12, fill: C_MINT }, tag);
+    A.E("text", { x: 0, y: 6, "text-anchor": "middle", fill: "#0B2545", "font-family": "Plex Mono", "font-weight": 700, "font-size": 22 }, tag).textContent = "BED 2 · READY";
+    const sparks = [0, 1, 2, 3].map(k => A.E("path", { d: "M0,-14 L4,-4 L14,0 L4,4 L0,14 L-4,4 L-14,0 L-4,-4 Z", fill: "#ffd166", opacity: 0, transform: `translate(${x0 + 120 + k * 50},${660 - (k % 2) * 30})` }, g));
+    A.E("text", { x: x0 + 160, y: 870, "text-anchor": "middle", fill: "#5d7f88", "font-family": "Plex Mono", "font-weight": 700, "font-size": 22 }, g).textContent = `BED ${i + 1}`;
+    X.bed.push({ head, blanket, fresh, tag, sparks, x0 });
+  });
+  X.leaver = A.makeAvatar(W, { hair: "short", shirt: "#e9c46a", pants: "#264653", skin: "#8d5524" });
+  X.nurse = A.makeAvatar(W, { hair: "nurse", shirt: "#2a9d8f", pants: "#2a9d8f", scrubs: true, skin: "#a0673d", phone: "smart" });
+  A.E("rect", { x: 1220, y: 800, width: 640, height: 30, rx: 8, fill: "#e8f1f3" }, W);           // desk top
+  A.E("rect", { x: 1240, y: 830, width: 600, height: 160, rx: 8, fill: "#5f8592" }, W);
+  A.E("text", { x: 1540, y: 925, "text-anchor": "middle", fill: "#e8f1f3", "font-family": "Space Grotesk", "font-weight": 700, "font-size": 34 }, W).textContent = "NURSES' STATION";
+  A.E("rect", { x: 1650, y: 690, width: 150, height: 104, rx: 10, fill: "#1d2c40" }, W);           // monitor
+  X.mon = A.E("rect", { x: 1660, y: 700, width: 130, height: 84, rx: 6, fill: C_MINT, opacity: 0.35 }, W);
+  A.E("rect", { x: 1715, y: 794, width: 20, height: 8, fill: "#1d2c40" }, W);
+
+  // citizens: a warm evening street with two neighbours
+  const CS = $("cscene"); A.defs(CS);
+  const dg = A.E("linearGradient", { id: "dusk", x1: 0, y1: 0, x2: 0, y2: 1 }, CS);
+  A.E("stop", { offset: 0, "stop-color": "#163b66" }, dg); A.E("stop", { offset: 0.55, "stop-color": "#3d74a3" }, dg); A.E("stop", { offset: 1, "stop-color": "#f2b37f" }, dg);
+  A.E("rect", { x: 0, y: 0, width: 1920, height: 1080, fill: "url(#dusk)" }, CS);
+  A.E("circle", { cx: 1000, cy: 860, r: 260, fill: "url(#lamp)", opacity: 0.9 }, CS);
+  const hr = A.rng(21); let hx = -40;
+  const pal = ["#e9c46a", "#f4a261", "#2a9d8f", "#e76f51", "#8ab17d", "#b5838d"];
+  while (hx < 1960) {
+    const w = 170 + hr() * 120, h = 170 + hr() * 120, y = 900 - h, col = pal[Math.floor(hr() * pal.length)];
+    A.E("rect", { x: hx, y, width: w, height: h, fill: col, opacity: 0.55 }, CS);
+    A.E("path", { d: `M${hx - 14},${y} L${hx + w / 2},${y - 70} L${hx + w + 14},${y} Z`, fill: "#7a3b2e", opacity: 0.6 }, CS);
+    A.E("rect", { x: hx + w / 2 - 24, y: 900 - 90, width: 48, height: 90, fill: "#3b2a24", opacity: 0.55 }, CS);
+    for (const wx of [hx + 22, hx + w - 62]) A.E("rect", { x: wx, y: y + 34, width: 40, height: 40, fill: "#ffe2a8", opacity: 0.7 }, CS);
+    hx += w + 30;
   }
-  X.walker = A.makePerson(bd, "#d9b48f", 0.6);
+  A.E("rect", { x: 0, y: 900, width: 1920, height: 180, fill: "#3a4756" }, CS);
+  A.E("rect", { x: 0, y: 900, width: 1920, height: 14, fill: "#56677a" }, CS);
+  X.woman = A.makeAvatar(CS, { hair: "wrap", wrap: "#e76f51", shirt: "#f4a261", pants: "#264653", skirt: "#2a9d8f", phone: "smart", skin: "#7a4a2a" });
+  X.man = A.makeAvatar(CS, { hair: "cap", shirt: "#457b9d", pants: "#1d3557", phone: "feature", beard: true, skin: "#5a3a22" });
+  X.cheer = [0, 1, 2, 3, 4, 5].map(k => A.E("path", { d: "M0,-12 L3,-3 L12,0 L3,3 L0,12 L-3,3 L-12,0 L-3,-3 Z", fill: "#ffd166", opacity: 0 }, CS));
+
+  // solution: a burst of light and confetti behind the logo
+  const BU = $("burst"); X.rings = [0, 1, 2].map(() => A.E("circle", { cx: 175, cy: 355, r: 10, fill: "none", stroke: C_MINT, "stroke-width": 6, opacity: 0 }, BU));
+  const pr = A.rng(4);
+  X.confetti = Array.from({ length: 46 }, () => ({ el: A.E("rect", { width: 12, height: 18, rx: 3, fill: [C_MINT, "#E8A33D", "#F4F7FA", "#E15554"][Math.floor(pr() * 4)], opacity: 0 }, BU),
+    a: -Math.PI * (0.05 + pr() * 0.9), v: 380 + pr() * 520, spin: pr() * 720 - 360 }));
 })();
 
 function marker(m, state, p = 1, pulse = 0) {
@@ -572,27 +658,55 @@ const draw = {
     $("p-timerbox").style.opacity = A.span(t, 1.0, 1.8);
   },
   solution(t) {
-    appear($("sol-logo"), prog(t, 0, 0.8)); appear($("sol-tag"), prog(t, 0.6, 0.8));
-    appear($("board"), prog(t, 1.4, 0.8), 40);
-    for (let i = 0; i < 4; i++) appear($("row" + i), prog(t, 1.8 + i * 0.25, 0.5), 14);
+    appear($("sol-logo"), prog(t, 0.2, 0.7), 0);
+    $("sol-logo").style.transform = `scale(${0.7 + 0.3 * A.eo(A.span(t, 0.2, 0.9)) + 0.04 * Math.sin(A.span(t, 0.9, 1.6) * Math.PI)})`;
+    $("sol-logo").style.transformOrigin = "left center";
+    appear($("sol-tag"), prog(t, 0.9, 0.8));
+    appear($("board"), prog(t, 1.8, 0.8), 40);
+    for (let i = 0; i < 4; i++) appear($("row" + i), prog(t, 2.2 + i * 0.25, 0.5), 14);
+    X.rings.forEach((r, i) => { const p = A.span(t, 0.3 + i * 0.25, 1.9 + i * 0.25);
+      r.setAttribute("r", 20 + 640 * A.eo(p)); r.setAttribute("opacity", p > 0 ? 0.7 * (1 - p) : 0); });
+    X.confetti.forEach(c => { const u = t - 0.35; if (u < 0) { c.el.setAttribute("opacity", 0); return; }
+      const x = 175 + Math.cos(c.a) * c.v * u, y = 355 + Math.sin(c.a) * c.v * u + 260 * u * u;
+      c.el.setAttribute("transform", `translate(${x},${y}) rotate(${c.spin * u})`);
+      c.el.setAttribute("opacity", Math.max(0, 1 - u / 2.6)); });
   },
   hospitals(t) {
-    appear($("hp"), prog(t, 0.3, 0.7), 40);
-    const tap = lineAt("hospitals", 0) + 2.8, leave = tap - 2.2;
-    $("w-plus").classList.toggle("hot", t > tap && t < tap + 0.35);
-    $("w-er").textContent = t > tap ? 3 : 2;
-    $("w-er").style.color = t > tap && t < tap + 1.5 ? "var(--mint)" : "";
-    const sy = lineAt("hospitals", 0) + 4.4;
-    appear($("sync"), prog(t, sy, 0.6), 10);
-    $("w-gen").textContent = t > sy + 0.4 ? 12 : 14;
-    X.beds.forEach((b, i) => {
-      const freed = b.empty ? 1 : i === 2 ? A.span(t, leave, leave + 0.3) : 0;
-      b.occ.setAttribute("opacity", 1 - freed);
-      b.free.setAttribute("opacity", b.empty ? 1 : i === 2 ? A.span(t, tap - 0.5, tap) : 0);
-      b.frame.setAttribute("stroke", (b.empty || (i === 2 && t > tap - 0.5)) ? A.C.mint : "#2d5583");
-    });
-    const w = A.span(t, leave + 0.2, tap + 0.2);
-    A.posePerson(X.walker, { x: 2 * 124 + 52 + 560 * w, y: 165, phase: t * 8, walk: w > 0 && w < 1 ? 1 : 0, op: t > leave + 0.1 ? 1 - A.span(t, tap - 0.2, tap + 0.2) : 0 });
+    appear($("hd-head"), prog(t, 0.2, 0.6), 20);
+    appear($("portal"), prog(t, 0.5, 0.7), 30);
+    const b2 = X.bed[1], L1 = lineAt("hospitals", 1), L2 = lineAt("hospitals", 2);
+    // a patient is discharged from bed 2 and walks out
+    const up = A.span(t, 0.8, 1.3);
+    b2.blanket.setAttribute("opacity", 1 - up); b2.head.setAttribute("opacity", 1 - up);
+    const w = A.span(t, 1.3, 4.2);
+    A.poseAvatar(X.leaver, { x: b2.x0 + 120 - 640 * w, y: 1000, s: 0.62, walk: w > 0 && w < 1 ? 1 : 0, phase: t * 8, smile: 0.9, op: up >= 1 ? 1 - A.span(t, 3.9, 4.3) : 0, flip: true });
+    // nurse updates the count, then answers the alert
+    const tap1 = 4.4, tap2 = L1 + 3.6;
+    const tapping = (t > tap1 - 0.4 && t < tap1 + 0.3) || (t > tap2 - 0.4 && t < tap2 + 0.3);
+    A.poseAvatar(X.nurse, { x: 1420, y: 905, s: 0.95, front: [24, 118], back: tapping ? [-30, -95] : [-8, 0], smile: t > tap2 ? 1 : 0.5, blink: Math.floor(t * 10) % 37 === 0, head: 6 });
+    $("pw-a").textContent = t > tap1 ? "1 free" : "0 free";
+    $("pw-a").style.color = t > tap1 ? "var(--mint)" : "var(--coral)";
+    $("psync").style.opacity = A.span(t, 5.4, 5.9);
+    X.mon.setAttribute("opacity", 0.35 + 0.3 * Math.abs(Math.sin(t * 2)));
+    // incoming patient alert -> Accept
+    const al = A.span(t, L1 + 0.5, L1 + 0.9);
+    $("alert").style.opacity = al; $("alert").style.transform = `translateX(${(1 - A.eo(al)) * 80}px)`;
+    $("alert").style.boxShadow = t > L1 + 0.5 && t < tap2 ? `0 0 0 ${6 + 6 * Math.abs(Math.sin(t * 5))}px rgba(225,85,84,.35)` : "none";
+    const ok = t > tap2;
+    $("b-acc").parentNode.style.display = ok ? "none" : "flex";
+    $("a-ok").style.display = ok ? "block" : "none";
+    $("alert").style.borderColor = ok ? "var(--mint)" : "var(--coral)";
+    $("alert").style.background = ok ? "#123e3c" : "#3a1e2a";
+    const rp = A.span(t, tap2 - 0.15, tap2 + 0.5);
+    Object.assign($("ripple").style, { left: "120px", top: "170px", opacity: rp > 0 && rp < 1 ? 1 - rp : 0, transform: `scale(${1 + 3 * rp})` });
+    $("b-acc").style.transform = t > tap2 - 0.15 && t < tap2 ? "scale(.94)" : "";
+    // bed 2 is made up, ambulance arrives outside
+    const mk = A.span(t, L2 - 0.4, L2 + 0.4);
+    b2.fresh.setAttribute("opacity", mk);
+    b2.tag.setAttribute("opacity", A.span(t, L2 + 0.2, L2 + 0.6));
+    b2.sparks.forEach((s, k) => { const p = A.span(t, L2 + 0.1 + k * 0.15, L2 + 1.1 + k * 0.15); s.setAttribute("opacity", p > 0 ? Math.sin(p * Math.PI) : 0); });
+    const ax = 1240 - 290 * A.eo(A.span(t, L2 + 0.6, L2 + 2.8));
+    A.poseAmbulance(X.winAmb, ax, 372, t, -ax, 1, 0.42);
   },
   dispatch(t) {
     appear($("dp"), prog(t, 0.3, 0.7), 40);
@@ -610,17 +724,31 @@ const draw = {
     A.poseTopAmbulance(X.dAmb, pos.x, pos.y, pos.ang, t, 1);
   },
   citizens(t) {
-    appear($("ph1"), prog(t, 0.1, 0.7), 40);
-    const tap = 1.8;
-    $("cta").style.transform = t > tap && t < tap + 0.25 ? "scale(.95)" : "";
-    appear($("code"), prog(t, tap + 0.4, 0.5), 10);
-    const u = lineAt("citizens", 1);
-    appear($("ph2"), prog(t, u - 0.2, 0.7), 40);
+    appear($("c-head"), prog(t, 0.2, 0.6), 20);
+    const L1 = lineAt("citizens", 1);
+    // she walks in, checks her phone, holds a bed, celebrates
+    const wi = A.span(t, 0.0, 1.2), tap = 2.7, code = 3.1, joy = A.span(t, 3.5, 4.0);
+    const hop = t > 3.5 && t < 5.5 ? -Math.abs(Math.sin((t - 3.5) * 6)) * 22 : 0;
+    A.poseAvatar(X.woman, { x: -150 + 520 * A.eo(wi), y: 905 + hop, s: 1.25, walk: wi < 1 ? 1 : 0, phase: t * 8,
+      front: wi < 1 ? [10, 0] : [24, 118], back: joy > 0 ? [-150 * joy, -20 * joy] : (t > tap - 0.4 && t < tap + 0.3 ? [-34, -92] : [-8, 0]),
+      smile: t > code ? 1 : 0.45, head: t < code ? 8 : -4 });
+    appear($("ph1"), prog(t, 1.0, 0.6), 20);
+    $("cta").style.transform = t > tap - 0.15 && t < tap + 0.1 ? "scale(.95)" : "";
+    appear($("code"), prog(t, code, 0.5), 10);
+    // he dials the short code on a basic phone; the SMS arrives
+    const mi = A.span(t, L1 - 0.6, L1 + 0.7), sms = L1 + 5.0;
+    A.poseAvatar(X.man, { x: 2080 - 840 * A.eo(mi), y: 905, s: 1.25, walk: mi > 0 && mi < 1 ? 1 : 0, phase: t * 8, flip: true,
+      front: t > sms + 0.4 ? [165, 10] : mi >= 1 ? [24, 118] : [10, 0], back: [-8, 0], smile: t > sms ? 1 : 0.45, head: t > sms + 0.4 ? -6 : 8 });
+    appear($("ph2"), prog(t, L1 + 0.6, 0.6), 30);
     const screens = ["*920#", "BedAlert\n1. Emergency\n2. Non-emergency\n\n> 1", "Your region:\n1. Ashanti\n2. Greater Accra\n3. Northern\n\n> 2",
       "Bed held at\nHospital A.\nCode K7P2QX.\nGo now.\nCode also sent\nby SMS."];
-    const k = Math.min(3, Math.max(0, Math.floor((t - u - 0.4) / 1.4)));
-    $("ussd").textContent = screens[t < u + 0.4 ? 0 : k];
-    appear($("sms"), prog(t, u + 5.0, 0.6), 20);
+    const k = Math.min(3, Math.max(0, Math.floor((t - L1 - 1.0) / 1.25)));
+    $("ussd").textContent = screens[t < L1 + 1.0 ? 0 : k];
+    appear($("sms"), prog(t, sms, 0.5), 20);
+    X.cheer.forEach((c, i) => { const who = i < 3 ? [370, 420, code + 0.4] : [1240, 420, sms + 0.5];
+      const p = A.span(t, who[2] + (i % 3) * 0.15, who[2] + 1.2 + (i % 3) * 0.15);
+      c.setAttribute("opacity", p > 0 ? Math.sin(p * Math.PI) : 0);
+      c.setAttribute("transform", `translate(${who[0] + [-90, 0, 90][i % 3]},${who[1] - 60 * p}) scale(${1 + p})`); });
   },
   trust(t) {
     appear($("p1"), prog(t, 0.2, 0.7));
@@ -649,6 +777,7 @@ window.render = function (now) {
     el.style.opacity = now >= s.start - 0.01 && now <= s.end + 0.01 ? o : 0;
     if (el.style.opacity > 0) draw[s.id](now - s.start);
   }
+  $("hope").style.opacity = clamp((now - scene("solution").start) / 1.5) * (1 - clamp((now - scene("credits").start) / 1.0));
   $("brand").style.opacity = clamp((now - scene("story").start) / FADE) * (now < scene("credits").start ? 1 : 0);
   let cap = null;
   for (const s of T.scenes) if (s.id !== "credits") for (const l of s.lines) if (now >= l.start - 0.05 && now <= l.end + 0.3) cap = l.text;

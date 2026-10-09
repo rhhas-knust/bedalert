@@ -23,7 +23,7 @@ for scene in script["scenes"]:
     start = t
     lines = []
     for line in scene["lines"]:
-        audio, sr = kokoro.create(line["say"], voice=script["voice"], speed=line.get("speed", script["speed"]), lang="en-us")
+        audio, sr = kokoro.create(line["say"], voice=script["voice"], speed=line.get("speed", scene.get("speed", script["speed"])), lang="en-us")
         assert sr == SR
         dur = len(audio) / SR
         lines.append({"text": line["text"], "start": round(t, 3), "end": round(t + dur, 3)})
