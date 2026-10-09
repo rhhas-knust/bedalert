@@ -1,0 +1,508 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BedAlert intro video</title>
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 500; src: url(fonts/space-grotesk-latin-500-normal.woff2); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url(fonts/space-grotesk-latin-700-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 500; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 700; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); }
+
+  :root {
+    --navy: #0B2545; --navy2: #13315C; --ink: #071a33; --teal: #0F6E6E; --mint: #8FE3C6;
+    --amber: #E8A33D; --coral: #E15554; --paper: #F4F7FA; --muted: #9FB3C8; --line: rgba(255,255,255,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ink); }
+  body { font-family: Inter, sans-serif; color: var(--paper); }
+  .stage { position: absolute; inset: 0; background: radial-gradient(1400px 900px at 70% 20%, #123a66 0%, var(--navy) 45%, var(--ink) 100%); }
+  .scene { position: absolute; inset: 0; opacity: 0; padding: 120px 140px 220px; }
+  h1, h2, .display { font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  .kicker { font-family: "Plex Mono", monospace; font-weight: 500; font-size: 26px; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); }
+  .mono { font-family: "Plex Mono", monospace; }
+  .brand { position: absolute; top: 56px; left: 140px; display: flex; align-items: center; gap: 14px; font-family: "Space Grotesk"; font-weight: 700; font-size: 30px; opacity: 0; }
+  .brand .dot { width: 18px; height: 18px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 6px rgba(143,227,198,.18); }
+
+  .caption { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); max-width: 1560px; padding: 18px 34px;
+    background: rgba(4,14,28,.78); border-radius: 14px; font-size: 38px; line-height: 1.35; text-align: center; font-weight: 600; opacity: 0; }
+
+  /* title */
+  #title h1 { font-size: 190px; line-height: .95; margin-top: 150px; }
+  #title h1 .red { color: var(--coral); }
+  #title .sub { font-size: 40px; color: var(--muted); margin-top: 40px; max-width: 1300px; line-height: 1.35; }
+  .ecg { position: absolute; left: 0; right: 0; top: 140px; height: 160px; }
+
+  /* story */
+  #story .head { display: flex; justify-content: space-between; align-items: flex-end; }
+  #story h2 { font-size: 74px; margin-top: 16px; }
+  #story .who { font-size: 34px; color: var(--muted); margin-top: 14px; }
+  .timer { text-align: right; }
+  .timer .num { font-family: "Plex Mono"; font-weight: 700; font-size: 150px; line-height: 1; color: var(--amber); }
+  .timer .lbl { font-family: "Plex Mono"; font-size: 26px; color: var(--muted); letter-spacing: .12em; }
+  .route { position: relative; margin-top: 150px; height: 260px; }
+  .route .track { position: absolute; left: 60px; right: 60px; top: 60px; height: 6px; background: var(--line); border-radius: 3px; }
+  .route .done { position: absolute; left: 60px; top: 60px; height: 6px; background: var(--amber); border-radius: 3px; width: 0; }
+  .stop { position: absolute; top: 0; width: 300px; margin-left: -150px; text-align: center; }
+  .stop .pin { width: 126px; height: 126px; margin: 0 auto; border-radius: 50%; background: var(--navy2); border: 4px solid var(--line);
+    display: grid; place-items: center; font-family: "Plex Mono"; font-weight: 700; font-size: 26px; color: var(--muted); }
+  .stop .name { margin-top: 22px; font-size: 32px; font-weight: 600; }
+  .stamp { position: absolute; left: 50%; top: -36px; transform: translateX(-50%) rotate(-8deg) scale(1.6); opacity: 0; border: 5px solid var(--coral);
+    color: var(--coral); font-family: "Plex Mono"; font-weight: 700; font-size: 34px; padding: 4px 16px; border-radius: 8px; background: rgba(11,37,69,.9); white-space: nowrap; }
+  .amb { position: absolute; top: 34px; width: 58px; height: 58px; margin-left: -29px; border-radius: 50%; background: var(--paper);
+    display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(232,163,61,.25); }
+  .amb svg { width: 34px; height: 34px; }
+  .endnote { margin-top: 70px; font-size: 44px; color: var(--paper); text-align: center; opacity: 0; font-family: "Space Grotesk"; font-weight: 500; }
+
+  /* stats */
+  #stats h2 { font-size: 72px; margin-top: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+  .card { background: rgba(255,255,255,.05); border: 2px solid var(--line); border-radius: 26px; padding: 36px 36px; opacity: 0; height: 500px; }
+  .card .big { font-family: "Space Grotesk"; font-weight: 700; font-size: 92px; line-height: 1; white-space: nowrap; }
+  .card .big small { font-size: 50px; }
+  .card .what { font-size: 31px; margin-top: 18px; line-height: 1.3; }
+  .card .src { font-family: "Plex Mono"; font-size: 20px; color: var(--muted); margin-top: 26px; line-height: 1.4; }
+  .dots { display: grid; grid-template-columns: repeat(50, 5px); gap: 2.5px; margin-top: 20px; }
+  .dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.18); }
+  .meter { height: 26px; border-radius: 13px; background: rgba(255,255,255,.1); margin-top: 30px; position: relative; overflow: visible; }
+  .meter .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 13px; background: var(--coral); }
+  .meter .cap { position: absolute; top: -14px; bottom: -14px; width: 4px; background: var(--paper); }
+  .meter .capl { position: absolute; top: -50px; font-family: "Plex Mono"; font-size: 20px; color: var(--paper); transform: translateX(-50%); }
+
+  /* problem */
+  #problem h2 { font-size: 84px; margin-top: 16px; max-width: 1500px; }
+  .hosps { display: flex; gap: 60px; margin-top: 110px; justify-content: center; }
+  .hosp { width: 380px; height: 300px; border-radius: 26px; border: 2px dashed rgba(255,255,255,.3); display: grid; place-items: center; text-align: center; opacity: 0; }
+  .hosp .q { font-family: "Space Grotesk"; font-weight: 700; font-size: 150px; color: var(--muted); line-height: 1; }
+  .hosp .l { font-size: 30px; color: var(--muted); }
+
+  /* solution / board */
+  #solution .logo { display: flex; align-items: center; gap: 30px; margin-top: 120px; }
+  #solution .logo .dot { width: 70px; height: 70px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 18px rgba(143,227,198,.15), 0 0 0 40px rgba(143,227,198,.07); }
+  #solution .logo .word { font-family: "Space Grotesk"; font-weight: 700; font-size: 170px; letter-spacing: -0.03em; }
+  #solution .tag { font-size: 52px; color: var(--mint); margin-top: 40px; font-family: "Space Grotesk"; font-weight: 500; }
+  .board { position: absolute; right: 140px; top: 120px; width: 760px; background: rgba(4,14,28,.6); border: 2px solid var(--line); border-radius: 26px; padding: 34px; opacity: 0; }
+  .board .bt { display: flex; justify-content: space-between; font-family: "Plex Mono"; font-size: 22px; color: var(--muted); margin-bottom: 18px; }
+  .live { color: var(--mint); }
+  .live::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--mint); margin-right: 10px; }
+  .row { padding: 18px 0; border-top: 1px solid var(--line); }
+  .row .rt { display: flex; justify-content: space-between; font-size: 28px; font-weight: 600; }
+  .row .rt .n { font-family: "Plex Mono"; font-weight: 700; }
+  .row .rs { font-family: "Plex Mono"; font-size: 19px; color: var(--muted); margin-top: 6px; }
+  .cbar { display: flex; gap: 4px; margin-top: 10px; }
+  .cbar i { flex: 1; height: 14px; border-radius: 3px; background: rgba(255,255,255,.12); }
+  .cbar i.occ { background: #5d7896; }
+  .cbar i.free { background: var(--mint); }
+  .illus { font-family: "Plex Mono"; font-size: 18px; color: var(--muted); margin-top: 16px; }
+
+  /* three pillars layout */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; height: 100%; }
+  .split h2 { font-size: 86px; line-height: 1.02; margin-top: 18px; }
+  .split p.lead { font-size: 38px; color: var(--muted); margin-top: 30px; line-height: 1.35; }
+  .panel { background: rgba(4,14,28,.6); border: 2px solid var(--line); border-radius: 30px; padding: 40px; opacity: 0; }
+  .ward { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-top: 1px solid var(--line); font-size: 36px; font-weight: 600; }
+  .ward:first-of-type { border-top: 0; }
+  .ward .ctl { display: flex; align-items: center; gap: 20px; }
+  .btn { width: 70px; height: 70px; border-radius: 16px; background: rgba(255,255,255,.08); display: grid; place-items: center; font-size: 44px; font-weight: 700; }
+  .btn.hot { background: var(--mint); color: var(--navy); }
+  .ward .n { font-family: "Plex Mono"; font-weight: 700; font-size: 48px; min-width: 70px; text-align: center; }
+  .sync { margin-top: 26px; display: flex; align-items: center; gap: 16px; font-family: "Plex Mono"; font-size: 24px; color: var(--mint); opacity: 0; }
+  .opt { display: flex; align-items: center; gap: 24px; padding: 24px; border-radius: 18px; margin-top: 16px; background: rgba(255,255,255,.04); border: 2px solid transparent; }
+  .opt .rank { font-family: "Plex Mono"; font-weight: 700; font-size: 34px; color: var(--muted); width: 40px; }
+  .opt .nm { font-size: 32px; font-weight: 600; }
+  .opt .meta { font-family: "Plex Mono"; font-size: 21px; color: var(--muted); margin-top: 4px; }
+  .opt .st { margin-left: auto; font-family: "Plex Mono"; font-weight: 700; font-size: 24px; padding: 8px 16px; border-radius: 10px; opacity: 0; }
+  .st.held { background: var(--mint); color: var(--navy); }
+  .st.declined { background: var(--coral); color: white; }
+
+  .phones { display: flex; gap: 60px; justify-content: center; align-items: flex-end; }
+  .smart { width: 380px; height: 650px; border-radius: 54px; background: #0d1f38; border: 10px solid #22426b; padding: 40px 26px; opacity: 0; }
+  .smart .ttl { font-family: "Space Grotesk"; font-weight: 700; font-size: 30px; }
+  .smart .hc { background: rgba(255,255,255,.06); border-radius: 18px; padding: 16px 20px; margin-top: 16px; font-size: 24px; }
+  .smart .hc .f { font-family: "Plex Mono"; color: var(--mint); font-size: 20px; margin-top: 6px; }
+  .smart .cta { margin-top: 24px; background: var(--mint); color: var(--navy); border-radius: 16px; text-align: center; font-weight: 700; font-size: 28px; padding: 20px; }
+  .smart .code { margin-top: 24px; text-align: center; opacity: 0; }
+  .smart .code .c { font-family: "Plex Mono"; font-weight: 700; font-size: 54px; letter-spacing: .12em; color: var(--mint); }
+  .feature { width: 330px; height: 510px; border-radius: 40px; background: #1d2a3a; border: 8px solid #33475f; padding: 30px 24px; opacity: 0; }
+  .feature .scr { background: #b9d3a6; color: #142012; border-radius: 10px; height: 270px; padding: 16px; font-family: "Plex Mono"; font-weight: 500; font-size: 21px; line-height: 1.35; white-space: pre-wrap; }
+  .feature .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+  .feature .keys i { height: 40px; border-radius: 12px; background: #2d3e53; font-style: normal; display: grid; place-items: center; font-family: "Plex Mono"; font-size: 22px; color: #c7d3e0; }
+  .sms { position: absolute; width: 520px; background: var(--paper); color: var(--navy); border-radius: 24px 24px 24px 6px; padding: 24px 28px; font-size: 25px; line-height: 1.35; opacity: 0; }
+  .sms b { font-family: "Plex Mono"; }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 90px; }
+  .pillar { border-radius: 26px; padding: 46px 40px; background: rgba(255,255,255,.05); border: 2px solid var(--line); opacity: 0; min-height: 420px; }
+  .pillar .ic { width: 90px; height: 90px; border-radius: 22px; display: grid; place-items: center; font-size: 46px; font-weight: 700; font-family: "Plex Mono"; }
+  .pillar h3 { font-family: "Space Grotesk"; font-size: 46px; margin-top: 34px; line-height: 1.1; }
+  .pillar p { font-size: 30px; color: var(--muted); margin-top: 20px; line-height: 1.35; }
+
+  .steps { margin-top: 90px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; }
+  .step { opacity: 0; }
+  .step .bar { height: 10px; border-radius: 5px; background: rgba(255,255,255,.15); }
+  .step.done .bar { background: var(--mint); }
+  .step .tg { font-family: "Plex Mono"; font-size: 22px; color: var(--muted); margin-top: 26px; letter-spacing: .1em; }
+  .step.done .tg { color: var(--mint); }
+  .step h3 { font-family: "Space Grotesk"; font-size: 42px; margin-top: 12px; line-height: 1.15; }
+
+  #ask .quote { font-family: "Space Grotesk"; font-weight: 700; font-size: 128px; line-height: 1.02; margin-top: 140px; max-width: 1640px; opacity: 0; }
+  #ask .chips { display: flex; gap: 24px; margin-top: 60px; }
+  .chip { border: 2px solid var(--mint); color: var(--mint); border-radius: 999px; padding: 16px 32px; font-size: 32px; font-weight: 600; opacity: 0; }
+
+  #credits { text-align: center; }
+  #credits .word { font-family: "Space Grotesk"; font-weight: 700; font-size: 120px; margin-top: 60px; }
+  #credits .by { font-family: "Plex Mono"; font-size: 26px; letter-spacing: .14em; color: var(--muted); margin-top: 50px; text-transform: uppercase; }
+  .people { display: flex; justify-content: center; gap: 50px; margin-top: 50px; }
+  .person { width: 470px; padding: 40px 30px; border-radius: 26px; background: rgba(255,255,255,.05); border: 2px solid var(--line); opacity: 0; }
+  .person .av { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto; display: grid; place-items: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 50px; color: var(--navy); }
+  .person .nm { font-family: "Space Grotesk"; font-weight: 700; font-size: 46px; margin-top: 26px; }
+  .person .rl { font-size: 27px; color: var(--muted); margin-top: 12px; line-height: 1.35; }
+  #credits .e112 { margin-top: 56px; font-size: 28px; color: var(--muted); }
+
+  #sources h2 { font-size: 60px; margin-top: 10px; }
+  #sources ol { margin-top: 40px; font-size: 27px; line-height: 1.5; color: #d5e0ea; padding-left: 36px; }
+  #sources li { margin-bottom: 14px; }
+  #sources .note { margin-top: 30px; font-size: 24px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="brand" id="brand"><span class="dot"></span>BedAlert</div>
+
+  <!-- 1. title -->
+  <section class="scene" id="title">
+    <svg class="ecg" viewBox="0 0 1920 160" preserveAspectRatio="none">
+      <path id="ecgpath" d="M0 80 H620 L660 80 L690 20 L720 140 L750 80 H900 L930 80 L955 50 L980 80 H1920" fill="none" stroke="#E15554" stroke-width="5" stroke-linejoin="round"/>
+    </svg>
+    <div class="kicker" style="margin-top:250px">Ghana · Emergency care</div>
+    <h1 id="t-h1">No Bed<br><span class="red">Syndrome.</span></h1>
+    <div class="sub" id="t-sub">Why patients are dying in ambulances, and what we are building to stop it.</div>
+  </section>
+
+  <!-- 2. story -->
+  <section class="scene" id="story">
+    <div class="head">
+      <div>
+        <div class="kicker">6 February 2026 · Accra</div>
+        <h2>Charles Amissah, 29</h2>
+        <div class="who">Engineer. Hit-and-run at the Circle overpass.</div>
+      </div>
+      <div class="timer"><div class="num" id="s-timer">0</div><div class="lbl">MINUTES IN THE REFERRAL LOOP</div></div>
+    </div>
+    <div class="route">
+      <div class="track"></div><div class="done" id="s-done"></div>
+      <div class="stop" style="left:60px"><div class="pin">EMS</div><div class="name">Circle overpass<br><span style="color:var(--muted);font-weight:400">Stabilised by paramedics</span></div></div>
+      <div class="stop" style="left:640px"><div class="stamp" id="st1">NO BED</div><div class="pin">1</div><div class="name">Police Hospital</div></div>
+      <div class="stop" style="left:1080px"><div class="stamp" id="st2">NO BED</div><div class="pin">2</div><div class="name">Ridge Hospital</div></div>
+      <div class="stop" style="left:1520px"><div class="stamp" id="st3">NO BED</div><div class="pin">3</div><div class="name">Korle Bu</div></div>
+      <div class="amb" id="s-amb"><svg viewBox="0 0 24 24"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z" fill="#E15554"/></svg></div>
+    </div>
+    <div class="endnote" id="s-end">He did not survive.</div>
+  </section>
+
+  <!-- 3. stats -->
+  <section class="scene" id="stats">
+    <div class="kicker">Not a rare story</div>
+    <h2>The numbers behind it</h2>
+    <div class="cards">
+      <div class="card" id="c1">
+        <div class="big">0.7–0.9</div>
+        <div class="what">hospital beds per 1,000 people in Ghana</div>
+        <div class="dots" id="dots"></div>
+        <div class="src" style="margin-top:14px">1,000 dots = 1,000 people · fewer than 1 bed for all of them</div>
+        <div class="src" style="margin-top:8px">World Bank · GRNMA (Mar 2026)</div>
+      </div>
+      <div class="card" id="c2">
+        <div class="big">120–150<small>%</small></div>
+        <div class="what">occupancy reported at major hospitals</div>
+        <div class="meter" style="margin-top:80px"><div class="fill" id="m-fill"></div><div class="cap" style="left:66.6%"></div><div class="capl" style="left:66.6%">100% full</div></div>
+        <div class="src" style="margin-top:50px">GRNMA (Mar 2026)</div>
+      </div>
+      <div class="card" id="c3">
+        <div class="big">~42</div>
+        <div class="what">ambulances available for Greater Accra’s 5+ million people</div>
+        <div class="src">National Ambulance Service dispatch head (Jun 2025) · 2021 Census</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. problem -->
+  <section class="scene" id="problem">
+    <div class="kicker">The real failure</div>
+    <h2 id="p-h2">Nobody knows where the free beds are.</h2>
+    <div class="hosps">
+      <div class="hosp" id="h1"><div><div class="q">?</div><div class="l">free beds</div></div></div>
+      <div class="hosp" id="h2"><div><div class="q">?</div><div class="l">free beds</div></div></div>
+      <div class="hosp" id="h3"><div><div class="q">?</div><div class="l">free beds</div></div></div>
+    </div>
+  </section>
+
+  <!-- 5. solution -->
+  <section class="scene" id="solution">
+    <div class="kicker">What we are building</div>
+    <div class="logo" id="sol-logo"><span class="dot"></span><span class="word">BedAlert</span></div>
+    <div class="tag" id="sol-tag">A live, shared view of free<br>hospital beds across Ghana.</div>
+    <div class="board" id="board">
+      <div class="bt"><span class="live">LIVE</span><span>ER beds near you</span></div>
+      <div id="rows"></div>
+      <div class="illus">Illustration · not real hospital data</div>
+    </div>
+  </section>
+
+  <!-- 6. hospitals -->
+  <section class="scene" id="hospitals">
+    <div class="split">
+      <div>
+        <div class="kicker">For hospitals</div>
+        <h2>One tap to update. Or fully automatic.</h2>
+        <p class="lead">Staff update free beds from the portal, or the hospital’s own system syncs through a secure API key.</p>
+      </div>
+      <div class="panel" id="hp">
+        <div class="ward"><span>Emergency</span><span class="ctl"><span class="btn">−</span><span class="n" id="w-er">2</span><span class="btn" id="w-plus">+</span></span></div>
+        <div class="ward"><span>ICU</span><span class="ctl"><span class="btn">−</span><span class="n">0</span><span class="btn">+</span></span></div>
+        <div class="ward"><span>Maternity</span><span class="ctl"><span class="btn">−</span><span class="n">5</span><span class="btn">+</span></span></div>
+        <div class="ward"><span>General ward</span><span class="ctl"><span class="btn">−</span><span class="n" id="w-gen">14</span><span class="btn">+</span></span></div>
+        <div class="sync" id="sync">⇄ Synced from hospital system · just now</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. dispatch -->
+  <section class="scene" id="dispatch">
+    <div class="split">
+      <div>
+        <div class="kicker">For ambulance dispatchers</div>
+        <h2>Hold the bed before the ambulance moves.</h2>
+        <p class="lead">Nearest hospital with a confirmed free bed first. If it declines, BedAlert re-routes instantly.</p>
+      </div>
+      <div class="panel" id="dp">
+        <div class="kicker" style="font-size:22px">Critical · road accident · ER</div>
+        <div class="opt" id="o1"><span class="rank">1</span><div><div class="nm">Hospital A</div><div class="meta">2.1 km · 3 ER beds · updated 4 min ago</div></div><span class="st held" id="o1h">HELD</span><span class="st declined" id="o1d" style="position:absolute;opacity:0">DECLINED</span></div>
+        <div class="opt" id="o2"><span class="rank">2</span><div><div class="nm">Hospital B</div><div class="meta">3.4 km · 1 ER bed · updated 9 min ago</div></div><span class="st held" id="o2h">HELD</span></div>
+        <div class="opt" id="o3"><span class="rank">3</span><div><div class="nm">Hospital C</div><div class="meta">5.8 km · 2 ER beds · updated 2 min ago</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. citizens -->
+  <section class="scene" id="citizens">
+    <div class="kicker">For families · smartphone or not</div>
+    <h2 style="font-size:86px;margin-top:16px;line-height:1.02">Find a bed.<br>Hold it. Go.</h2>
+    <div class="phones" style="position:absolute;right:180px;top:110px">
+      <div class="smart" id="ph1">
+        <div class="ttl">ER beds near you</div>
+        <div class="hc">Hospital A · 2.1 km<div class="f">3 free · updated 4 min ago</div></div>
+        <div class="hc">Hospital B · 3.4 km<div class="f">1 free · updated 9 min ago</div></div>
+        <div class="cta" id="cta">Hold a bed at Hospital A</div>
+        <div class="code" id="code"><div style="font-size:22px;color:var(--muted)">Your code</div><div class="c">K7P2QX</div></div>
+      </div>
+      <div class="feature" id="ph2">
+        <div class="scr" id="ussd">*920#</div>
+        <div class="keys"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></div>
+      </div>
+    </div>
+    <div class="sms" id="sms" style="left:140px;top:430px">BedAlert: ER bed held at Hospital A. Code <b>K7P2QX</b>. Go now. Emergency? Also call 112.</div>
+  </section>
+
+  <!-- 9. trust -->
+  <section class="scene" id="trust">
+    <div class="kicker">Built to be trusted</div>
+    <h2 style="font-size:80px;margin-top:16px">Fair, honest, private.</h2>
+    <div class="pillars">
+      <div class="pillar" id="p1"><div class="ic" style="background:var(--mint);color:var(--navy)">⏱</div><h3>Holds expire</h3><p>No arrival in time? The bed is released automatically for the next patient.</p></div>
+      <div class="pillar" id="p2"><div class="ic" style="background:var(--amber);color:var(--navy)">?</div><h3>Stale data flagged</h3><p>Numbers that haven’t been confirmed recently are marked and ranked lower.</p></div>
+      <div class="pillar" id="p3"><div class="ic" style="background:var(--paper);color:var(--navy)">#</div><h3>Counts, not records</h3><p>BedAlert shares bed counts. Never patient records.</p></div>
+    </div>
+  </section>
+
+  <!-- 10. roadmap -->
+  <section class="scene" id="roadmap">
+    <div class="kicker">Where we are</div>
+    <h2 style="font-size:80px;margin-top:16px">From idea to pilot</h2>
+    <div class="steps">
+      <div class="step done" id="r1"><div class="bar"></div><div class="tg">✓ DONE</div><h3>Core system built &amp; tested</h3></div>
+      <div class="step" id="r2"><div class="bar"></div><div class="tg">NEXT</div><h3>Hospital, dispatcher &amp; citizen apps</h3></div>
+      <div class="step" id="r3"><div class="bar"></div><div class="tg">THEN</div><h3>Real SMS &amp; USSD</h3></div>
+      <div class="step" id="r4"><div class="bar"></div><div class="tg">GOAL</div><h3>Pilot in one district</h3></div>
+    </div>
+  </section>
+
+  <!-- 11. ask -->
+  <section class="scene" id="ask">
+    <div class="kicker">Join us</div>
+    <div class="chips">
+      <span class="chip" id="k1">Partner hospitals</span>
+      <span class="chip" id="k2">National Ambulance Service</span>
+      <span class="chip" id="k3">Health leaders</span>
+    </div>
+    <div class="quote" id="quote">No patient should die looking for a bed.</div>
+  </section>
+
+  <!-- 12. credits -->
+  <section class="scene" id="credits">
+    <div class="word">BedAlert</div>
+    <div class="by">Started by</div>
+    <div class="people">
+      <div class="person" id="pp1"><div class="av" style="background:var(--mint)">R</div><div class="nm">Robert Hasford</div><div class="rl">BSc Biomedical Engineering<br>KNUST · Class of 2026</div></div>
+      <div class="person" id="pp2"><div class="av" style="background:var(--amber)">J</div><div class="nm">Jayne</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+      <div class="person" id="pp3"><div class="av" style="background:var(--paper)">W</div><div class="nm">Welam</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+    </div>
+    <div class="e112">In an emergency in Ghana, call 112.</div>
+  </section>
+
+  <!-- 13. sources -->
+  <section class="scene" id="sources">
+    <div class="kicker">Sources</div>
+    <h2>Where the facts come from</h2>
+    <ol>
+      <li>Charles Amissah case: Graphic Online, Citi Newsroom, Ghanaian Times (Feb 2026); HeFRA investigation (16 Feb 2026); Ministry of Health committee findings, “118-minute referral loop” (May 2026).</li>
+      <li>Hospital beds per 1,000 people: World Bank World Development Indicators (0.7); GRNMA statement via Ghana News Agency (27 Mar 2026); Ashesi / Reach Alliance “No Bed Syndrome” study (0.9, 2021).</li>
+      <li>120–150% occupancy at major hospitals: GRNMA statement (Mar 2026).</li>
+      <li>~42 ambulances available in Greater Accra: National Ambulance Service dispatch head, Citi Newsroom (Jun 2025). Population: Ghana 2021 Census.</li>
+    </ol>
+    <div class="note">Hospital names and numbers shown in the product screens are illustrations, not real data.</div>
+  </section>
+
+  <div class="caption" id="cap"></div>
+</div>
+
+<script>
+const T = window.TIMINGS;  // injected: {duration, scenes:[{id,start,end,lines:[{text,start,end}]}]}
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = p => 1 - Math.pow(1 - clamp(p), 3);
+const prog = (t, a, d) => ease((t - a) / d);
+function appear(el, p, dy = 30) { el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * dy}px)`; }
+const FADE = 0.5;
+
+// static content
+(function build() {
+  const dots = $("dots");
+  for (let i = 0; i < 1000; i++) dots.appendChild(document.createElement("i"));
+  const rows = [["Hospital A", 3, 20, 4], ["Hospital B", 1, 15, 9], ["Hospital C", 2, 25, 2], ["Hospital D", 0, 12, 71]];
+  $("rows").innerHTML = rows.map(([n, f, tot, m], i) => `
+    <div class="row" id="row${i}"><div class="rt"><span>${n}</span><span class="n" style="color:${f ? "var(--mint)" : "var(--coral)"}">${f} free</span></div>
+    <div class="cbar">${Array.from({length: 20}, (_, k) => `<i class="${k < 20 - Math.round(f * 20 / tot) ? "occ" : "free"}"></i>`).join("")}</div>
+    <div class="rs">${m > 60 ? "⚠ not confirmed recently" : "updated " + m + " min ago"}</div></div>`).join("");
+  const ecg = $("ecgpath"); const L = ecg.getTotalLength();
+  ecg.style.strokeDasharray = L; ecg.dataset.len = L;
+})();
+
+const scene = id => T.scenes.find(s => s.id === id);
+const lineAt = (id, i) => scene(id).lines[i].start - scene(id).start;  // line start, relative to scene
+
+const draw = {
+  title(t) {
+    const ecg = $("ecgpath"); ecg.style.strokeDashoffset = ecg.dataset.len * (1 - clamp(t / 2.2));
+    appear($("t-h1"), prog(t, lineAt("title", 1) - 0.3, 0.8), 60);
+    appear($("t-sub"), prog(t, lineAt("title", 1) + 0.8, 0.8));
+  },
+  story(t) {
+    const s = scene("story"), dur = s.end - s.start;
+    const stops = [60, 640, 1080, 1520];
+    const a = lineAt("story", 1), b = lineAt("story", 2) + 1.0;   // ambulance travels during line 2
+    const travel = clamp((t - a) / (b - a));
+    const x = stops[0] + (stops[3] - stops[0]) * ease(travel);
+    $("s-amb").style.left = x + "px";
+    $("s-done").style.width = (x - 60) + "px";
+    [1, 2, 3].forEach(i => {
+      const reach = (stops[i] - stops[0]) / (stops[3] - stops[0]);
+      const p = travel >= reach - 0.001 ? clamp((t - (a + reach * (b - a))) / 0.35) : 0;
+      $("st" + i).style.opacity = p;
+      $("st" + i).style.transform = `translateX(-50%) rotate(-8deg) scale(${1.6 - 0.6 * ease(p)})`;
+    });
+    $("s-timer").textContent = Math.round(118 * ease(clamp(t / (lineAt("story", 3) + 3.5))));
+    appear($("s-end"), prog(t, lineAt("story", 3) + 4.2, 0.8));
+  },
+  stats(t) {
+    const p1 = prog(t, lineAt("stats", 1) - 0.2, 0.7), p2 = prog(t, lineAt("stats", 2) - 0.2, 0.7), p3 = prog(t, lineAt("stats", 3) - 0.2, 0.7);
+    appear($("c1"), p1); appear($("c2"), p2); appear($("c3"), p3);
+    const lit = clamp((t - lineAt("stats", 1) - 0.8) / 1.0);
+    $("dots").children[0].style.background = lit > 0 ? `rgba(143,227,198,${0.35 + 0.65 * lit})` : "";
+    $("dots").children[0].style.transform = `scale(${1 + 1.2 * lit})`;
+    $("m-fill").style.width = (100 * ease(clamp((t - lineAt("stats", 2) - 0.4) / 2.0))) + "%";
+  },
+  problem(t) {
+    appear($("p-h2"), prog(t, 0, 0.8));
+    ["h1", "h2", "h3"].forEach((h, i) => {
+      const p = prog(t, lineAt("problem", 1) + i * 0.35, 0.6);
+      appear($(h), p);
+      $(h).style.borderColor = `rgba(225,85,84,${0.3 + 0.5 * Math.abs(Math.sin((t + i) * 2)) * clamp((t - lineAt("problem", 2)) / 0.5)})`;
+    });
+  },
+  solution(t) {
+    appear($("sol-logo"), prog(t, 0, 0.8)); appear($("sol-tag"), prog(t, 0.6, 0.8));
+    appear($("board"), prog(t, 1.4, 0.8), 40);
+    for (let i = 0; i < 4; i++) appear($("row" + i), prog(t, 1.8 + i * 0.25, 0.5), 14);
+  },
+  hospitals(t) {
+    appear($("hp"), prog(t, 0.3, 0.7), 40);
+    const tap = lineAt("hospitals", 0) + 2.2;
+    $("w-plus").classList.toggle("hot", t > tap && t < tap + 0.35);
+    $("w-er").textContent = t > tap ? 3 : 2;
+    $("w-er").style.color = t > tap && t < tap + 1.5 ? "var(--mint)" : "";
+    const sy = lineAt("hospitals", 0) + 4.2;
+    appear($("sync"), prog(t, sy, 0.6), 10);
+    $("w-gen").textContent = t > sy + 0.4 ? 12 : 14;
+  },
+  dispatch(t) {
+    appear($("dp"), prog(t, 0.3, 0.7), 40);
+    const held = lineAt("dispatch", 0) + 4.0, dec = lineAt("dispatch", 1) + 0.6, re = dec + 1.2;
+    $("o1h").style.opacity = t > held && t < dec ? 1 : 0;
+    $("o1d").style.opacity = t > dec ? 1 : 0; $("o1d").style.position = t > dec ? "static" : "absolute";
+    $("o1h").style.display = t > dec ? "none" : "";
+    $("o1").style.borderColor = t > held && t < dec ? "var(--mint)" : t > dec ? "rgba(225,85,84,.6)" : "transparent";
+    $("o1").style.opacity = t > dec ? 0.55 : 1;
+    $("o2h").style.opacity = prog(t, re, 0.3);
+    $("o2").style.borderColor = t > re ? "var(--mint)" : "transparent";
+  },
+  citizens(t) {
+    appear($("ph1"), prog(t, 0.1, 0.7), 40);
+    const tap = 1.8;
+    $("cta").style.transform = t > tap && t < tap + 0.25 ? "scale(.95)" : "";
+    appear($("code"), prog(t, tap + 0.4, 0.5), 10);
+    const u = lineAt("citizens", 1);
+    appear($("ph2"), prog(t, u - 0.2, 0.7), 40);
+    const screens = ["*920#", "BedAlert\n1. Emergency\n2. Non-emergency\n\n> 1", "Your region:\n1. Ashanti\n2. Greater Accra\n3. Northern\n\n> 2",
+      "Bed held at\nHospital A.\nCode K7P2QX.\nGo now.\nCode also sent\nby SMS."];
+    const k = Math.min(3, Math.max(0, Math.floor((t - u - 0.4) / 1.4)));
+    $("ussd").textContent = screens[t < u + 0.4 ? 0 : k];
+    appear($("sms"), prog(t, u + 5.0, 0.6), 20);
+  },
+  trust(t) {
+    appear($("p1"), prog(t, 0.2, 0.7));
+    appear($("p2"), prog(t, lineAt("trust", 1), 0.7));
+    appear($("p3"), prog(t, lineAt("trust", 1) + 2.6, 0.7));
+  },
+  roadmap(t) {
+    appear($("r1"), prog(t, 0.2, 0.6));
+    const n = lineAt("roadmap", 1);
+    appear($("r2"), prog(t, n + 0.6, 0.6)); appear($("r3"), prog(t, n + 4.0, 0.6)); appear($("r4"), prog(t, n + 5.8, 0.6));
+  },
+  ask(t) {
+    ["k1", "k2", "k3"].forEach((k, i) => appear($(k), prog(t, 1.0 + i * 1.3, 0.5), 14));
+    appear($("quote"), prog(t, lineAt("ask", 1) - 0.2, 1.0), 40);
+  },
+  credits(t) {
+    ["pp1", "pp2", "pp3"].forEach((k, i) => appear($(k), prog(t, 0.6 + [0, 4.6, 5.4][i], 0.7), 30));
+  },
+  sources(t) {},
+};
+
+window.render = function (now) {
+  for (const s of T.scenes) {
+    const el = $(s.id);
+    const o = clamp((now - s.start) / FADE) * (s === T.scenes[T.scenes.length - 1] ? 1 : clamp((s.end - now) / FADE));
+    el.style.opacity = now >= s.start - 0.01 && now <= s.end + 0.01 ? o : 0;
+    if (el.style.opacity > 0) draw[s.id](now - s.start);
+  }
+  $("brand").style.opacity = clamp((now - scene("story").start) / FADE) * (now < scene("credits").start ? 1 : 0);
+  let cap = null;
+  for (const s of T.scenes) if (s.id !== "credits") for (const l of s.lines) if (now >= l.start - 0.05 && now <= l.end + 0.3) cap = l.text;
+  $("cap").textContent = cap || "";
+  $("cap").style.opacity = cap ? 1 : 0;
+};
+</script>
+</body>
+</html>
