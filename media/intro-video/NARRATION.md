@@ -1,6 +1,6 @@
 # BedAlert — No Bed Syndrome (narration script)
 
-Read at a calm pace; about 3 minutes. Captions in the video use this exact text.
+Read at a calm pace; about 3 minutes 15 seconds. Pause where marked so the animation can play (the ambulance drives between hospitals). Captions in the video use this exact text.
 
 ## Opening
 
@@ -9,8 +9,11 @@ No bed syndrome.
 
 ## The story
 
-On the 6th of February 2026, Charles Amissah, a 29-year-old engineer, was hit by a car at the Circle overpass in Accra.
-Paramedics stabilised him. Then the ambulance went from the Police Hospital, to Ridge, to Korle Bu.
+On the 6th of February 2026, Charles Amissah, a 29-year-old engineer, was hit by a car at the Circle overpass in Accra.  *(pause 3 s)*
+Paramedics reached him and stabilised him.
+Then the ambulance went to the Police Hospital.  *(pause 2 s)*
+Then to Ridge Hospital.  *(pause 2 s)*
+Then to Korle Bu.  *(pause 2 s)*
 Each time, the answer was the same: no bed.
 A Ministry of Health committee later described a 118-minute referral loop. He did not survive.
 

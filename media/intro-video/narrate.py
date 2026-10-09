@@ -28,8 +28,9 @@ for scene in script["scenes"]:
         dur = len(audio) / SR
         lines.append({"text": line["text"], "start": round(t, 3), "end": round(t + dur, 3)})
         track.append(audio.astype(np.float32))
-        track.append(np.zeros(int(GAP * SR), dtype=np.float32))
-        t += dur + GAP
+        track.append(np.zeros(int(line.get("gap", GAP) * SR), dtype=np.float32))
+        gap = line.get("gap", GAP)
+        t += dur + gap
     track.append(np.zeros(int(scene["pad"] * SR), dtype=np.float32))
     t += scene["pad"]
     timings.append({"id": scene["id"], "start": round(start, 3), "end": round(t, 3), "lines": lines})

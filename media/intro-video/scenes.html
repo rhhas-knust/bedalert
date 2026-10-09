@@ -29,11 +29,21 @@
   .caption { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); max-width: 1560px; padding: 18px 34px;
     background: rgba(4,14,28,.78); border-radius: 14px; font-size: 38px; line-height: 1.35; text-align: center; font-weight: 600; opacity: 0; }
 
+  .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  .storyhead { position: absolute; left: 140px; top: 104px; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+  .storyhead h2 { font-size: 70px; margin-top: 12px; }
+  .storyhead .who { font-size: 32px; color: var(--muted); margin-top: 8px; }
+  #s-timerbox, #p-timerbox { position: absolute; right: 140px; top: 104px; opacity: 0; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+  .maptag { position: absolute; right: 40px; bottom: 30px; font-family: "Plex Mono"; font-size: 18px; color: var(--muted); opacity: .8; }
+  .shade { position: absolute; inset: 0; background: #020812; opacity: 0; }
+  .endnote2 { position: absolute; left: 0; right: 0; top: 470px; text-align: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 84px; opacity: 0; }
+  .topfade { position: absolute; left: 0; right: 0; top: 0; height: 330px; background: linear-gradient(#071a33ee, #071a3300); }
+  #tstreet { opacity: .9; }
   /* title */
-  #title h1 { font-size: 190px; line-height: .95; margin-top: 150px; }
+  #title h1 { font-size: 180px; line-height: .95; margin-top: 30px; }
   #title h1 .red { color: var(--coral); }
   #title .sub { font-size: 40px; color: var(--muted); margin-top: 40px; max-width: 1300px; line-height: 1.35; }
-  .ecg { position: absolute; left: 0; right: 0; top: 140px; height: 160px; }
+  .ecg { position: absolute; left: 0; right: 0; top: 40px; height: 160px; }
 
   /* story */
   #story .head { display: flex; justify-content: space-between; align-items: flex-end; }
@@ -172,33 +182,28 @@
 
   <!-- 1. title -->
   <section class="scene" id="title">
+    <svg id="tstreet" class="full" viewBox="0 0 1920 1080"></svg>
     <svg class="ecg" viewBox="0 0 1920 160" preserveAspectRatio="none">
       <path id="ecgpath" d="M0 80 H620 L660 80 L690 20 L720 140 L750 80 H900 L930 80 L955 50 L980 80 H1920" fill="none" stroke="#E15554" stroke-width="5" stroke-linejoin="round"/>
     </svg>
-    <div class="kicker" style="margin-top:250px">Ghana · Emergency care</div>
+    <div class="kicker" style="margin-top:110px">Ghana · Emergency care</div>
     <h1 id="t-h1">No Bed<br><span class="red">Syndrome.</span></h1>
     <div class="sub" id="t-sub">Why patients are dying in ambulances, and what we are building to stop it.</div>
   </section>
 
   <!-- 2. story -->
-  <section class="scene" id="story">
-    <div class="head">
-      <div>
-        <div class="kicker">6 February 2026 · Accra</div>
-        <h2>Charles Amissah, 29</h2>
-        <div class="who">Engineer. Hit-and-run at the Circle overpass.</div>
-      </div>
-      <div class="timer"><div class="num" id="s-timer">0</div><div class="lbl">MINUTES IN THE REFERRAL LOOP</div></div>
+  <section class="scene" id="story" style="padding:0">
+    <svg id="street" class="full" viewBox="0 0 1920 1080"></svg>
+    <svg id="accra" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="shade" id="s-dim"></div>
+    <div class="storyhead" id="s-head">
+      <div class="kicker">6 February 2026 · Circle overpass, Accra</div>
+      <h2>Charles Amissah, 29</h2>
+      <div class="who">Engineer</div>
     </div>
-    <div class="route">
-      <div class="track"></div><div class="done" id="s-done"></div>
-      <div class="stop" style="left:60px"><div class="pin">EMS</div><div class="name">Circle overpass<br><span style="color:var(--muted);font-weight:400">Stabilised by paramedics</span></div></div>
-      <div class="stop" style="left:640px"><div class="stamp" id="st1">NO BED</div><div class="pin">1</div><div class="name">Police Hospital</div></div>
-      <div class="stop" style="left:1080px"><div class="stamp" id="st2">NO BED</div><div class="pin">2</div><div class="name">Ridge Hospital</div></div>
-      <div class="stop" style="left:1520px"><div class="stamp" id="st3">NO BED</div><div class="pin">3</div><div class="name">Korle Bu</div></div>
-      <div class="amb" id="s-amb"><svg viewBox="0 0 24 24"><path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z" fill="#E15554"/></svg></div>
-    </div>
-    <div class="endnote" id="s-end">He did not survive.</div>
+    <div class="timer" id="s-timerbox"><div class="num" id="s-timer">0</div><div class="lbl">MINUTES SINCE THE ACCIDENT</div></div>
+    <div class="maptag" id="s-maptag">Accra · not to scale</div>
+    <div class="endnote2" id="s-end">He did not survive.</div>
   </section>
 
   <!-- 3. stats -->
@@ -228,14 +233,15 @@
   </section>
 
   <!-- 4. problem -->
-  <section class="scene" id="problem">
-    <div class="kicker">The real failure</div>
-    <h2 id="p-h2">Nobody knows where the free beds are.</h2>
-    <div class="hosps">
-      <div class="hosp" id="h1"><div><div class="q">?</div><div class="l">free beds</div></div></div>
-      <div class="hosp" id="h2"><div><div class="q">?</div><div class="l">free beds</div></div></div>
-      <div class="hosp" id="h3"><div><div class="q">?</div><div class="l">free beds</div></div></div>
+  <section class="scene" id="problem" style="padding:0">
+    <svg id="pmap" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="topfade"></div>
+    <div class="storyhead">
+      <div class="kicker">The real failure</div>
+      <h2 id="p-h2" style="font-size:76px;max-width:1250px">Nobody knows where the free beds are.</h2>
     </div>
+    <div class="timer" id="p-timerbox"><div class="num" id="p-timer" style="color:var(--coral)">0</div><div class="lbl">MINUTES LOST SEARCHING</div></div>
+    <div class="maptag">Illustration</div>
   </section>
 
   <!-- 5. solution -->
@@ -257,6 +263,7 @@
         <div class="kicker">For hospitals</div>
         <h2>One tap to update. Or fully automatic.</h2>
         <p class="lead">Staff update free beds from the portal, or the hospital’s own system syncs through a secure API key.</p>
+        <svg id="beds" viewBox="0 0 760 190" width="760" height="190" style="margin-top:36px;overflow:visible"></svg>
       </div>
       <div class="panel" id="hp">
         <div class="ward"><span>Emergency</span><span class="ctl"><span class="btn">−</span><span class="n" id="w-er">2</span><span class="btn" id="w-plus">+</span></span></div>
@@ -276,11 +283,9 @@
         <h2>Hold the bed before the ambulance moves.</h2>
         <p class="lead">Nearest hospital with a confirmed free bed first. If it declines, BedAlert re-routes instantly.</p>
       </div>
-      <div class="panel" id="dp">
-        <div class="kicker" style="font-size:22px">Critical · road accident · ER</div>
-        <div class="opt" id="o1"><span class="rank">1</span><div><div class="nm">Hospital A</div><div class="meta">2.1 km · 3 ER beds · updated 4 min ago</div></div><span class="st held" id="o1h">HELD</span><span class="st declined" id="o1d" style="position:absolute;opacity:0">DECLINED</span></div>
-        <div class="opt" id="o2"><span class="rank">2</span><div><div class="nm">Hospital B</div><div class="meta">3.4 km · 1 ER bed · updated 9 min ago</div></div><span class="st held" id="o2h">HELD</span></div>
-        <div class="opt" id="o3"><span class="rank">3</span><div><div class="nm">Hospital C</div><div class="meta">5.8 km · 2 ER beds · updated 2 min ago</div></div></div>
+      <div class="panel" id="dp" style="padding:0;overflow:hidden;height:720px;position:relative">
+        <svg id="dmap" viewBox="0 0 900 720" width="100%" height="720"></svg>
+        <div class="kicker" style="position:absolute;left:28px;top:22px;font-size:20px;background:rgba(4,14,28,.7);padding:8px 14px;border-radius:10px">Critical · road accident · ER · with BedAlert</div>
       </div>
     </div>
   </section>
@@ -367,6 +372,7 @@
   <div class="caption" id="cap"></div>
 </div>
 
+<script src="anim.js"></script>
 <script>
 const T = window.TIMINGS;  // injected: {duration, scenes:[{id,start,end,lines:[{text,start,end}]}]}
 const $ = id => document.getElementById(id);
@@ -389,31 +395,156 @@ const FADE = 0.5;
   ecg.style.strokeDasharray = L; ecg.dataset.len = L;
 })();
 
+const A = window.ANIM;
 const scene = id => T.scenes.find(s => s.id === id);
 const lineAt = (id, i) => scene(id).lines[i].start - scene(id).start;  // line start, relative to scene
+const lineEnd = (id, i) => scene(id).lines[i].end - scene(id).start;
+const wordAt = (id, i, w) => { const l = scene(id).lines[i]; const k = l.text.indexOf(w);
+  return lineAt(id, i) + (l.end - l.start) * (k < 0 ? 0 : k / l.text.length); };
+
+// ---------------------------------------------------------------- build animated scenes
+const X = {};
+(function buildAnim() {
+  // title: skyline + road with a passing ambulance
+  const ts = $("tstreet"); A.defs(ts);
+  const r = A.rng(11); let x = -20;
+  while (x < 1940) { const w = 70 + r() * 120, h = 90 + r() * 200; A.E("rect", { x, y: 800 - h, width: w, height: h, fill: "#0c2240", opacity: .8 }, ts);
+    for (let wy = 812 - h; wy < 780; wy += 26) for (let wx = x + 10; wx < x + w - 12; wx += 22) if (r() < .25) A.E("rect", { x: wx, y: wy, width: 9, height: 12, fill: "#f6d38a", opacity: .25 + r() * .4 }, ts);
+    x += w + 8; }
+  A.E("rect", { x: 0, y: 800, width: 1920, height: 120, fill: "#0f1a28" }, ts);
+  for (let x = 0; x < 1920; x += 140) A.E("rect", { x, y: 856, width: 80, height: 6, fill: "#c9d3dd", opacity: .45 }, ts);
+  X.tAmb = A.makeAmbulance(ts, false);
+
+  // story: street
+  const st = $("street"); A.buildStreet(st, { roadY: 760 });
+  X.person = A.makePerson(st, A.C.paper, 1.35);
+  X.car = A.makeCar(st);
+  X.flash = A.E("circle", { cx: 0, cy: 0, r: 10, fill: "url(#glowW)", opacity: 0 }, st);
+  X.amb = A.makeAmbulance(st, true);
+  X.medics = [A.makePerson(st, A.C.amber, 1.3), A.makePerson(st, A.C.amber, 1.3)];
+  X.siren = A.E("rect", { x: 0, y: 0, width: 1920, height: 1080, fill: "#ff3b3b", opacity: 0 }, st);
+
+  // story: Accra map
+  const am = $("accra"); A.buildMapBase(am, 1920, 1080, 5, true);
+  const P = { c: [560, 440], p: [1450, 420], r: [1080, 610], k: [430, 780] };
+  X.seg = [
+    A.routePath(am, [P.c, [760, 400], [1000, 380], [1250, 390], P.p]),
+    A.routePath(am, [P.p, [1430, 510], [1260, 575], P.r]),
+    A.routePath(am, [P.r, [880, 660], [650, 730], P.k]),
+  ];
+  const acc = A.E("g", { transform: `translate(${P.c[0]},${P.c[1]})` }, am);
+  X.accRing = A.E("circle", { cx: 0, cy: 0, r: 40, fill: "none", stroke: A.C.coral, "stroke-width": 4 }, acc);
+  A.E("path", { d: "M0,-30 L28,20 L-28,20 Z", fill: A.C.coral }, acc);
+  A.E("text", { x: 0, y: 14, "text-anchor": "middle", fill: "#fff", "font-family": "Space Grotesk", "font-weight": 700, "font-size": 30 }, acc).textContent = "!";
+  A.E("text", { x: 0, y: 66, "text-anchor": "middle", fill: A.C.paper, "font-family": "Inter", "font-weight": 600, "font-size": 28 }, acc).textContent = "Circle overpass";
+  X.hm = [A.hospitalMarker(am, ...P.p, "Police Hospital"), A.hospitalMarker(am, ...P.r, "Ridge Hospital"), A.hospitalMarker(am, ...P.k, "Korle Bu")];
+  X.mapAmb = A.makeTopAmbulance(am);
+
+  // problem: generic map, searching blind
+  const pm = $("pmap"); A.buildMapBase(pm, 1920, 1080, 9, true);
+  const Q = { s: [300, 720], a: [760, 470], b: [1290, 730], c: [1640, 440] };
+  X.pseg = [A.routePath(pm, [Q.s, [520, 560], Q.a], { color: A.C.coral }), A.routePath(pm, [Q.a, [1000, 640], Q.b], { color: A.C.coral }), A.routePath(pm, [Q.b, [1480, 620], Q.c], { color: A.C.coral })];
+  const ps = A.E("g", { transform: `translate(${Q.s[0]},${Q.s[1]})` }, pm);
+  A.E("path", { d: "M0,-30 L28,20 L-28,20 Z", fill: A.C.coral }, ps);
+  A.E("text", { x: 0, y: 66, "text-anchor": "middle", fill: A.C.paper, "font-family": "Inter", "font-weight": 600, "font-size": 28 }, ps).textContent = "Emergency";
+  X.pm = [A.hospitalMarker(pm, ...Q.a, "Hospital"), A.hospitalMarker(pm, ...Q.b, "Hospital"), A.hospitalMarker(pm, ...Q.c, "Hospital")];
+  X.pAmb = A.makeTopAmbulance(pm);
+
+  // dispatch: generic map, with BedAlert
+  const dm = $("dmap"); A.buildMapBase(dm, 900, 720, 13, false);
+  const D = { s: [140, 590], a: [330, 230], b: [560, 470], c: [770, 230] };
+  X.d1 = A.routePath(dm, [D.s, [340, 560], D.b], { color: A.C.mint, width: 8 });
+  const mid = A.along(X.d1, 0.6);
+  X.d2 = A.routePath(dm, [[mid.x, mid.y], [560, 360], [680, 300], D.c], { color: A.C.mint, width: 8 });
+  const ds = A.E("g", { transform: `translate(${D.s[0]},${D.s[1]})` }, dm);
+  A.E("path", { d: "M0,-24 L22,16 L-22,16 Z", fill: A.C.coral }, ds);
+  X.dm = [A.hospitalMarker(dm, ...D.a, "Hospital A", { small: true }), A.hospitalMarker(dm, ...D.b, "Hospital B", { small: true }), A.hospitalMarker(dm, ...D.c, "Hospital C", { small: true })];
+  X.dAmb = A.makeTopAmbulance(dm);
+
+  // hospitals: ward beds
+  const bd = $("beds"); A.defs(bd); X.beds = [];
+  for (let i = 0; i < 6; i++) {
+    const g = A.E("g", { transform: `translate(${i * 124},40)` }, bd);
+    const frame = A.E("rect", { x: 0, y: 0, width: 104, height: 120, rx: 14, fill: "#17375c", stroke: "#2d5583", "stroke-width": 3 }, g);
+    A.E("rect", { x: 18, y: 10, width: 68, height: 22, rx: 8, fill: "#c9d6e3" }, g);
+    const occ = A.E("g", {}, g);
+    A.E("circle", { cx: 52, cy: 46, r: 14, fill: "#d9b48f" }, occ);
+    A.E("rect", { x: 10, y: 60, width: 84, height: 52, rx: 10, fill: "#5d7896" }, occ);
+    const free = A.E("text", { x: 52, y: 84, "text-anchor": "middle", fill: A.C.mint, "font-family": "Plex Mono", "font-weight": 700, "font-size": 22, opacity: 0 }, g);
+    free.textContent = "FREE";
+    X.beds.push({ g, frame, occ, free, empty: i === 4 });
+  }
+  X.walker = A.makePerson(bd, "#d9b48f", 0.6);
+})();
+
+function marker(m, state, p = 1, pulse = 0) {
+  const S = { idle: null, checking: ["CHECKING…", A.C.amber, A.C.navy], nobed: ["NO BED", A.C.coral, "#fff"], full: ["FULL", A.C.coral, "#fff"],
+    q: ["? beds", "#33557f", A.C.paper], declined: ["DECLINED", A.C.coral, "#fff"], held: ["HELD ✓", A.C.mint, A.C.navy] };
+  if (state && state.startsWith("free:")) { const n = +state.slice(5);
+    return A.setMarker(m, { pill: `${n} free`, color: n ? A.C.mint : A.C.coral, txColor: n ? A.C.navy : "#fff", pillP: p, disc: n ? A.C.mint : A.C.coral }); }
+  const s = S[state];
+  A.setMarker(m, { pill: s ? s[0] : null, color: s ? s[1] : A.C.coral, txColor: s ? s[2] : "#fff", pillP: p, ring: state === "checking" ? 0.9 : 0, pulse,
+    disc: state === "nobed" || state === "full" || state === "declined" ? A.C.coral : state === "held" ? A.C.mint : A.C.mint });
+}
 
 const draw = {
   title(t) {
     const ecg = $("ecgpath"); ecg.style.strokeDashoffset = ecg.dataset.len * (1 - clamp(t / 2.2));
     appear($("t-h1"), prog(t, lineAt("title", 1) - 0.3, 0.8), 60);
     appear($("t-sub"), prog(t, lineAt("title", 1) + 0.8, 0.8));
+    const ax = -300 + 2500 * A.span(t, 0.2, scene("title").end - scene("title").start);
+    A.poseAmbulance(X.tAmb, ax, 905, t, ax * 1.4, 1, 0.5);
   },
   story(t) {
-    const s = scene("story"), dur = s.end - s.start;
-    const stops = [60, 640, 1080, 1520];
-    const a = lineAt("story", 1), b = lineAt("story", 2) + 1.0;   // ambulance travels during line 2
-    const travel = clamp((t - a) / (b - a));
-    const x = stops[0] + (stops[3] - stops[0]) * ease(travel);
-    $("s-amb").style.left = x + "px";
-    $("s-done").style.width = (x - 60) + "px";
-    [1, 2, 3].forEach(i => {
-      const reach = (stops[i] - stops[0]) / (stops[3] - stops[0]);
-      const p = travel >= reach - 0.001 ? clamp((t - (a + reach * (b - a))) / 0.35) : 0;
-      $("st" + i).style.opacity = p;
-      $("st" + i).style.transform = `translateX(-50%) rotate(-8deg) scale(${1.6 - 0.6 * ease(p)})`;
+    const tHit = wordAt("story", 0, "was hit"), mapStart = lineAt("story", 2) - 0.6;
+    const streetOn = 1 - A.span(t, mapStart, mapStart + 0.8);
+    $("street").style.opacity = streetOn; $("accra").style.opacity = 1 - streetOn;
+    $("s-maptag").style.opacity = 1 - streetOn;
+    appear($("s-head"), prog(t, 0.3, 0.8), 20);
+    const on = Math.floor(t * 6) % 2;
+    if (streetOn > 0) {
+      // a man crosses; a car hits him and drives off
+      if (t < tHit) { const w = A.span(t, 0.6, tHit); A.posePerson(X.person, { x: 980, y: 690 + 140 * w, phase: t * 7, walk: t > 0.6 ? 1 : 0 }); }
+      else { const f = A.eo(A.span(t, tHit, tHit + 0.6)); A.posePerson(X.person, { x: 980 + 150 * f, y: 830 + 40 * f, rot: -90 * f }); }
+      const cx = 714 + (t - tHit) * 1100;
+      A.poseCar(X.car, cx, 852, (t - tHit) * 900, 1);
+      const fl = A.span(t, tHit, tHit + 0.45);
+      X.flash.setAttribute("cx", 1000); X.flash.setAttribute("cy", 770);
+      X.flash.setAttribute("r", 40 + 320 * fl); X.flash.setAttribute("opacity", t >= tHit ? 1 - fl : 0);
+      // the ambulance arrives, paramedics run to him
+      const tA = tHit + 1.6;
+      const ax = 2060 - (2060 - 1180) * A.eo(A.span(t, tA, tA + 2.2));
+      A.poseAmbulance(X.amb, ax, 900, t, -ax * 1.3, 1);
+      X.siren.setAttribute("opacity", t > tA + 0.5 ? (on ? 0.07 : 0.02) : 0);
+      const kneel = A.eo(A.span(t, lineAt("story", 1), lineAt("story", 1) + 0.6));
+      [[1240, 960], [1270, 1170]].forEach(([from, to], i) => {
+        const m = A.span(t, tA + 2.3 + i * 0.3, tA + 3.6 + i * 0.3);
+        A.posePerson(X.medics[i], { x: from + (to - from) * A.eo(m), y: 878, phase: t * 9, walk: m > 0 && m < 1 ? 1 : 0, kneel, reach: kneel, op: t > tA + 2.2 + i * 0.3 ? 1 : 0 });
+      });
+    }
+    // the map: Police Hospital -> Ridge -> Korle Bu
+    const a = [lineEnd("story", 2), lineEnd("story", 3), lineEnd("story", 4)];
+    const d = [mapStart + 0.8, a[0] + 1.6, a[1] + 1.6];
+    const pr = d.map((ds, i) => A.ez(A.span(t, ds, a[i])));
+    pr.forEach((p, i) => A.drawRoute(X.seg[i], p));
+    const i = t < d[1] ? 0 : t < d[2] ? 1 : 2;
+    const pos = A.along(X.seg[i], pr[i]);
+    const endT = wordAt("story", 6, "He did not");
+    A.poseTopAmbulance(X.mapAmb, pos.x, pos.y, pos.ang, t, t < endT ? 1 : 0);
+    X.hm.forEach((m, k) => {
+      const s = a[k] + 0.7;
+      if (t < a[k]) marker(m, "idle");
+      else if (t < s) marker(m, "checking", 1, Math.abs(Math.sin(t * 6)));
+      else marker(m, "nobed", A.span(t, s, s + 0.35));
     });
-    $("s-timer").textContent = Math.round(118 * ease(clamp(t / (lineAt("story", 3) + 3.5))));
-    appear($("s-end"), prog(t, lineAt("story", 3) + 4.2, 0.8));
+    X.accRing.setAttribute("r", 40 + 12 * Math.abs(Math.sin(t * 3)));
+    const keys = [[tHit, 0], [mapStart, 18], [a[0] + 0.7, 40], [a[1] + 0.7, 66], [a[2] + 0.7, 92], [wordAt("story", 6, "118"), 118]];
+    let mins = 0;
+    for (let k = 0; k < keys.length - 1; k++) if (t >= keys[k][0]) mins = keys[k][1] + (keys[k + 1][1] - keys[k][1]) * A.span(t, keys[k][0], keys[k + 1][0]);
+    $("s-timer").textContent = Math.round(mins);
+    $("s-timerbox").style.opacity = A.span(t, tHit + 0.6, tHit + 1.4);
+    $("s-dim").style.opacity = 0.78 * A.span(t, endT, endT + 1.2);
+    $("s-end").style.opacity = A.span(t, endT + 0.4, endT + 1.4);
   },
   stats(t) {
     const p1 = prog(t, lineAt("stats", 1) - 0.2, 0.7), p2 = prog(t, lineAt("stats", 2) - 0.2, 0.7), p3 = prog(t, lineAt("stats", 3) - 0.2, 0.7);
@@ -425,11 +556,20 @@ const draw = {
   },
   problem(t) {
     appear($("p-h2"), prog(t, 0, 0.8));
-    ["h1", "h2", "h3"].forEach((h, i) => {
-      const p = prog(t, lineAt("problem", 1) + i * 0.35, 0.6);
-      appear($(h), p);
-      $(h).style.borderColor = `rgba(225,85,84,${0.3 + 0.5 * Math.abs(Math.sin((t + i) * 2)) * clamp((t - lineAt("problem", 2)) / 0.5)})`;
+    const ds = [1.0, 5.6, 10.2], as = [4.0, 8.6, 13.2];
+    const pr = ds.map((d, i) => A.ez(A.span(t, d, as[i])));
+    pr.forEach((p, i) => A.drawRoute(X.pseg[i], p));
+    const i = t < ds[1] ? 0 : t < ds[2] ? 1 : 2;
+    const pos = A.along(X.pseg[i], pr[i]);
+    A.poseTopAmbulance(X.pAmb, pos.x, pos.y, pos.ang, t, 1);
+    X.pm.forEach((m, k) => {
+      const show = A.span(t, 0.4 + k * 0.3, 0.8 + k * 0.3);
+      if (t < as[k]) marker(m, "q", show);
+      else if (t < as[k] + 0.6) marker(m, "checking", 1, Math.abs(Math.sin(t * 6)));
+      else marker(m, "full", A.span(t, as[k] + 0.6, as[k] + 0.95));
     });
+    $("p-timer").textContent = Math.round(38 * A.span(t, 1.0, 15.0));
+    $("p-timerbox").style.opacity = A.span(t, 1.0, 1.8);
   },
   solution(t) {
     appear($("sol-logo"), prog(t, 0, 0.8)); appear($("sol-tag"), prog(t, 0.6, 0.8));
@@ -438,24 +578,36 @@ const draw = {
   },
   hospitals(t) {
     appear($("hp"), prog(t, 0.3, 0.7), 40);
-    const tap = lineAt("hospitals", 0) + 2.2;
+    const tap = lineAt("hospitals", 0) + 2.8, leave = tap - 2.2;
     $("w-plus").classList.toggle("hot", t > tap && t < tap + 0.35);
     $("w-er").textContent = t > tap ? 3 : 2;
     $("w-er").style.color = t > tap && t < tap + 1.5 ? "var(--mint)" : "";
-    const sy = lineAt("hospitals", 0) + 4.2;
+    const sy = lineAt("hospitals", 0) + 4.4;
     appear($("sync"), prog(t, sy, 0.6), 10);
     $("w-gen").textContent = t > sy + 0.4 ? 12 : 14;
+    X.beds.forEach((b, i) => {
+      const freed = b.empty ? 1 : i === 2 ? A.span(t, leave, leave + 0.3) : 0;
+      b.occ.setAttribute("opacity", 1 - freed);
+      b.free.setAttribute("opacity", b.empty ? 1 : i === 2 ? A.span(t, tap - 0.5, tap) : 0);
+      b.frame.setAttribute("stroke", (b.empty || (i === 2 && t > tap - 0.5)) ? A.C.mint : "#2d5583");
+    });
+    const w = A.span(t, leave + 0.2, tap + 0.2);
+    A.posePerson(X.walker, { x: 2 * 124 + 52 + 560 * w, y: 165, phase: t * 8, walk: w > 0 && w < 1 ? 1 : 0, op: t > leave + 0.1 ? 1 - A.span(t, tap - 0.2, tap + 0.2) : 0 });
   },
   dispatch(t) {
     appear($("dp"), prog(t, 0.3, 0.7), 40);
-    const held = lineAt("dispatch", 0) + 4.0, dec = lineAt("dispatch", 1) + 0.6, re = dec + 1.2;
-    $("o1h").style.opacity = t > held && t < dec ? 1 : 0;
-    $("o1d").style.opacity = t > dec ? 1 : 0; $("o1d").style.position = t > dec ? "static" : "absolute";
-    $("o1h").style.display = t > dec ? "none" : "";
-    $("o1").style.borderColor = t > held && t < dec ? "var(--mint)" : t > dec ? "rgba(225,85,84,.6)" : "transparent";
-    $("o1").style.opacity = t > dec ? 0.55 : 1;
-    $("o2h").style.opacity = prog(t, re, 0.3);
-    $("o2").style.borderColor = t > re ? "var(--mint)" : "transparent";
+    const dur = scene("dispatch").end - scene("dispatch").start;
+    const tDec = lineAt("dispatch", 1) + 1.2;
+    const states = ["free:0", "free:3", "free:2"];
+    X.dm.forEach((m, k) => marker(m, states[k], A.span(t, 0.6 + k * 0.3, 1.0 + k * 0.3)));
+    A.drawRoute(X.d1, A.span(t, 2.2, 3.0));
+    X.d1.p.setAttribute("stroke", t < tDec ? A.C.mint : A.C.coral);
+    X.d1.p.setAttribute("opacity", t < tDec ? 1 : 0.45);
+    if (t > 3.2) marker(X.dm[1], t < tDec ? "held" : "declined", t < tDec ? A.span(t, 3.2, 3.5) : A.span(t, tDec, tDec + 0.35));
+    A.drawRoute(X.d2, A.span(t, tDec + 0.3, tDec + 1.1));
+    if (t > tDec + 1.1) marker(X.dm[2], "held", A.span(t, tDec + 1.1, tDec + 1.4));
+    const pos = t < tDec + 1.2 ? A.along(X.d1, 0.6 * A.span(t, 3.6, tDec)) : A.along(X.d2, A.ez(A.span(t, tDec + 1.2, dur - 0.3)));
+    A.poseTopAmbulance(X.dAmb, pos.x, pos.y, pos.ang, t, 1);
   },
   citizens(t) {
     appear($("ph1"), prog(t, 0.1, 0.7), 40);

@@ -1,11 +1,12 @@
 # BedAlert intro video
 
-A ~3-minute explainer: what "no bed syndrome" is, the numbers behind it, and
+A ~3-minute animated explainer: what "no bed syndrome" is, the numbers behind it, and
 what BedAlert is building. Narrated (AI voice) with on-screen captions.
 
 - `NARRATION.md`: the script, to re-record in your own voice
 - `script.json`: the same text, plus how the AI voice should pronounce it
-- `scenes.html`: the animated visuals (one scene per section)
+- `scenes.html`: the scenes and their timing
+- `anim.js`: the animated illustrations (street, car, ambulance, people, maps)
 - `narrate.py`, `pad.py`, `render.py`: build steps
 
 The rendered MP4 is not committed (`out/` is ignored).

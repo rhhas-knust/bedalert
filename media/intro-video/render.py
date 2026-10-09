@@ -24,6 +24,7 @@ FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
 for f in fonts.rglob("*-latin-[4-7]00-normal.woff2"):
     shutil.copy(f, build / "fonts" / f.name)
 shutil.copy(HERE / "scenes.html", build / "scenes.html")
+shutil.copy(HERE / "anim.js", build / "anim.js")
 timings = json.loads((build / "timings.json").read_text())
 duration = timings["duration"]
 
@@ -31,6 +32,8 @@ with sync_playwright() as pw:
     browser = pw.chromium.launch(executable_path=CHROME if pathlib.Path(CHROME).exists() else None)
     page = browser.new_page(viewport={"width": 1920, "height": 1080})
     page.add_init_script(f"window.TIMINGS = {json.dumps(timings)};")
+    page.on("pageerror", lambda e: print("PAGE ERROR:", e))
+    page.on("console", lambda m: print("CONSOLE:", m.text) if m.type == "error" else None)
     page.goto((build / "scenes.html").as_uri())
     page.evaluate("document.fonts.ready")
     if preview:
