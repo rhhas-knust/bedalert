@@ -20,3 +20,24 @@ Share this so it reaches the right people. 🙏
 ## Short version (if you want less text)
 
 3 hospitals. 0 beds. 118 minutes. We're building BedAlert so no one in Ghana dies looking for a bed. 🇬🇭🏥 #NoBedSyndrome #Ghana #HealthTech #BedAlert #KNUST #UG
+
+---
+
+# TikTok post: BedAlert phase update
+
+Video: `phase-update.json` → `compose_voice.py` → `render.py --portrait`.
+Cover: `thumb/phase-cover.html` → `out/tiktok-cover-phase-update.png`.
+
+## Caption
+
+BedAlert build update 🇬🇭🏥
+
+Phase 1 ✅ The core system is built and tested: secure bed database, bed holds that expire, auto re-routing when a hospital declines, hospital API keys, a USSD menu for basic phones, 31 automated tests passing.
+
+Phase 2 🚧 Now building the three apps: hospital portal, dispatch console and family app. Then real SMS + USSD, and a pilot in our first district.
+
+Started by Robert (Biomedical Engineering, KNUST), Jayne & Welam (Medical Laboratory Science, University of Ghana).
+
+💬 Hospitals, NAS, developers, health students: want in? Comment or DM.
+
+#BedAlert #NoBedSyndrome #Ghana #HealthTech #BuildInPublic #KNUST #UniversityOfGhana #StudentFounders #TechForGood #AfricanInnovation

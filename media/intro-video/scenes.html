@@ -62,6 +62,27 @@
   .ologo .dot { width: 80px; height: 80px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 20px rgba(143,227,198,.15), 0 0 0 44px rgba(143,227,198,.07); }
   html.portrait .ocard { left: 70px; right: 70px; top: 560px; font-size: 92px; }
   html.portrait .ologo { font-size: 120px; top: 640px; }
+  .pword { font-family: "Space Grotesk"; font-weight: 700; font-size: 130px; margin-top: 14px; letter-spacing: -.02em; }
+  .pnote { margin-top: 40px; font-size: 36px; color: var(--muted); opacity: 0; }
+  .ph-h { font-size: 84px; margin-top: 14px; }
+  .chk { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 40px; }
+  .ci { display: flex; align-items: center; gap: 22px; font-size: 34px; font-weight: 600; opacity: 0; }
+  .ci i { flex: none; width: 56px; height: 56px; border-radius: 50%; background: var(--mint); color: var(--navy); font-style: normal; font-weight: 700; display: grid; place-items: center; font-size: 32px; }
+  .road { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .rstep { border-radius: 26px; padding: 34px; background: rgba(255,255,255,.05); border: 3px solid var(--line); opacity: .25; }
+  .rstep.on { opacity: 1; }
+  .rtag { font-family: "Plex Mono"; font-weight: 700; font-size: 22px; letter-spacing: .1em; color: var(--muted); }
+  .rt { font-family: "Space Grotesk"; font-weight: 700; font-size: 50px; margin-top: 12px; }
+  .rd { font-size: 28px; color: var(--muted); margin-top: 12px; line-height: 1.35; }
+  html.portrait .pword { font-size: 120px; }
+  html.portrait #pioneers .people { margin-top: 26px !important; }
+  html.portrait .ph-h { font-size: 72px; }
+  html.portrait .chk { grid-template-columns: 1fr; gap: 28px; margin-top: 44px; }
+  html.portrait .ci { font-size: 40px; }
+  html.portrait .ci i { width: 64px; height: 64px; font-size: 36px; }
+  html.portrait .road { grid-template-columns: 1fr; gap: 22px; margin-top: 36px; }
+  html.portrait .rstep { padding: 26px 30px; }
+  html.portrait .rt { font-size: 46px; }
   /* title */
   #title h1 { font-size: 180px; line-height: .95; margin-top: 30px; }
   #title h1 .red { color: var(--coral); }
@@ -236,7 +257,8 @@
   html.portrait #solution .logo { margin-top: 60px; }
   html.portrait #solution .logo .word { font-size: 150px; }
   html.portrait #solution .tag { font-size: 46px; }
-  html.portrait .board { left: 70px; right: 70px; top: auto; bottom: 470px; width: auto; }
+  html.portrait .board { left: 70px; right: 70px; top: 700px; bottom: auto; width: auto; }
+  html.portrait #row3 { display: none; }
   /* hospitals */
   html.portrait .headcard { left: 60px; top: 230px; padding: 24px 32px; }
   html.portrait .headcard h2 { font-size: 54px; }
@@ -283,6 +305,42 @@
     <div class="kicker" style="margin-top:110px">Ghana · Emergency care</div>
     <h1 id="t-h1">No Bed<br><span class="red">Syndrome.</span></h1>
     <div class="sub" id="t-sub">Why patients are dying in ambulances, and what we are building to stop it.</div>
+  </section>
+
+  <!-- phase-update video: pioneers / phase 1 / phase 2 -->
+  <section class="scene" id="pioneers">
+    <div class="kicker">Meet the pioneers</div>
+    <div class="pword">BedAlert <span style="font-size:.5em">🇬🇭</span></div>
+    <div class="people" style="margin-top:40px">
+      <div class="person" id="pq1"><div class="av" style="background:var(--mint)">R</div><div class="nm">Robert Hasford</div><div class="rl">BSc Biomedical Engineering<br>KNUST · Class of 2026</div></div>
+      <div class="person" id="pq2"><div class="av" style="background:var(--amber)">J</div><div class="nm">Jayne</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+      <div class="person" id="pq3"><div class="av" style="background:var(--paper)">W</div><div class="nm">Welam</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+    </div>
+    <div class="pnote" id="pq-note">Three students building a fix for no bed syndrome.</div>
+  </section>
+
+  <section class="scene" id="phase1">
+    <div class="kicker">Phase 1 · Done ✓</div>
+    <h2 class="ph-h">Where we are</h2>
+    <div class="chk">
+      <div class="ci" id="ci0"><i>✓</i>Secure bed database</div>
+      <div class="ci" id="ci1"><i>✓</i>Logins and roles for hospitals &amp; dispatchers</div>
+      <div class="ci" id="ci2"><i>✓</i>Bed holds that expire automatically</div>
+      <div class="ci" id="ci3"><i>✓</i>Auto re-routing when a hospital declines</div>
+      <div class="ci" id="ci4"><i>✓</i>Hospital API keys for their own systems</div>
+      <div class="ci" id="ci5"><i>✓</i>USSD menu for basic phones</div>
+      <div class="ci" id="ci6"><i>✓</i>31 automated tests passing</div>
+    </div>
+  </section>
+
+  <section class="scene" id="phase2">
+    <div class="kicker">What’s next</div>
+    <h2 class="ph-h">The road to a real pilot</h2>
+    <div class="road">
+      <div class="rstep" id="rs0"><div class="rtag">PHASE 2 · NOW BUILDING</div><div class="rt">Three apps</div><div class="rd">🏥 Hospital portal · 🚑 Dispatch console · 👪 Family app</div></div>
+      <div class="rstep" id="rs1"><div class="rtag">PHASE 3</div><div class="rt">Real SMS &amp; USSD</div><div class="rd">Live alerts, and a short code on every network</div></div>
+      <div class="rstep" id="rs2"><div class="rtag">PHASE 4</div><div class="rt">First pilot district</div><div class="rd">2–5 hospitals and an ambulance station</div></div>
+    </div>
   </section>
 
   <!-- 2. story -->
@@ -886,8 +944,31 @@ const draw = {
   credits(t) {
     ["pp1", "pp2", "pp3"].forEach((k, i) => appear($(k), prog(t, 0.6 + [0, 4.6, 5.4][i], 0.7), 30));
   },
+  pioneers(t) {
+    const L = lineAt("pioneers", 0);
+    [1.0, 4.6, 5.3].forEach((c, i) => appear($("pq" + (i + 1)), prog(t, L + c, 0.6), 30));
+    appear($("pq-note"), prog(t, L + 7.2, 0.8), 14);
+  },
+  phase1(t) {
+    const L = lineAt("phase1", 0);
+    for (let i = 0; i < 7; i++) {
+      const p = prog(t, L + 0.2 + i * 0.5, 0.45);
+      appear($("ci" + i), p, 16);
+      $("ci" + i).firstChild.style.transform = `scale(${0.4 + 0.6 * A.eo(A.span(t, L + 0.3 + i * 0.5, L + 0.7 + i * 0.5)) + 0.15 * Math.sin(Math.PI * A.span(t, L + 0.5 + i * 0.5, L + 0.9 + i * 0.5))})`;
+    }
+  },
+  phase2(t) {
+    const marks = [wordAt("phase2", 0, "launch"), wordAt("phase2", 0, "connect"), wordAt("phase2", 0, "pilot")];
+    marks.forEach((m, i) => {
+      const on = t > m - 0.2;
+      $("rs" + i).classList.toggle("on", on);
+      $("rs" + i).style.borderColor = on ? (i === 0 ? "var(--mint)" : "rgba(255,255,255,.35)") : "";
+      $("rs" + i).style.transform = `scale(${1 + 0.04 * Math.sin(Math.PI * A.span(t, m - 0.2, m + 0.4))})`;
+      $("rs" + i).querySelector(".rtag").style.color = on && i === 0 ? "var(--mint)" : "";
+    });
+  },
   outro(t) {
-    const cues = [1.1, 7.5, 16.5, 24.9, 32.0, 99];
+    const cues = scene("outro").cues || [1.1, 7.5, 16.5, 24.9, 32.0, 99];
     cues.slice(0, 5).forEach((c, i) => {
       const on = A.span(t, c, c + 0.6), off = A.span(t, cues[i + 1] - 0.5, cues[i + 1]);
       appear($("oc" + i), on * (1 - off), 30);
@@ -904,8 +985,13 @@ window.render = function (now) {
     el.style.opacity = now >= s.start - 0.01 && now <= s.end + 0.01 ? o : 0;
     if (el.style.opacity > 0) draw[s.id](now - s.start);
   }
-  $("hope").style.opacity = clamp((now - scene("solution").start) / 1.5) * (1 - clamp((now - scene("credits").start) / 1.0) + (scene("outro") ? clamp((now - scene("outro").start) / 1.0) * (1 - clamp((now - scene("outro").end) / 1.0)) : 0));
-  $("brand").style.opacity = clamp((now - scene("story").start) / FADE) * (now < scene("credits").start ? 1 : 0);
+  const sAt = (id, k, fallback) => (scene(id) ? scene(id)[k] : fallback);
+  const hopeFrom = sAt("solution", "start", 0), hopeTo = sAt("credits", "start", T.duration + 9);
+  $("hope").style.opacity = Math.min(1, clamp((now - hopeFrom) / 1.5) * (1 - clamp((now - hopeTo) / 1.0))
+    + (scene("outro") ? clamp((now - scene("outro").start) / 1.0) * (1 - clamp((now - scene("outro").end) / 1.0)) : 0));
+  const brandFrom = sAt("story", "start", T.scenes.length > 1 ? T.scenes[1].start : 0);
+  const brandTo = sAt("credits", "start", sAt("outro", "start", T.duration + 9));
+  $("brand").style.opacity = clamp((now - brandFrom) / FADE) * (now < brandTo ? 1 : 0);
   let cap = null;
   for (const s of T.scenes) if (s.id !== "credits") for (const l of s.lines) if (now >= l.start - 0.05 && now <= l.end + 0.3) cap = l.text;
   $("cap").textContent = cap || "";
