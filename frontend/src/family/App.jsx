@@ -11,6 +11,7 @@ const NEEDS = {
   maternity: { ward: 'maternity', title: 'Maternity beds', icon: '🤰', label: 'Labour / pregnancy', sub: 'Labour or pregnancy problems' },
   stable: { ward: 'general', title: 'Ward beds', icon: '🛏️', label: 'Not an emergency', sub: 'Referral, admission, check-up' },
 }
+const NEED_BY_WARD = { ER: 'emergency', maternity: 'maternity', general: 'stable' }
 const CATEGORIES = {
   emergency: ['chest_pain', 'road_accident', 'breathing_difficulty', 'stroke_signs', 'bleeding_injury', 'burns', 'poisoning', 'child_fever', 'other'],
   maternity: ['labour', 'bleeding_injury', 'other'],
@@ -58,7 +59,7 @@ export default function FamilyApp() {
         />
       )}
       {view.name === 'held' && (
-        <Held hold={view.hold} session={session} setCitizen={setCitizen} meta={meta} onFindAnother={() => go('list', { need: 'emergency' })} />
+        <Held hold={view.hold} session={session} setCitizen={setCitizen} meta={meta} onFindAnother={() => go('list', { need: NEED_BY_WARD[view.hold.ward] || 'emergency' })} />
       )}
       {view.name === 'mine' && <Mine session={session} setCitizen={setCitizen} meta={meta} onOpen={(hold) => go('held', { hold })} onHome={() => go('home')} />}
     </AppShell>
