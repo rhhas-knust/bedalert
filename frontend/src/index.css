@@ -5,12 +5,22 @@
 body {
   font-family: 'Inter', sans-serif;
   color: #1B2430;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.font-display {
-  font-family: 'Space Grotesk', sans-serif;
-}
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+.font-mono-data { font-family: 'IBM Plex Mono', monospace; }
 
-.font-mono-data {
-  font-family: 'IBM Plex Mono', monospace;
+/* Map pins (dispatch console) */
+.ba-pin {
+  width: 36px; height: 36px; border-radius: 9999px; display: grid; place-items: center;
+  font: 700 13px 'Space Grotesk', sans-serif; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(11, 37, 69, .35);
 }
+.ba-pin-free { background: #5FCBA4; color: #0B2545; }
+.ba-pin-low { background: #E8A33D; color: #0B2545; }
+.ba-pin-full { background: #E15554; color: #fff; }
+.ba-pin-stale { background: #9FB3C8; color: #0B2545; }
+.ba-pin-chosen { background: #0F6E6E; color: #fff; outline: 4px solid rgba(15, 110, 110, .35); transform: scale(1.15); }
+.ba-pin-incident { background: #0B2545; color: #fff; animation: ba-pulse 1.6s ease-out infinite; }
+@keyframes ba-pulse { 0% { box-shadow: 0 0 0 0 rgba(225, 85, 84, .6); } 100% { box-shadow: 0 0 0 18px rgba(225, 85, 84, 0); } }
+.ba-dot { display: inline-block; width: 10px; height: 10px; border-radius: 9999px; }

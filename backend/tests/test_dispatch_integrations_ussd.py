@@ -24,9 +24,13 @@ def test_dispatch_prefers_fresh_then_nearest_and_forces_er_for_critical(client, 
     opts = client.get("/v1/dispatch/options", params={**KUMASI, "severity": "critical", "ward": "general"}, headers=headers).json()
     assert [o["hospital_name"] for o in opts] == ["Farther, fresh", "Near but stale"]
     assert opts[0]["ward"] == "ER"
+    assert {"lat", "lng"} <= set(opts[0])  # for the dispatch map
     hold = client.post("/v1/dispatch/holds", headers=headers,
                        json={**KUMASI, "severity": "critical", "ward": "general", "condition_category": "road_accident"}).json()
     assert hold["hospital_id"] == far_fresh and hold["ward"] == "ER" and hold["eta_minutes"] >= 5
+    assert hold["hospital_lat"] == 6.75 and hold["hospital_lng"] == -1.60
+    board = client.get("/v1/dispatch/holds", headers=headers).json()
+    assert board[0]["hospital_lat"] == 6.75
 
 
 def test_decline_reroutes_dispatcher_hold(client, db):

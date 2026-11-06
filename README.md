@@ -26,9 +26,19 @@ See `docs/PRODUCTION_ARCHITECTURE.md` for the reasoning and the roadmap.
   that consume beds forever, automatic re-routing when a hospital declines
   an ambulance patient, hospital API keys, phone OTP, USSD in the
   Africa's Talking format, SMS outbox, audit log. 31 tests.
-- **Phase 2 (next): split the apps.** The React app in `frontend/` is still
-  the v0.2 demo and **does not talk to the new API yet**; it will be
-  rebuilt as citizen / hospital / dispatch apps.
+- **Phase 2 (done): the apps.** Four web apps in `frontend/`, built from one
+  Vercel project, each loading only its own code:
+
+  | URL | App | Who |
+  |---|---|---|
+  | `/` | Find a bed | Families: see free beds nearby, verify a phone by SMS code, hold a bed, get a code and live status |
+  | `/hospital` | Hospital portal | Ward staff: incoming patients (accept / decline / arrived), one-tap bed updates; admins: on-call SMS list, team, API keys, registering a new hospital |
+  | `/dispatch` | Dispatch console | Ambulance controllers: map, ranked hospitals, hold a bed, live board with automatic re-routes |
+  | `/admin` | Network admin | BedAlert team: verify hospitals, agencies, roles, data freshness |
+
+  Checked end to end in a real browser by `frontend/e2e/smoke.py`.
+- **Next:** go live (Supabase + API host + Vercel), real SMS/USSD through
+  Africa's Talking, then a pilot district.
 
 ## How a bed hold works
 
@@ -96,10 +106,33 @@ backend/app/
                          integrations, dispatch, admin (+ dev, local only)
 backend/scripts/         migrate, seed_dev, grant_role
 backend/tests/
-frontend/                v0.2 demo UI (to be replaced in Phase 2)
+frontend/
+  index.html, hospital/, dispatch/, admin/    one entry page per app
+  src/family|hospital|dispatch|admin/         each app
+  src/shared/            API client, staff sign-in, UI pieces, map
+  e2e/smoke.py           browser test across all four apps
+```
+
+## Run the apps locally
+
+With the API running in dev mode (above):
+
+```bash
+cd frontend
+npm install
+npm run dev            # http://localhost:5173/ , /hospital/ , /dispatch/ , /admin/
+```
+
+Staff sign-in uses the demo accounts in dev mode (no password). To try the
+whole flow in a browser automatically:
+
+```bash
+npm run build && npx vite preview --port 4173 &
+# API started with CORS_ORIGINS=http://localhost:4173 and fresh demo data
+python e2e/smoke.py http://localhost:4173 e2e-screenshots
 ```
 
 ## Deploying
 
-See `DEPLOYMENT.md`. Hosting stays within free-tier limits: Supabase (database
-+ staff login), Render (API) and Vercel (the web apps, all from one project).
+See `DEPLOYMENT.md`. Supabase (database + staff login), an API host, and
+Vercel for the web apps (all four from one project).

@@ -138,6 +138,8 @@ def rank_candidates(conn: Connection, *, lat: float, lng: float, ward: str, excl
             "hospital_id": f["id"],
             "hospital_name": f["name"],
             "hospital_phone": f["phone"],
+            "lat": f["lat"],
+            "lng": f["lng"],
             "city": f["city"],
             "ward": ward,
             "available": w["available"],
@@ -188,7 +190,7 @@ def create_hold(
     expire_holds(conn)
 
     w = conn.execute(
-        """select w.id::text, w.total, w.occupied, h.name as hospital_name, h.phone as hospital_phone
+        """select w.id::text, w.total, w.occupied, h.name as hospital_name, h.phone as hospital_phone, h.lat, h.lng
            from wards w join hospitals h on h.id = w.hospital_id
            where h.id = %s and w.kind = %s and h.status = 'verified'
            for update of w""",
@@ -241,7 +243,8 @@ def create_hold(
             + " Emergency? Also call 112.",
             "hold_citizen",
         )
-    return hold_view(hold, hospital_name=w["hospital_name"], hospital_phone=w["hospital_phone"], ward=ward)
+    return hold_view({**hold, "hospital_lat": w["lat"], "hospital_lng": w["lng"]},
+                     hospital_name=w["hospital_name"], hospital_phone=w["hospital_phone"], ward=ward)
 
 
 def _notify_hospital(conn: Connection, hospital_id: str, hold: dict, hospital_name: str) -> None:
@@ -278,6 +281,8 @@ def hold_view(h: dict, *, hospital_name=None, hospital_phone=None, ward=None, in
         "arrived_at": h["arrived_at"].isoformat() if h.get("arrived_at") else None,
         "previous_hold_id": str(h["previous_hold_id"]) if h.get("previous_hold_id") else None,
     }
+    if h.get("hospital_lat") is not None:
+        out["hospital_lat"], out["hospital_lng"] = h["hospital_lat"], h["hospital_lng"]
     if include_private:
         out.update({
             "condition_note": h["condition_note"],
@@ -290,7 +295,8 @@ def hold_view(h: dict, *, hospital_name=None, hospital_phone=None, ward=None, in
 
 
 HOLD_SELECT = """
-    select x.*, h.name as hospital_name, h.phone as hospital_phone, w.kind as ward
+    select x.*, h.name as hospital_name, h.phone as hospital_phone, h.lat as hospital_lat, h.lng as hospital_lng,
+           w.kind as ward
     from holds x join hospitals h on h.id = x.hospital_id join wards w on w.id = x.ward_id
 """
 

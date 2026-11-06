@@ -219,7 +219,7 @@ not depend on the split: every API route checks the caller's role.
 4. Hold → accept → arrive lifecycle with expiry job.
 5. Tests for the ledger (no double-booking the last bed, expiry releases beds).
 
-**Phase 2 — Split the apps (≈2 weeks)**
+**Phase 2 — Split the apps ✅ done** (family app, hospital portal, dispatch console, plus a small network-admin page)
 6. Move to `apps/*` + `packages/ui`; one Vercel project per app.
 7. Hospital portal: bed updates, incoming patients, accept/decline.
 8. Dispatch console: region view, hold, ETA.

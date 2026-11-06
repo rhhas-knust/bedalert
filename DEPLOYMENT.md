@@ -66,11 +66,34 @@ The API refuses to start in production if a secret is missing or
 3. Test with the Africa's Talking simulator. A dedicated short code on
    MTN / Telecel / AT takes weeks to provision, so apply early.
 
-## 4. Vercel (web apps)
+## 4. Vercel (the four web apps)
 
-Import the repo, set root directory to `frontend`, and set
-`VITE_API_URL=https://<your-api>.onrender.com`. (Phase 2 will add the
-Supabase URL and publishable key for staff login.)
+One Vercel project serves the family app (`/`), hospital portal
+(`/hospital`), dispatch console (`/dispatch`) and admin page (`/admin`).
+
+1. Vercel → Add New → Project → import this repository.
+2. **Root Directory:** `frontend`. Vercel detects Vite; `frontend/vercel.json`
+   sets the build, the `/hospital` `/dispatch` `/admin` routes and security headers.
+3. **Environment variables** (Settings → Environment Variables):
+   - `VITE_API_URL` = your API's URL, no trailing slash
+   - `VITE_SUPABASE_URL` = `https://<project-ref>.supabase.co`
+   - `VITE_SUPABASE_ANON_KEY` = the project's publishable (anon) key. It is
+     meant to be public; row level security keeps the data closed.
+4. Deploy. Then add the Vercel URL (and any custom domain) to the API's
+   `CORS_ORIGINS`, comma-separated, e.g. `https://bedalert.vercel.app`.
+5. In Supabase → Authentication → URL Configuration, set the Site URL to the
+   Vercel URL so email confirmation links come back to BedAlert.
+
+Without the two Supabase variables the apps fall back to the development
+sign-in, which only works against an API running with `BEDALERT_ENV=dev`.
+
+**Onboarding the first users after deploy:**
+1. Create your own account at `/hospital` (or `/admin`), then make yourself
+   network admin with `scripts/grant_role` (step 1.5 above).
+2. At `/admin`: add the ambulance agency, and grant dispatchers their role
+   once they have created an account.
+3. Hospitals register themselves at `/hospital`. Verify each at `/admin`
+   after checking the HeFRA licence by phone.
 
 ## Local development
 
