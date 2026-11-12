@@ -1,0 +1,238 @@
+{
+ "voice": "af_heart",
+ "speed": 0.92,
+ "scenes": [
+  {
+   "id": "title",
+   "pad": 2.0,
+   "lines": [
+    {
+     "text": "In Ghana, there is a phrase every emergency worker knows.",
+     "say": "In Ghana, there is a phrase every emergency worker knows."
+    },
+    {
+     "text": "No bed syndrome.",
+     "say": "No bed syndrome.",
+     "speed": 0.85
+    }
+   ]
+  },
+  {
+   "id": "story",
+   "pad": 2.0,
+   "lines": [
+    {
+     "text": "On the 6th of February 2026, Charles Amissah, a 29-year-old engineer, was hit by a car at the Circle overpass in Accra.",
+     "say": "On the sixth of February, twenty twenty-six, Charles Amissah, a twenty-nine year old engineer, was hit by a car at the Circle overpass in Accra.",
+     "gap": 2.6
+    },
+    {
+     "text": "Paramedics reached him and stabilised him.",
+     "say": "Paramedics reached him, and stabilised him.",
+     "gap": 1.0
+    },
+    {
+     "text": "Then the ambulance went to the Police Hospital.",
+     "say": "Then the ambulance went to the Police Hospital.",
+     "gap": 2.2
+    },
+    {
+     "text": "Then to Ridge Hospital.",
+     "say": "Then to Ridge Hospital.",
+     "gap": 2.2
+    },
+    {
+     "text": "Then to Korle Bu.",
+     "say": "Then to Korlay Boo.",
+     "gap": 2.0
+    },
+    {
+     "text": "Each time, the answer was the same: no bed.",
+     "say": "Each time, the answer was the same. No bed.",
+     "speed": 0.82,
+     "gap": 0.6
+    },
+    {
+     "text": "A Ministry of Health committee later described a 118-minute referral loop. He did not survive.",
+     "say": "A Ministry of Health committee later described a one hundred and eighteen minute referral loop. He did not survive."
+    }
+   ]
+  },
+  {
+   "id": "stats",
+   "pad": 1.0,
+   "lines": [
+    {
+     "text": "His story is not rare.",
+     "say": "His story is not rare.",
+     "speed": 0.85
+    },
+    {
+     "text": "Ghana has fewer than one hospital bed for every 1,000 people: about 0.7 to 0.9.",
+     "say": "Ghana has fewer than one hospital bed for every thousand people. About zero point seven, to zero point nine."
+    },
+    {
+     "text": "Major hospitals report running at 120 to 150 percent of their capacity.",
+     "say": "Major hospitals report running at one hundred and twenty, to one hundred and fifty percent of their capacity."
+    },
+    {
+     "text": "And in mid-2025, Greater Accra, a region of over five million people, had only about 42 ambulances available.",
+     "say": "And in mid twenty twenty-five, Greater Accra, a region of over five million people, had only about forty-two ambulances available."
+    }
+   ]
+  },
+  {
+   "id": "problem",
+   "pad": 1.0,
+   "lines": [
+    {
+     "text": "But beds are only part of the problem. The deeper failure is information.",
+     "say": "But beds are only part of the problem. The deeper failure is information."
+    },
+    {
+     "text": "When an ambulance leaves the scene, nobody knows which hospital has a free bed.",
+     "say": "When an ambulance leaves the scene, nobody knows which hospital has a free bed."
+    },
+    {
+     "text": "Crews find out by driving there. Every wrong stop costs minutes a patient may not have.",
+     "say": "Crews find out by driving there. Every wrong stop costs minutes a patient may not have.",
+     "gap": 1.2
+    }
+   ]
+  },
+  {
+   "id": "solution",
+   "pad": 0.8,
+   "lines": [
+    {
+     "text": "So we are building BedAlert: one live view of every free hospital bed, so nobody has to search blind ever again!",
+     "say": "So we are building Bed Alert! One live view of every free hospital bed, so nobody has to search blind, ever again!"
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "hospitals",
+   "pad": 0.6,
+   "lines": [
+    {
+     "text": "Hospitals update their free beds in one tap, or connect their own systems so the numbers update automatically.",
+     "say": "Hospitals update their free beds in one tap, or connect their own systems, so the numbers update automatically.",
+     "gap": 0.8
+    },
+    {
+     "text": "And when a patient is on the way, the ward gets an alert, and accepts or declines with a single tap.",
+     "say": "And when a patient is on the way, the ward gets an alert, and accepts or declines with a single tap.",
+     "gap": 0.5
+    },
+    {
+     "text": "The bed is ready before the ambulance even arrives.",
+     "say": "The bed is ready before the ambulance even arrives.",
+     "gap": 1.6
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "dispatch",
+   "pad": 0.6,
+   "lines": [
+    {
+     "text": "Ambulance dispatchers see the nearest hospital with a confirmed free bed, and lock it in before the ambulance even moves.",
+     "say": "Ambulance dispatchers see the nearest hospital with a confirmed free bed, and lock it in before the ambulance even moves."
+    },
+    {
+     "text": "And if a hospital declines? BedAlert instantly finds the next one.",
+     "say": "And if a hospital declines? Bed Alert instantly finds the next one!"
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "citizens",
+   "pad": 0.6,
+   "lines": [
+    {
+     "text": "Families can find a free bed near them, and hold it, right from their phone.",
+     "say": "Families can find a free bed near them, and hold it, right from their phone.",
+     "gap": 2.2
+    },
+    {
+     "text": "No smartphone? No data? No problem. Dial a short code, and the confirmation arrives by SMS.",
+     "say": "No smartphone? No data? No problem! Dial a short code, and the confirmation arrives by S M S.",
+     "gap": 1.8
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "trust",
+   "pad": 0.8,
+   "lines": [
+    {
+     "text": "Held beds are released automatically if the patient doesn't come, so no bed sits empty.",
+     "say": "Held beds are released automatically if the patient doesn't come, so no bed sits empty."
+    },
+    {
+     "text": "Old numbers are flagged, never hidden. And we share bed counts, never patient records.",
+     "say": "Old numbers are flagged, never hidden. And we share bed counts, never patient records."
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "roadmap",
+   "pad": 0.8,
+   "lines": [
+    {
+     "text": "The core system is already built and tested.",
+     "say": "The core system is already built and tested.",
+     "speed": 0.95
+    },
+    {
+     "text": "Next, we launch the apps for hospitals, dispatchers and families, connect real SMS and USSD, and pilot in our first district.",
+     "say": "Next, we launch the apps for hospitals, dispatchers and families, connect real S M S and U S S D, and pilot in our first district!"
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "ask",
+   "pad": 1.2,
+   "lines": [
+    {
+     "text": "We are looking for partner hospitals, the National Ambulance Service, and health leaders who believe this can change.",
+     "say": "We are looking for partner hospitals, the National Ambulance Service, and health leaders who believe this can change.",
+     "gap": 0.5
+    },
+    {
+     "text": "Together, we can end no bed syndrome.",
+     "say": "Together, we can end no bed syndrome!",
+     "speed": 0.9,
+     "gap": 0.6
+    },
+    {
+     "text": "Because no patient should ever die looking for a bed.",
+     "say": "Because no patient should ever die looking for a bed.",
+     "speed": 0.82
+    }
+   ],
+   "speed": 1.0
+  },
+  {
+   "id": "credits",
+   "pad": 4.0,
+   "lines": [
+    {
+     "text": "BedAlert was started by Robert Hasford, Biomedical Engineering at KNUST, with Jayne and Welam, Medical Laboratory Science at the University of Ghana.",
+     "say": "Bed Alert was started by Robert Hasford, biomedical engineering at K N U S T, together with Jayne and Welam, medical laboratory science at the University of Ghana."
+    }
+   ]
+  },
+  {
+   "id": "sources",
+   "pad": 5.0,
+   "lines": []
+  }
+ ]
+}

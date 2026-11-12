@@ -1,8 +1,30 @@
 services:
   - type: web
-    name: bedalert-backend
+    name: bedalert-api
     runtime: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free          # move to a paid plan before real patients depend on it (free tier sleeps)
     rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m scripts.migrate && uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /v1/health
+    envVars:
+      - key: BEDALERT_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: SUPABASE_JWKS_URL
+        sync: false
+      - key: CITIZEN_TOKEN_SECRET
+        generateValue: true
+      - key: HASH_PEPPER
+        generateValue: true
+      - key: USSD_CALLBACK_SECRET
+        generateValue: true
+      - key: SMS_PROVIDER
+        value: africastalking
+      - key: AT_USERNAME
+        sync: false
+      - key: AT_API_KEY
+        sync: false

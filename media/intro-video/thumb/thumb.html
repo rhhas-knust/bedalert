@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>BedAlert TikTok cover</title>
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url(fonts/space-grotesk-latin-700-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 700; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #071a33; color: #F4F7FA; font-family: Inter; }
+  svg { position: absolute; left: 0; top: 0; }
+  .hook { position: absolute; left: 70px; right: 150px; top: 200px; font-family: "Space Grotesk"; font-weight: 700; font-size: 112px; line-height: .98; letter-spacing: -.02em; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
+  .hook .red { color: #E15554; }
+  .tag { position: absolute; left: 70px; top: 120px; font-family: "Plex Mono"; font-weight: 700; font-size: 34px; letter-spacing: .12em; color: #8FE3C6; }
+  .clock { position: absolute; right: 150px; top: 1010px; text-align: right; text-shadow: 0 4px 24px rgba(0,0,0,.7); }
+  .clock .n { font-family: "Plex Mono"; font-weight: 700; font-size: 150px; line-height: 1; color: #E8A33D; }
+  .clock .l { font-family: "Plex Mono"; font-weight: 700; font-size: 30px; color: #F4F7FA; letter-spacing: .1em; }
+  .fix { position: absolute; left: 70px; right: 150px; top: 1250px; background: #8FE3C6; color: #0B2545; border-radius: 30px; padding: 30px 40px;
+    font-family: "Space Grotesk"; font-weight: 700; font-size: 62px; line-height: 1.05; box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+  .brand { position: absolute; left: 70px; top: 1490px; display: flex; align-items: center; gap: 18px; font-family: "Space Grotesk"; font-weight: 700; font-size: 56px; }
+  .brand i { width: 34px; height: 34px; border-radius: 50%; background: #8FE3C6; box-shadow: 0 0 0 10px rgba(143,227,198,.2); }
+</style></head>
+<body>
+<svg id="m" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+<div class="tag">GHANA · NO BED SYNDROME</div>
+<div class="hook">3 hospitals.<br><span class="red">0 beds.</span></div>
+<div class="clock"><div class="n">118</div><div class="l">MINUTES</div></div>
+<div class="fix">So we’re building the fix.</div>
+<div class="brand"><i></i>BedAlert</div>
+<script src="anim.js"></script>
+<script>
+const A = ANIM, m = document.getElementById("m");
+A.buildMapBase(m, 1080, 1920, 5, false);
+const fade = A.E("linearGradient", { id: "fade", x1: 0, y1: 0, x2: 0, y2: 1 }, m.querySelector("defs"));
+[[0, .95], [.28, .2], [.62, .15], [1, .95]].forEach(([o, a]) => A.E("stop", { offset: o, "stop-color": "#071a33", "stop-opacity": a }, fade));
+const P = { c: [160, 720], p: [880, 640], r: [620, 900], k: [200, 1120] };
+const segs = [A.routePath(m, [P.c, [400, 650], [700, 620], P.p]), A.routePath(m, [P.p, [860, 780], [760, 870], P.r]), A.routePath(m, [P.r, [460, 980], [300, 1060], P.k])];
+segs.forEach(s => A.drawRoute(s, 1));
+const acc = A.E("g", { transform: `translate(${P.c[0]},${P.c[1]})` }, m);
+A.E("circle", { r: 46, fill: "none", stroke: "#E15554", "stroke-width": 5 }, acc);
+A.E("path", { d: "M0,-30 L28,20 L-28,20 Z", fill: "#E15554" }, acc);
+[["Police Hospital", P.p], ["Ridge Hospital", P.r], ["Korle Bu", P.k]].forEach(([n, p]) => {
+  const mk = A.hospitalMarker(m, ...p, n);
+  A.setMarker(mk, { pill: "NO BED", color: "#E15554", txColor: "#fff", pillP: 1, disc: "#E15554" });
+});
+const amb = A.makeTopAmbulance(m);
+const pos = A.along(segs[2], 0.55);
+A.poseTopAmbulance(amb, pos.x, pos.y, pos.ang, 0, 1);
+amb.g.setAttribute("transform", `translate(${pos.x},${pos.y}) scale(1.6)`);
+A.E("rect", { x: 0, y: 0, width: 1080, height: 1920, fill: "url(#fade)" }, m);
+</script>
+</body></html>

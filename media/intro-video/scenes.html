@@ -1,0 +1,1002 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BedAlert intro video</title>
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 500; src: url(fonts/space-grotesk-latin-500-normal.woff2); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url(fonts/space-grotesk-latin-700-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 500; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 700; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); }
+
+  :root {
+    --navy: #0B2545; --navy2: #13315C; --ink: #071a33; --teal: #0F6E6E; --mint: #8FE3C6;
+    --amber: #E8A33D; --coral: #E15554; --paper: #F4F7FA; --muted: #9FB3C8; --line: rgba(255,255,255,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ink); }
+  body { font-family: Inter, sans-serif; color: var(--paper); }
+  .stage { position: absolute; inset: 0; background: radial-gradient(1400px 900px at 70% 20%, #123a66 0%, var(--navy) 45%, var(--ink) 100%); }
+  .scene { position: absolute; inset: 0; opacity: 0; padding: 120px 140px 220px; }
+  h1, h2, .display { font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+  .kicker { font-family: "Plex Mono", monospace; font-weight: 500; font-size: 26px; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); }
+  .mono { font-family: "Plex Mono", monospace; }
+  .brand { position: absolute; top: 56px; left: 140px; display: flex; align-items: center; gap: 14px; font-family: "Space Grotesk"; font-weight: 700; font-size: 30px; opacity: 0; }
+  .brand .dot { width: 18px; height: 18px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 6px rgba(143,227,198,.18); }
+
+  .caption { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: max-content; max-width: 1500px; padding: 18px 34px;
+    background: rgba(4,14,28,.78); border-radius: 14px; font-size: 38px; line-height: 1.35; text-align: center; font-weight: 600; opacity: 0; }
+
+  .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  .storyhead { position: absolute; left: 140px; top: 104px; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+  .storyhead h2 { font-size: 70px; margin-top: 12px; }
+  .storyhead .who { font-size: 32px; color: var(--muted); margin-top: 8px; }
+  #s-timerbox, #p-timerbox { position: absolute; right: 140px; top: 104px; opacity: 0; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+  .maptag { position: absolute; right: 40px; bottom: 30px; font-family: "Plex Mono"; font-size: 18px; color: var(--muted); opacity: .8; }
+  .shade { position: absolute; inset: 0; background: #020812; opacity: 0; }
+  .endnote2 { position: absolute; left: 0; right: 0; top: 470px; text-align: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 84px; opacity: 0; }
+  .topfade { position: absolute; left: 0; right: 0; top: 0; height: 330px; background: linear-gradient(#071a33ee, #071a3300); }
+  #tstreet { opacity: .9; }
+  #hope { position: absolute; inset: 0; opacity: 0; background: radial-gradient(1300px 800px at 60% 25%, rgba(15,110,110,.55), rgba(15,110,110,0) 70%), radial-gradient(900px 600px at 15% 90%, rgba(232,163,61,.18), rgba(232,163,61,0) 70%); }
+  .headcard { position: absolute; left: 110px; top: 80px; background: rgba(7,26,51,.82); border-radius: 26px; padding: 30px 40px; opacity: 0; }
+  .headcard h2 { font-size: 64px; line-height: 1.04; margin-top: 12px; }
+  .portal { position: absolute; left: 1200px; top: 70px; width: 620px; background: #0b2545; border: 2px solid rgba(255,255,255,.18); border-radius: 26px; padding: 26px 30px; opacity: 0; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+  .ptop { display: flex; justify-content: space-between; font-family: "Plex Mono"; font-size: 21px; color: var(--muted); margin-bottom: 12px; }
+  .prow { display: flex; justify-content: space-between; font-size: 30px; font-weight: 600; padding: 14px 0; border-top: 1px solid var(--line); }
+  .pn { font-family: "Plex Mono"; font-weight: 700; color: var(--mint); }
+  .psync { font-family: "Plex Mono"; font-size: 19px; color: var(--mint); margin-top: 8px; opacity: 0; }
+  .alert { position: relative; margin-top: 18px; border-radius: 18px; background: #3a1e2a; border: 3px solid var(--coral); padding: 20px 22px; opacity: 0; overflow: hidden; }
+  .atop { font-family: "Plex Mono"; font-weight: 700; font-size: 24px; color: #ffb3b3; letter-spacing: .06em; }
+  .abody { font-size: 28px; font-weight: 600; margin-top: 8px; line-height: 1.35; }
+  .abody .mono { font-size: 23px; color: #ffd0d0; }
+  .abtns { display: flex; gap: 16px; margin-top: 16px; }
+  .abtns .b { flex: 1; text-align: center; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 26px; }
+  .b.acc { background: var(--mint); color: var(--navy); }
+  .b.dec { background: rgba(255,255,255,.12); color: var(--paper); }
+  .aok { display: none; margin-top: 16px; font-weight: 700; font-size: 26px; color: var(--mint); }
+  .ripple { position: absolute; width: 40px; height: 40px; border-radius: 50%; border: 4px solid #fff; opacity: 0; pointer-events: none; }
+  .ocard { position: absolute; left: 140px; right: 140px; top: 330px; font-family: "Space Grotesk"; font-weight: 700; font-size: 110px; line-height: 1.04; letter-spacing: -.02em; opacity: 0; }
+  .ologo { display: flex; align-items: center; gap: 30px; font-size: 150px; top: 400px; }
+  .ologo .dot { width: 80px; height: 80px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 20px rgba(143,227,198,.15), 0 0 0 44px rgba(143,227,198,.07); }
+  html.portrait .ocard { left: 70px; right: 70px; top: 560px; font-size: 92px; }
+  html.portrait .ologo { font-size: 120px; top: 640px; }
+  .pword { font-family: "Space Grotesk"; font-weight: 700; font-size: 130px; margin-top: 14px; letter-spacing: -.02em; }
+  .pnote { margin-top: 40px; font-size: 36px; color: var(--muted); opacity: 0; }
+  .ph-h { font-size: 84px; margin-top: 14px; }
+  .chk { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 40px; }
+  .ci { display: flex; align-items: center; gap: 22px; font-size: 34px; font-weight: 600; opacity: 0; }
+  .ci i { flex: none; width: 56px; height: 56px; border-radius: 50%; background: var(--mint); color: var(--navy); font-style: normal; font-weight: 700; display: grid; place-items: center; font-size: 32px; }
+  .road { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .rstep { border-radius: 26px; padding: 34px; background: rgba(255,255,255,.05); border: 3px solid var(--line); opacity: .25; }
+  .rstep.on { opacity: 1; }
+  .rtag { font-family: "Plex Mono"; font-weight: 700; font-size: 22px; letter-spacing: .1em; color: var(--muted); }
+  .rt { font-family: "Space Grotesk"; font-weight: 700; font-size: 50px; margin-top: 12px; }
+  .rd { font-size: 28px; color: var(--muted); margin-top: 12px; line-height: 1.35; }
+  html.portrait .pword { font-size: 120px; }
+  html.portrait #pioneers .people { margin-top: 26px !important; }
+  html.portrait .ph-h { font-size: 72px; }
+  html.portrait .chk { grid-template-columns: 1fr; gap: 28px; margin-top: 44px; }
+  html.portrait .ci { font-size: 40px; }
+  html.portrait .ci i { width: 64px; height: 64px; font-size: 36px; }
+  html.portrait .road { grid-template-columns: 1fr; gap: 22px; margin-top: 36px; }
+  html.portrait .rstep { padding: 26px 30px; }
+  html.portrait .rt { font-size: 46px; }
+  /* title */
+  #title h1 { font-size: 180px; line-height: .95; margin-top: 30px; }
+  #title h1 .red { color: var(--coral); }
+  #title .sub { font-size: 40px; color: var(--muted); margin-top: 40px; max-width: 1300px; line-height: 1.35; }
+  .ecg { position: absolute; left: 0; right: 0; top: 40px; height: 160px; }
+
+  /* story */
+  #story .head { display: flex; justify-content: space-between; align-items: flex-end; }
+  #story h2 { font-size: 74px; margin-top: 16px; }
+  #story .who { font-size: 34px; color: var(--muted); margin-top: 14px; }
+  .timer { text-align: right; }
+  .timer .num { font-family: "Plex Mono"; font-weight: 700; font-size: 150px; line-height: 1; color: var(--amber); }
+  .timer .lbl { font-family: "Plex Mono"; font-size: 26px; color: var(--muted); letter-spacing: .12em; }
+  .route { position: relative; margin-top: 150px; height: 260px; }
+  .route .track { position: absolute; left: 60px; right: 60px; top: 60px; height: 6px; background: var(--line); border-radius: 3px; }
+  .route .done { position: absolute; left: 60px; top: 60px; height: 6px; background: var(--amber); border-radius: 3px; width: 0; }
+  .stop { position: absolute; top: 0; width: 300px; margin-left: -150px; text-align: center; }
+  .stop .pin { width: 126px; height: 126px; margin: 0 auto; border-radius: 50%; background: var(--navy2); border: 4px solid var(--line);
+    display: grid; place-items: center; font-family: "Plex Mono"; font-weight: 700; font-size: 26px; color: var(--muted); }
+  .stop .name { margin-top: 22px; font-size: 32px; font-weight: 600; }
+  .stamp { position: absolute; left: 50%; top: -36px; transform: translateX(-50%) rotate(-8deg) scale(1.6); opacity: 0; border: 5px solid var(--coral);
+    color: var(--coral); font-family: "Plex Mono"; font-weight: 700; font-size: 34px; padding: 4px 16px; border-radius: 8px; background: rgba(11,37,69,.9); white-space: nowrap; }
+  .amb { position: absolute; top: 34px; width: 58px; height: 58px; margin-left: -29px; border-radius: 50%; background: var(--paper);
+    display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(232,163,61,.25); }
+  .amb svg { width: 34px; height: 34px; }
+  .endnote { margin-top: 70px; font-size: 44px; color: var(--paper); text-align: center; opacity: 0; font-family: "Space Grotesk"; font-weight: 500; }
+
+  /* stats */
+  #stats h2 { font-size: 72px; margin-top: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+  .card { background: rgba(255,255,255,.05); border: 2px solid var(--line); border-radius: 26px; padding: 36px 36px; opacity: 0; height: 500px; }
+  .card .big { font-family: "Space Grotesk"; font-weight: 700; font-size: 92px; line-height: 1; white-space: nowrap; }
+  .card .big small { font-size: 50px; }
+  .card .what { font-size: 31px; margin-top: 18px; line-height: 1.3; }
+  .card .src { font-family: "Plex Mono"; font-size: 20px; color: var(--muted); margin-top: 26px; line-height: 1.4; }
+  .dots { display: grid; grid-template-columns: repeat(50, 5px); gap: 2.5px; margin-top: 20px; }
+  .dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.18); }
+  .meter { height: 26px; border-radius: 13px; background: rgba(255,255,255,.1); margin-top: 30px; position: relative; overflow: visible; }
+  .meter .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 13px; background: var(--coral); }
+  .meter .cap { position: absolute; top: -14px; bottom: -14px; width: 4px; background: var(--paper); }
+  .meter .capl { position: absolute; top: -50px; font-family: "Plex Mono"; font-size: 20px; color: var(--paper); transform: translateX(-50%); }
+
+  /* problem */
+  #problem h2 { font-size: 84px; margin-top: 16px; max-width: 1500px; }
+  .hosps { display: flex; gap: 60px; margin-top: 110px; justify-content: center; }
+  .hosp { width: 380px; height: 300px; border-radius: 26px; border: 2px dashed rgba(255,255,255,.3); display: grid; place-items: center; text-align: center; opacity: 0; }
+  .hosp .q { font-family: "Space Grotesk"; font-weight: 700; font-size: 150px; color: var(--muted); line-height: 1; }
+  .hosp .l { font-size: 30px; color: var(--muted); }
+
+  /* solution / board */
+  #solution .logo { display: flex; align-items: center; gap: 30px; margin-top: 120px; }
+  #solution .logo .dot { width: 70px; height: 70px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 18px rgba(143,227,198,.15), 0 0 0 40px rgba(143,227,198,.07); }
+  #solution .logo .word { font-family: "Space Grotesk"; font-weight: 700; font-size: 170px; letter-spacing: -0.03em; }
+  #solution .tag { font-size: 52px; color: var(--mint); margin-top: 40px; font-family: "Space Grotesk"; font-weight: 500; }
+  .board { position: absolute; right: 140px; top: 120px; width: 760px; background: rgba(4,14,28,.6); border: 2px solid var(--line); border-radius: 26px; padding: 34px; opacity: 0; }
+  .board .bt { display: flex; justify-content: space-between; font-family: "Plex Mono"; font-size: 22px; color: var(--muted); margin-bottom: 18px; }
+  .live { color: var(--mint); }
+  .live::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--mint); margin-right: 10px; }
+  .row { padding: 18px 0; border-top: 1px solid var(--line); }
+  .row .rt { display: flex; justify-content: space-between; font-size: 28px; font-weight: 600; }
+  .row .rt .n { font-family: "Plex Mono"; font-weight: 700; }
+  .row .rs { font-family: "Plex Mono"; font-size: 19px; color: var(--muted); margin-top: 6px; }
+  .cbar { display: flex; gap: 4px; margin-top: 10px; }
+  .cbar i { flex: 1; height: 14px; border-radius: 3px; background: rgba(255,255,255,.12); }
+  .cbar i.occ { background: #5d7896; }
+  .cbar i.free { background: var(--mint); }
+  .illus { font-family: "Plex Mono"; font-size: 18px; color: var(--muted); margin-top: 16px; }
+
+  /* three pillars layout */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; height: 100%; }
+  .split h2 { font-size: 86px; line-height: 1.02; margin-top: 18px; }
+  .split p.lead { font-size: 38px; color: var(--muted); margin-top: 30px; line-height: 1.35; }
+  .panel { background: rgba(4,14,28,.6); border: 2px solid var(--line); border-radius: 30px; padding: 40px; opacity: 0; }
+  .ward { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-top: 1px solid var(--line); font-size: 36px; font-weight: 600; }
+  .ward:first-of-type { border-top: 0; }
+  .ward .ctl { display: flex; align-items: center; gap: 20px; }
+  .btn { width: 70px; height: 70px; border-radius: 16px; background: rgba(255,255,255,.08); display: grid; place-items: center; font-size: 44px; font-weight: 700; }
+  .btn.hot { background: var(--mint); color: var(--navy); }
+  .ward .n { font-family: "Plex Mono"; font-weight: 700; font-size: 48px; min-width: 70px; text-align: center; }
+  .sync { margin-top: 26px; display: flex; align-items: center; gap: 16px; font-family: "Plex Mono"; font-size: 24px; color: var(--mint); opacity: 0; }
+  .opt { display: flex; align-items: center; gap: 24px; padding: 24px; border-radius: 18px; margin-top: 16px; background: rgba(255,255,255,.04); border: 2px solid transparent; }
+  .opt .rank { font-family: "Plex Mono"; font-weight: 700; font-size: 34px; color: var(--muted); width: 40px; }
+  .opt .nm { font-size: 32px; font-weight: 600; }
+  .opt .meta { font-family: "Plex Mono"; font-size: 21px; color: var(--muted); margin-top: 4px; }
+  .opt .st { margin-left: auto; font-family: "Plex Mono"; font-weight: 700; font-size: 24px; padding: 8px 16px; border-radius: 10px; opacity: 0; }
+  .st.held { background: var(--mint); color: var(--navy); }
+  .st.declined { background: var(--coral); color: white; }
+
+  .phones { display: flex; gap: 60px; justify-content: center; align-items: flex-end; }
+  .smart { width: 380px; height: 650px; border-radius: 54px; background: #0d1f38; border: 10px solid #22426b; padding: 40px 26px; opacity: 0; }
+  .smart .ttl { font-family: "Space Grotesk"; font-weight: 700; font-size: 30px; }
+  .smart .hc { background: rgba(255,255,255,.06); border-radius: 18px; padding: 16px 20px; margin-top: 16px; font-size: 24px; }
+  .smart .hc .f { font-family: "Plex Mono"; color: var(--mint); font-size: 20px; margin-top: 6px; }
+  .smart .cta { margin-top: 24px; background: var(--mint); color: var(--navy); border-radius: 16px; text-align: center; font-weight: 700; font-size: 28px; padding: 20px; }
+  .smart .code { margin-top: 24px; text-align: center; opacity: 0; }
+  .smart .code .c { font-family: "Plex Mono"; font-weight: 700; font-size: 54px; letter-spacing: .12em; color: var(--mint); }
+  .feature { width: 330px; height: 510px; border-radius: 40px; background: #1d2a3a; border: 8px solid #33475f; padding: 30px 24px; opacity: 0; }
+  .feature .scr { background: #b9d3a6; color: #142012; border-radius: 10px; height: 270px; padding: 16px; font-family: "Plex Mono"; font-weight: 500; font-size: 21px; line-height: 1.35; white-space: pre-wrap; }
+  .feature .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+  .feature .keys i { height: 40px; border-radius: 12px; background: #2d3e53; font-style: normal; display: grid; place-items: center; font-family: "Plex Mono"; font-size: 22px; color: #c7d3e0; }
+  .sms { position: absolute; width: 520px; background: var(--paper); color: var(--navy); border-radius: 24px 24px 24px 6px; padding: 24px 28px; font-size: 25px; line-height: 1.35; opacity: 0; }
+  .sms b { font-family: "Plex Mono"; }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 90px; }
+  .pillar { border-radius: 26px; padding: 46px 40px; background: rgba(255,255,255,.05); border: 2px solid var(--line); opacity: 0; min-height: 420px; }
+  .pillar .ic { width: 90px; height: 90px; border-radius: 22px; display: grid; place-items: center; font-size: 46px; font-weight: 700; font-family: "Plex Mono"; }
+  .pillar h3 { font-family: "Space Grotesk"; font-size: 46px; margin-top: 34px; line-height: 1.1; }
+  .pillar p { font-size: 30px; color: var(--muted); margin-top: 20px; line-height: 1.35; }
+
+  .steps { margin-top: 90px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; }
+  .step { opacity: 0; }
+  .step .bar { height: 10px; border-radius: 5px; background: rgba(255,255,255,.15); }
+  .step.done .bar { background: var(--mint); }
+  .step .tg { font-family: "Plex Mono"; font-size: 22px; color: var(--muted); margin-top: 26px; letter-spacing: .1em; }
+  .step.done .tg { color: var(--mint); }
+  .step h3 { font-family: "Space Grotesk"; font-size: 42px; margin-top: 12px; line-height: 1.15; }
+
+  #ask .quote { font-family: "Space Grotesk"; font-weight: 700; font-size: 128px; line-height: 1.02; margin-top: 140px; max-width: 1640px; opacity: 0; }
+  #ask .chips { display: flex; gap: 24px; margin-top: 60px; }
+  .chip { border: 2px solid var(--mint); color: var(--mint); border-radius: 999px; padding: 16px 32px; font-size: 32px; font-weight: 600; opacity: 0; }
+
+  #credits { text-align: center; }
+  #credits .word { font-family: "Space Grotesk"; font-weight: 700; font-size: 120px; margin-top: 60px; }
+  #credits .by { font-family: "Plex Mono"; font-size: 26px; letter-spacing: .14em; color: var(--muted); margin-top: 50px; text-transform: uppercase; }
+  .people { display: flex; justify-content: center; gap: 50px; margin-top: 50px; }
+  .person { width: 470px; padding: 40px 30px; border-radius: 26px; background: rgba(255,255,255,.05); border: 2px solid var(--line); opacity: 0; }
+  .person .av { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto; display: grid; place-items: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 50px; color: var(--navy); }
+  .person .nm { font-family: "Space Grotesk"; font-weight: 700; font-size: 46px; margin-top: 26px; }
+  .person .rl { font-size: 27px; color: var(--muted); margin-top: 12px; line-height: 1.35; }
+  #credits .e112 { margin-top: 56px; font-size: 28px; color: var(--muted); }
+
+  #sources h2 { font-size: 60px; margin-top: 10px; }
+  #sources ol { margin-top: 40px; font-size: 27px; line-height: 1.5; color: #d5e0ea; padding-left: 36px; }
+  #sources li { margin-bottom: 14px; }
+  #sources .note { margin-top: 30px; font-size: 24px; color: var(--muted); }
+
+  /* ================= vertical (9:16, TikTok) layout =================
+     Safe area: top 160px (app header), bottom ~330px (caption/username),
+     right ~130px from y 900 down (like/comment buttons). */
+  html.portrait, html.portrait body { width: 1080px; height: 1920px; }
+  html.portrait .full { width: 1080px; height: 1920px; }
+  html.portrait .scene { padding: 250px 70px 420px; }
+  html.portrait .brand { top: 175px; left: 70px; }
+  html.portrait .caption { bottom: 340px; max-width: 940px; font-size: 42px; padding: 18px 28px; }
+  html.portrait .kicker { font-size: 24px; }
+  html.portrait .maptag { bottom: 340px; right: 30px; }
+  /* title */
+  html.portrait .ecg { top: 150px; }
+  html.portrait #title .kicker { margin-top: 80px !important; }
+  html.portrait #title h1 { font-size: 150px; margin-top: 24px; }
+  html.portrait #title .sub { font-size: 40px; max-width: 900px; }
+  /* story + problem */
+  html.portrait .storyhead { left: 70px; top: 240px; }
+  html.portrait .storyhead h2 { font-size: 64px; }
+  html.portrait #problem .storyhead h2 { font-size: 68px !important; max-width: 900px !important; }
+  html.portrait #s-timerbox, html.portrait #p-timerbox { left: 70px; right: auto; top: 470px; text-align: left; }
+  html.portrait #p-timerbox { top: 520px; }
+  html.portrait .timer .num { font-size: 110px; }
+  html.portrait .endnote2 { top: 860px; font-size: 76px; padding: 0 60px; }
+  html.portrait .topfade { height: 640px; }
+  /* stats */
+  html.portrait #stats h2 { font-size: 64px; }
+  html.portrait #stats { padding-top: 230px; }
+  html.portrait .cards { grid-template-columns: 1fr; gap: 18px; margin-top: 24px; }
+  html.portrait .card { height: auto; min-height: 0; padding: 22px 30px; }
+  html.portrait .card .big { font-size: 72px; }
+  html.portrait .card .what { font-size: 28px; margin-top: 10px; }
+  html.portrait .card .meter { margin-top: 48px !important; }
+  html.portrait .card .src { margin-top: 14px !important; }
+  html.portrait .dots { grid-template-columns: repeat(100, 5px); gap: 2.5px; }
+  /* solution */
+  html.portrait #solution .logo { margin-top: 60px; }
+  html.portrait #solution .logo .word { font-size: 150px; }
+  html.portrait #solution .tag { font-size: 46px; }
+  html.portrait .board { left: 70px; right: 70px; top: 700px; bottom: auto; width: auto; }
+  html.portrait #row3 { display: none; }
+  /* hospitals */
+  html.portrait .headcard { left: 60px; top: 230px; padding: 24px 32px; }
+  html.portrait .headcard h2 { font-size: 54px; }
+  html.portrait .portal { left: 60px; right: 60px; width: auto; top: 470px; }
+  /* dispatch */
+  html.portrait .split { grid-template-columns: 1fr; gap: 40px; align-items: start; height: auto; }
+  html.portrait .split h2 { font-size: 72px; }
+  html.portrait .split p.lead { font-size: 34px; }
+  html.portrait #dp { height: 720px !important; }
+  /* citizens */
+  html.portrait #ph1 { left: 560px !important; top: 560px !important; transform: scale(.92); transform-origin: left top; }
+  html.portrait #ph2 { left: 560px !important; top: 640px !important; }
+  html.portrait #sms { left: 60px !important; top: 470px !important; width: 470px; }
+  /* trust / roadmap / ask / credits / sources */
+  html.portrait .pillars { grid-template-columns: 1fr; gap: 22px; margin-top: 40px; }
+  html.portrait .pillar { min-height: 0; padding: 28px 32px; display: grid; grid-template-columns: 90px 1fr; column-gap: 26px; }
+  html.portrait .pillar h3 { margin-top: 0; font-size: 42px; }
+  html.portrait .pillar p { grid-column: 2; margin-top: 8px; font-size: 28px; }
+  html.portrait .steps { grid-template-columns: 1fr 1fr; row-gap: 50px; margin-top: 60px; }
+  html.portrait #ask .quote { font-size: 104px; margin-top: 90px; }
+  html.portrait #ask .chips { flex-wrap: wrap; }
+  html.portrait #credits .word { font-size: 110px; margin-top: 30px; }
+  html.portrait .people { flex-direction: column; align-items: center; gap: 22px; margin-top: 30px; }
+  html.portrait .person { width: 900px; display: grid; grid-template-columns: 110px 1fr; column-gap: 30px; text-align: left; padding: 26px 34px; }
+  html.portrait .person .av { grid-row: span 2; }
+  html.portrait .person .nm { margin-top: 6px; font-size: 44px; }
+  html.portrait .person .rl { margin-top: 4px; }
+  html.portrait #sources h2 { font-size: 52px; }
+  html.portrait #sources ol { font-size: 26px; }
+</style>
+</head>
+<body>
+<script>if (innerHeight > innerWidth) document.documentElement.classList.add("portrait");</script>
+<div class="stage">
+  <div id="hope"></div>
+  <div class="brand" id="brand"><span class="dot"></span>BedAlert</div>
+
+  <!-- 1. title -->
+  <section class="scene" id="title">
+    <svg id="tstreet" class="full" viewBox="0 0 1920 1080"></svg>
+    <svg class="ecg" viewBox="0 0 1920 160" preserveAspectRatio="none">
+      <path id="ecgpath" d="M0 80 H620 L660 80 L690 20 L720 140 L750 80 H900 L930 80 L955 50 L980 80 H1920" fill="none" stroke="#E15554" stroke-width="5" stroke-linejoin="round"/>
+    </svg>
+    <div class="kicker" style="margin-top:110px">Ghana · Emergency care</div>
+    <h1 id="t-h1">No Bed<br><span class="red">Syndrome.</span></h1>
+    <div class="sub" id="t-sub">Why patients are dying in ambulances, and what we are building to stop it.</div>
+  </section>
+
+  <!-- phase-update video: pioneers / phase 1 / phase 2 -->
+  <section class="scene" id="pioneers">
+    <div class="kicker">Meet the pioneers</div>
+    <div class="pword">BedAlert <span style="font-size:.5em">🇬🇭</span></div>
+    <div class="people" style="margin-top:40px">
+      <div class="person" id="pq1"><div class="av" style="background:var(--mint)">R</div><div class="nm">Robert Hasford</div><div class="rl">BSc Biomedical Engineering<br>KNUST · Class of 2026</div></div>
+      <div class="person" id="pq2"><div class="av" style="background:var(--amber)">J</div><div class="nm">Jayne</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+      <div class="person" id="pq3"><div class="av" style="background:var(--paper)">W</div><div class="nm">Welam</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+    </div>
+    <div class="pnote" id="pq-note">Three students building a fix for no bed syndrome.</div>
+  </section>
+
+  <section class="scene" id="phase1">
+    <div class="kicker">Phase 1 · Done ✓</div>
+    <h2 class="ph-h">Where we are</h2>
+    <div class="chk">
+      <div class="ci" id="ci0"><i>✓</i>Secure bed database</div>
+      <div class="ci" id="ci1"><i>✓</i>Logins and roles for hospitals &amp; dispatchers</div>
+      <div class="ci" id="ci2"><i>✓</i>Bed holds that expire automatically</div>
+      <div class="ci" id="ci3"><i>✓</i>Auto re-routing when a hospital declines</div>
+      <div class="ci" id="ci4"><i>✓</i>Hospital API keys for their own systems</div>
+      <div class="ci" id="ci5"><i>✓</i>USSD menu for basic phones</div>
+      <div class="ci" id="ci6"><i>✓</i>31 automated tests passing</div>
+    </div>
+  </section>
+
+  <section class="scene" id="phase2">
+    <div class="kicker">What’s next</div>
+    <h2 class="ph-h">The road to a real pilot</h2>
+    <div class="road">
+      <div class="rstep" id="rs0"><div class="rtag">PHASE 2 · NOW BUILDING</div><div class="rt">Three apps</div><div class="rd">🏥 Hospital portal · 🚑 Dispatch console · 👪 Family app</div></div>
+      <div class="rstep" id="rs1"><div class="rtag">PHASE 3</div><div class="rt">Real SMS &amp; USSD</div><div class="rd">Live alerts, and a short code on every network</div></div>
+      <div class="rstep" id="rs2"><div class="rtag">PHASE 4</div><div class="rt">First pilot district</div><div class="rd">2–5 hospitals and an ambulance station</div></div>
+    </div>
+  </section>
+
+  <!-- 2. story -->
+  <section class="scene" id="story" style="padding:0">
+    <svg id="street" class="full" viewBox="0 0 1920 1080"></svg>
+    <svg id="accra" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="shade" id="s-dim"></div>
+    <div class="storyhead" id="s-head">
+      <div class="kicker">6 February 2026 · Circle overpass, Accra</div>
+      <h2>Charles Amissah, 29</h2>
+      <div class="who">Engineer</div>
+    </div>
+    <div class="timer" id="s-timerbox"><div class="num" id="s-timer">0</div><div class="lbl">MINUTES SINCE THE ACCIDENT</div></div>
+    <div class="maptag" id="s-maptag">Accra · not to scale</div>
+    <div class="endnote2" id="s-end">He did not survive.</div>
+  </section>
+
+  <!-- 3. stats -->
+  <section class="scene" id="stats">
+    <div class="kicker">Not a rare story</div>
+    <h2>The numbers behind it</h2>
+    <div class="cards">
+      <div class="card" id="c1">
+        <div class="big">0.7–0.9</div>
+        <div class="what">hospital beds per 1,000 people in Ghana</div>
+        <div class="dots" id="dots"></div>
+        <div class="src" style="margin-top:14px">1,000 dots = 1,000 people · fewer than 1 bed for all of them</div>
+        <div class="src" style="margin-top:8px">World Bank · GRNMA (Mar 2026)</div>
+      </div>
+      <div class="card" id="c2">
+        <div class="big">120–150<small>%</small></div>
+        <div class="what">occupancy reported at major hospitals</div>
+        <div class="meter" style="margin-top:80px"><div class="fill" id="m-fill"></div><div class="cap" style="left:66.6%"></div><div class="capl" style="left:66.6%">100% full</div></div>
+        <div class="src" style="margin-top:50px">GRNMA (Mar 2026)</div>
+      </div>
+      <div class="card" id="c3">
+        <div class="big">~42</div>
+        <div class="what">ambulances available for Greater Accra’s 5+ million people</div>
+        <div class="src">National Ambulance Service dispatch head (Jun 2025) · 2021 Census</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. problem -->
+  <section class="scene" id="problem" style="padding:0">
+    <svg id="pmap" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="topfade"></div>
+    <div class="storyhead">
+      <div class="kicker">The real failure</div>
+      <h2 id="p-h2" style="font-size:76px;max-width:1250px">Nobody knows where the free beds are.</h2>
+    </div>
+    <div class="timer" id="p-timerbox"><div class="num" id="p-timer" style="color:var(--coral)">0</div><div class="lbl">MINUTES LOST SEARCHING</div></div>
+    <div class="maptag">Illustration</div>
+  </section>
+
+  <!-- 5. solution -->
+  <section class="scene" id="solution">
+    <svg id="burst" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="kicker">What we are building</div>
+    <div class="logo" id="sol-logo"><span class="dot"></span><span class="word">BedAlert</span></div>
+    <div class="tag" id="sol-tag">A live, shared view of free<br>hospital beds across Ghana.</div>
+    <div class="board" id="board">
+      <div class="bt"><span class="live">LIVE</span><span>ER beds near you</span></div>
+      <div id="rows"></div>
+      <div class="illus">Illustration · not real hospital data</div>
+    </div>
+  </section>
+
+  <!-- 6. hospitals -->
+  <section class="scene" id="hospitals" style="padding:0">
+    <svg id="ward" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="headcard" id="hd-head">
+      <div class="kicker">For hospitals</div>
+      <h2>One tap to update.<br>One tap to accept.</h2>
+    </div>
+    <div class="portal" id="portal">
+      <div class="ptop"><span>BedAlert · Ward portal</span><span class="live">LIVE</span></div>
+      <div class="prow"><span>Emergency</span><span class="pn">2 free</span></div>
+      <div class="prow"><span>Ward A</span><span class="pn" id="pw-a">0 free</span></div>
+      <div class="psync" id="psync">⇄ Synced from hospital system · just now</div>
+      <div class="alert" id="alert">
+        <div class="atop">🚑 INCOMING PATIENT</div>
+        <div class="abody">Critical · Road accident<br><span class="mono">ETA 8 min · Code K7P2QX</span></div>
+        <div class="abtns"><span class="b acc" id="b-acc">Accept</span><span class="b dec" id="b-dec">Decline</span></div>
+        <div class="aok" id="a-ok">✓ Accepted · Bed 2 is being prepared</div>
+        <div class="ripple" id="ripple"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. dispatch -->
+  <section class="scene" id="dispatch">
+    <div class="split">
+      <div>
+        <div class="kicker">For ambulance dispatchers</div>
+        <h2>Hold the bed before the ambulance moves.</h2>
+        <p class="lead">Nearest hospital with a confirmed free bed first. If it declines, BedAlert re-routes instantly.</p>
+      </div>
+      <div class="panel" id="dp" style="padding:0;overflow:hidden;height:720px;position:relative">
+        <svg id="dmap" viewBox="0 0 900 720" width="100%" height="720"></svg>
+        <div class="kicker" style="position:absolute;left:28px;top:22px;font-size:20px;background:rgba(4,14,28,.7);padding:8px 14px;border-radius:10px">Critical · road accident · ER · with BedAlert</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. citizens -->
+  <section class="scene" id="citizens" style="padding:0">
+    <svg id="cscene" class="full" viewBox="0 0 1920 1080"></svg>
+    <div class="headcard" id="c-head">
+      <div class="kicker">For families · smartphone or not</div>
+      <h2>Find a bed.<br>Hold it. Go.</h2>
+    </div>
+    <div class="smart" id="ph1" style="position:absolute;left:560px;top:185px;transform-origin:left center">
+      <div class="ttl">ER beds near you</div>
+      <div class="hc">Hospital A · 2.1 km<div class="f">3 free · updated 4 min ago</div></div>
+      <div class="hc">Hospital B · 3.4 km<div class="f">1 free · updated 9 min ago</div></div>
+      <div class="cta" id="cta">Hold a bed at Hospital A</div>
+      <div class="code" id="code"><div style="font-size:22px;color:var(--muted)">Your code</div><div class="c">K7P2QX</div></div>
+    </div>
+    <div class="feature" id="ph2" style="position:absolute;left:1440px;top:330px">
+      <div class="scr" id="ussd">*920#</div>
+      <div class="keys"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></div>
+    </div>
+    <div class="sms" id="sms" style="left:1300px;top:150px">BedAlert: ER bed held at Hospital A. Code <b>K7P2QX</b>. Go now. Emergency? Also call 112.</div>
+  </section>
+
+  <!-- 9. trust -->
+  <section class="scene" id="trust">
+    <div class="kicker">Built to be trusted</div>
+    <h2 style="font-size:80px;margin-top:16px">Fair, honest, private.</h2>
+    <div class="pillars">
+      <div class="pillar" id="p1"><div class="ic" style="background:var(--mint);color:var(--navy)">⏱</div><h3>Holds expire</h3><p>No arrival in time? The bed is released automatically for the next patient.</p></div>
+      <div class="pillar" id="p2"><div class="ic" style="background:var(--amber);color:var(--navy)">?</div><h3>Stale data flagged</h3><p>Numbers that haven’t been confirmed recently are marked and ranked lower.</p></div>
+      <div class="pillar" id="p3"><div class="ic" style="background:var(--paper);color:var(--navy)">#</div><h3>Counts, not records</h3><p>BedAlert shares bed counts. Never patient records.</p></div>
+    </div>
+  </section>
+
+  <!-- 10. roadmap -->
+  <section class="scene" id="roadmap">
+    <div class="kicker">Where we are</div>
+    <h2 style="font-size:80px;margin-top:16px">From idea to pilot</h2>
+    <div class="steps">
+      <div class="step done" id="r1"><div class="bar"></div><div class="tg">✓ DONE</div><h3>Core system built &amp; tested</h3></div>
+      <div class="step" id="r2"><div class="bar"></div><div class="tg">NEXT</div><h3>Hospital, dispatcher &amp; citizen apps</h3></div>
+      <div class="step" id="r3"><div class="bar"></div><div class="tg">THEN</div><h3>Real SMS &amp; USSD</h3></div>
+      <div class="step" id="r4"><div class="bar"></div><div class="tg">GOAL</div><h3>Pilot in one district</h3></div>
+    </div>
+  </section>
+
+  <!-- 11. ask -->
+  <section class="scene" id="ask">
+    <div class="kicker">Join us</div>
+    <div class="chips">
+      <span class="chip" id="k1">Partner hospitals</span>
+      <span class="chip" id="k2">National Ambulance Service</span>
+      <span class="chip" id="k3">Health leaders</span>
+    </div>
+    <div class="quote" id="quote">No patient should die looking for a bed.</div>
+  </section>
+
+  <!-- 12. credits -->
+  <section class="scene" id="credits">
+    <div class="word">BedAlert</div>
+    <div class="by">Started by</div>
+    <div class="people">
+      <div class="person" id="pp1"><div class="av" style="background:var(--mint)">R</div><div class="nm">Robert Hasford</div><div class="rl">BSc Biomedical Engineering<br>KNUST · Class of 2026</div></div>
+      <div class="person" id="pp2"><div class="av" style="background:var(--amber)">J</div><div class="nm">Jayne</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+      <div class="person" id="pp3"><div class="av" style="background:var(--paper)">W</div><div class="nm">Welam</div><div class="rl">Medical Laboratory Science<br>University of Ghana</div></div>
+    </div>
+    <div class="e112">In an emergency in Ghana, call 112.</div>
+  </section>
+
+  <!-- 12b. outro (only in the own-voice version: Robert's closing words) -->
+  <section class="scene" id="outro">
+    <div class="ocard" id="oc0">No one must die<br>because of <span style="color:var(--coral)">no bed</span>.</div>
+    <div class="ocard" id="oc1">Interested in this project?<br><span style="color:var(--mint)">Drop a comment.</span> 💬</div>
+    <div class="ocard" id="oc2">Be a part of it.<br><span style="color:var(--mint)">Let’s save lives.</span></div>
+    <div class="ocard" id="oc3">No one should die<br>because there’s <span style="color:var(--coral)">no bed</span>.</div>
+    <div class="ocard ologo" id="oc4"><span class="dot"></span>BedAlert <span style="font-size:.6em">🇬🇭</span></div>
+  </section>
+
+  <!-- 13. sources -->
+  <section class="scene" id="sources">
+    <div class="kicker">Sources</div>
+    <h2>Where the facts come from</h2>
+    <ol>
+      <li>Charles Amissah case: Graphic Online, Citi Newsroom, Ghanaian Times (Feb 2026); HeFRA investigation (16 Feb 2026); Ministry of Health committee findings, “118-minute referral loop” (May 2026).</li>
+      <li>Hospital beds per 1,000 people: World Bank World Development Indicators (0.7); GRNMA statement via Ghana News Agency (27 Mar 2026); Ashesi / Reach Alliance “No Bed Syndrome” study (0.9, 2021).</li>
+      <li>120–150% occupancy at major hospitals: GRNMA statement (Mar 2026).</li>
+      <li>~42 ambulances available in Greater Accra: National Ambulance Service dispatch head, Citi Newsroom (Jun 2025). Population: Ghana 2021 Census.</li>
+    </ol>
+    <div class="note">Hospital names and numbers shown in the product screens are illustrations, not real data.</div>
+  </section>
+
+  <div class="caption" id="cap"></div>
+</div>
+
+<script src="anim.js"></script>
+<script>
+const T = window.TIMINGS;  // injected: {duration, scenes:[{id,start,end,lines:[{text,start,end}]}]}
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = p => 1 - Math.pow(1 - clamp(p), 3);
+const prog = (t, a, d) => ease((t - a) / d);
+function appear(el, p, dy = 30) { el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * dy}px)`; }
+const FADE = 0.5;
+
+// static content
+(function build() {
+  const dots = $("dots");
+  for (let i = 0; i < 1000; i++) dots.appendChild(document.createElement("i"));
+  const rows = [["Hospital A", 3, 20, 4], ["Hospital B", 1, 15, 9], ["Hospital C", 2, 25, 2], ["Hospital D", 0, 12, 71]];
+  $("rows").innerHTML = rows.map(([n, f, tot, m], i) => `
+    <div class="row" id="row${i}"><div class="rt"><span>${n}</span><span class="n" style="color:${f ? "var(--mint)" : "var(--coral)"}">${f} free</span></div>
+    <div class="cbar">${Array.from({length: 20}, (_, k) => `<i class="${k < 20 - Math.round(f * 20 / tot) ? "occ" : "free"}"></i>`).join("")}</div>
+    <div class="rs">${m > 60 ? "⚠ not confirmed recently" : "updated " + m + " min ago"}</div></div>`).join("");
+  const ecg = $("ecgpath"); const L = ecg.getTotalLength();
+  ecg.style.strokeDasharray = L; ecg.dataset.len = L;
+})();
+
+const A = window.ANIM;
+const C_MINT = "#8FE3C6";
+const scene = id => T.scenes.find(s => s.id === id);
+const lineAt = (id, i) => scene(id).lines[i].start - scene(id).start;  // line start, relative to scene
+const lineEnd = (id, i) => scene(id).lines[i].end - scene(id).start;
+const wordAt = (id, i, w) => { const l = scene(id).lines[i]; const k = l.text.indexOf(w);
+  return lineAt(id, i) + (l.end - l.start) * (k < 0 ? 0 : k / l.text.length); };
+
+// ---------------------------------------------------------------- build animated scenes
+const X = {};
+const PORTRAIT = document.documentElement.classList.contains("portrait");
+// Vertical video: a 1100-wide camera window onto the 1920x1080 illustrations.
+function cam(svg, vbx) { if (PORTRAIT) svg.setAttribute("viewBox", `${vbx} -420 1100 1956`); }
+function extend(svg, top, bottom) {
+  if (!PORTRAIT) return;
+  const first = svg.firstChild.nextSibling;
+  svg.insertBefore(A.E("rect", { x: -2000, y: 1080, width: 6000, height: 1500, fill: bottom }), first);
+  svg.insertBefore(A.E("rect", { x: -2000, y: -1500, width: 6000, height: 1500, fill: top }), first);
+}
+const lerpKeys = (t, keys) => { let v = keys[0][1];
+  for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i][0]) v = keys[i][1] + (keys[i + 1][1] - keys[i][1]) * A.ez(A.span(t, keys[i][0], keys[i + 1][0]));
+  return v; };
+(function buildAnim() {
+  // title: skyline + road with a passing ambulance
+  const ts = $("tstreet"); A.defs(ts);
+  const r = A.rng(11); let x = -20;
+  while (x < 1940) { const w = 70 + r() * 120, h = 90 + r() * 200; A.E("rect", { x, y: 800 - h, width: w, height: h, fill: "#0c2240", opacity: .8 }, ts);
+    for (let wy = 812 - h; wy < 780; wy += 26) for (let wx = x + 10; wx < x + w - 12; wx += 22) if (r() < .25) A.E("rect", { x: wx, y: wy, width: 9, height: 12, fill: "#f6d38a", opacity: .25 + r() * .4 }, ts);
+    x += w + 8; }
+  A.E("rect", { x: 0, y: 800, width: 1920, height: 120, fill: "#0f1a28" }, ts);
+  for (let x = 0; x < 1920; x += 140) A.E("rect", { x, y: 856, width: 80, height: 6, fill: "#c9d3dd", opacity: .45 }, ts);
+  X.tAmb = A.makeAmbulance(ts, false);
+  cam(ts, 380);
+
+  // story: street
+  const st = $("street"); A.buildStreet(st, { roadY: 760 });
+  X.person = A.makePerson(st, A.C.paper, 1.35);
+  X.car = A.makeCar(st);
+  X.flash = A.E("circle", { cx: 0, cy: 0, r: 10, fill: "url(#glowW)", opacity: 0 }, st);
+  X.amb = A.makeAmbulance(st, true);
+  X.medics = [A.makePerson(st, A.C.amber, 1.3), A.makePerson(st, A.C.amber, 1.3)];
+  X.siren = A.E("rect", { x: -2000, y: -1500, width: 6000, height: 4000, fill: "#ff3b3b", opacity: 0 }, st);
+  extend(st, "#040d1c", "#223146"); cam(st, 520);
+
+  // story: Accra map
+  const am = $("accra");
+  if (PORTRAIT) am.setAttribute("viewBox", "0 0 1080 1920");
+  A.buildMapBase(am, PORTRAIT ? 1080 : 1920, PORTRAIT ? 1920 : 1080, 5, true);
+  const P = PORTRAIT ? { c: [200, 800], p: [860, 740], r: [620, 1040], k: [230, 1320] } : { c: [560, 440], p: [1450, 420], r: [1080, 610], k: [430, 780] };
+  X.seg = PORTRAIT ? [
+    A.routePath(am, [P.c, [420, 740], [680, 710], P.p]),
+    A.routePath(am, [P.p, [860, 900], [760, 1000], P.r]),
+    A.routePath(am, [P.r, [460, 1120], [320, 1220], P.k]),
+  ] : [
+    A.routePath(am, [P.c, [760, 400], [1000, 380], [1250, 390], P.p]),
+    A.routePath(am, [P.p, [1430, 510], [1260, 575], P.r]),
+    A.routePath(am, [P.r, [880, 660], [650, 730], P.k]),
+  ];
+  const acc = A.E("g", { transform: `translate(${P.c[0]},${P.c[1]})` }, am);
+  X.accRing = A.E("circle", { cx: 0, cy: 0, r: 40, fill: "none", stroke: A.C.coral, "stroke-width": 4 }, acc);
+  A.E("path", { d: "M0,-30 L28,20 L-28,20 Z", fill: A.C.coral }, acc);
+  A.E("text", { x: 0, y: 14, "text-anchor": "middle", fill: "#fff", "font-family": "Space Grotesk", "font-weight": 700, "font-size": 30 }, acc).textContent = "!";
+  A.E("text", { x: 0, y: 66, "text-anchor": "middle", fill: A.C.paper, "font-family": "Inter", "font-weight": 600, "font-size": 28 }, acc).textContent = "Circle overpass";
+  X.hm = [A.hospitalMarker(am, ...P.p, "Police Hospital"), A.hospitalMarker(am, ...P.r, "Ridge Hospital"), A.hospitalMarker(am, ...P.k, "Korle Bu")];
+  X.mapAmb = A.makeTopAmbulance(am);
+
+  // problem: generic map, searching blind
+  const pm = $("pmap");
+  if (PORTRAIT) pm.setAttribute("viewBox", "0 0 1080 1920");
+  A.buildMapBase(pm, PORTRAIT ? 1080 : 1920, PORTRAIT ? 1920 : 1080, 9, true);
+  const Q = PORTRAIT ? { s: [200, 1380], a: [760, 1170], b: [260, 950], c: [760, 760] } : { s: [300, 720], a: [760, 470], b: [1290, 730], c: [1640, 440] };
+  const qm = PORTRAIT ? [[520, 1310], [520, 1050], [480, 830]] : [[520, 560], [1000, 640], [1480, 620]];
+  X.pseg = [A.routePath(pm, [Q.s, qm[0], Q.a], { color: A.C.coral }), A.routePath(pm, [Q.a, qm[1], Q.b], { color: A.C.coral }), A.routePath(pm, [Q.b, qm[2], Q.c], { color: A.C.coral })];
+  const ps = A.E("g", { transform: `translate(${Q.s[0]},${Q.s[1]})` }, pm);
+  A.E("path", { d: "M0,-30 L28,20 L-28,20 Z", fill: A.C.coral }, ps);
+  A.E("text", { x: 0, y: 66, "text-anchor": "middle", fill: A.C.paper, "font-family": "Inter", "font-weight": 600, "font-size": 28 }, ps).textContent = "Emergency";
+  X.pm = [A.hospitalMarker(pm, ...Q.a, "Hospital"), A.hospitalMarker(pm, ...Q.b, "Hospital"), A.hospitalMarker(pm, ...Q.c, "Hospital")];
+  X.pAmb = A.makeTopAmbulance(pm);
+
+  // dispatch: generic map, with BedAlert
+  const dm = $("dmap"); A.buildMapBase(dm, 900, 720, 13, false);
+  const D = { s: [140, 590], a: [330, 230], b: [560, 470], c: [770, 230] };
+  X.d1 = A.routePath(dm, [D.s, [340, 560], D.b], { color: A.C.mint, width: 8 });
+  const mid = A.along(X.d1, 0.6);
+  X.d2 = A.routePath(dm, [[mid.x, mid.y], [560, 360], [680, 300], D.c], { color: A.C.mint, width: 8 });
+  const ds = A.E("g", { transform: `translate(${D.s[0]},${D.s[1]})` }, dm);
+  A.E("path", { d: "M0,-24 L22,16 L-22,16 Z", fill: A.C.coral }, ds);
+  X.dm = [A.hospitalMarker(dm, ...D.a, "Hospital A", { small: true }), A.hospitalMarker(dm, ...D.b, "Hospital B", { small: true }), A.hospitalMarker(dm, ...D.c, "Hospital C", { small: true })];
+  X.dAmb = A.makeTopAmbulance(dm);
+
+  // hospitals: an illustrated ward with a nurses' station
+  const W = $("ward"); A.defs(W);
+  A.E("rect", { x: 0, y: 0, width: 1920, height: 790, fill: "#cfe2e6" }, W);
+  A.E("rect", { x: 0, y: 520, width: 1920, height: 14, fill: "#b4ccd2" }, W);
+  A.E("rect", { x: 0, y: 770, width: 1920, height: 20, fill: "#8fa9b0" }, W);
+  A.E("rect", { x: 0, y: 790, width: 1920, height: 290, fill: "#9fbcc2" }, W);
+  for (let x = -200; x < 2100; x += 160) A.E("line", { x1: x, y1: 790, x2: x - 120, y2: 1080, stroke: "#b6cfd4", "stroke-width": 3 }, W);
+  for (let y = 840; y < 1080; y += 70) A.E("line", { x1: 0, y1: y, x2: 1920, y2: y, stroke: "#b6cfd4", "stroke-width": 3 }, W);
+  // window onto the street, where the ambulance will arrive
+  const clip = A.E("clipPath", { id: "winclip" }, W); A.E("rect", { x: 880, y: 110, width: 280, height: 270, rx: 10 }, clip);
+  const win = A.E("g", { "clip-path": "url(#winclip)" }, W);
+  A.E("rect", { x: 880, y: 110, width: 280, height: 270, fill: "url(#night)" }, win);
+  for (let i = 0; i < 6; i++) A.E("rect", { x: 880 + i * 50, y: 220 + (i % 3) * 20, width: 40, height: 140, fill: "#0b1d36" }, win);
+  A.E("rect", { x: 880, y: 330, width: 280, height: 50, fill: "#1b2533" }, win);
+  X.winAmb = A.makeAmbulance(win, true);
+  A.E("rect", { x: 870, y: 100, width: 300, height: 290, rx: 14, fill: "none", stroke: "#f1f6f7", "stroke-width": 16 }, W);
+  A.E("line", { x1: 1020, y1: 104, x2: 1020, y2: 386, stroke: "#f1f6f7", "stroke-width": 8 }, W);
+  A.E("text", { x: 1020, y: 430, "text-anchor": "middle", fill: "#5d7f88", "font-family": "Inter", "font-weight": 600, "font-size": 22 }, W).textContent = "Ambulance bay";
+  // beds
+  X.bed = [];
+  [90, 440, 790].forEach((x0, i) => {
+    const g = A.E("g", {}, W);
+    A.E("rect", { x: x0 + 150, y: 520, width: 8, height: 260, fill: "#9ab" }, g);            // IV pole
+    A.E("rect", { x: x0 + 132, y: 520, width: 44, height: 60, rx: 10, fill: "#e9f6ff", stroke: "#9ab", "stroke-width": 3 }, g);
+    A.E("rect", { x: x0, y: 600, width: 22, height: 170, rx: 8, fill: "#6d8f99" }, g);       // headboard
+    A.E("rect", { x: x0 + 10, y: 730, width: 300, height: 26, rx: 8, fill: "#6d8f99" }, g);   // frame
+    for (const lx of [x0 + 34, x0 + 284]) { A.E("rect", { x: lx, y: 756, width: 10, height: 64, fill: "#6d8f99" }, g); A.E("circle", { cx: lx + 5, cy: 826, r: 10, fill: "#3d5560" }, g); }
+    A.E("rect", { x: x0 + 14, y: 700, width: 296, height: 34, rx: 12, fill: "#f7fbfc" }, g); // mattress
+    A.E("ellipse", { cx: x0 + 64, cy: 694, rx: 44, ry: 16, fill: "#ffffff", stroke: "#dbe7ea", "stroke-width": 2 }, g);
+    const head = A.E("circle", { cx: x0 + 70, cy: 676, r: 24, fill: ["#6b4226", "#8d5524", "#5a3a22"][i] }, g);
+    const blanket = A.E("rect", { x: x0 + 90, y: 676, width: 214, height: 38, rx: 18, fill: ["#457b9d", "#e76f51", "#2a9d8f"][i] }, g);
+    const fresh = A.E("rect", { x: x0 + 100, y: 684, width: 204, height: 22, rx: 10, fill: "#ffffff", stroke: C_MINT, "stroke-width": 4, opacity: 0 }, g);
+    const tag = A.E("g", { opacity: 0, transform: `translate(${x0 + 160},610)` }, g);
+    A.E("rect", { x: -110, y: -26, width: 220, height: 46, rx: 12, fill: C_MINT }, tag);
+    A.E("text", { x: 0, y: 6, "text-anchor": "middle", fill: "#0B2545", "font-family": "Plex Mono", "font-weight": 700, "font-size": 22 }, tag).textContent = "BED 2 · READY";
+    const sparks = [0, 1, 2, 3].map(k => A.E("path", { d: "M0,-14 L4,-4 L14,0 L4,4 L0,14 L-4,4 L-14,0 L-4,-4 Z", fill: "#ffd166", opacity: 0, transform: `translate(${x0 + 120 + k * 50},${660 - (k % 2) * 30})` }, g));
+    A.E("text", { x: x0 + 160, y: 870, "text-anchor": "middle", fill: "#5d7f88", "font-family": "Plex Mono", "font-weight": 700, "font-size": 22 }, g).textContent = `BED ${i + 1}`;
+    X.bed.push({ head, blanket, fresh, tag, sparks, x0 });
+  });
+  X.leaver = A.makeAvatar(W, { hair: "short", shirt: "#e9c46a", pants: "#264653", skin: "#8d5524" });
+  X.nurse = A.makeAvatar(W, { hair: "nurse", shirt: "#2a9d8f", pants: "#2a9d8f", scrubs: true, skin: "#a0673d", phone: "smart" });
+  A.E("rect", { x: 1220, y: 800, width: 640, height: 30, rx: 8, fill: "#e8f1f3" }, W);           // desk top
+  A.E("rect", { x: 1240, y: 830, width: 600, height: 160, rx: 8, fill: "#5f8592" }, W);
+  A.E("text", { x: 1540, y: 925, "text-anchor": "middle", fill: "#e8f1f3", "font-family": "Space Grotesk", "font-weight": 700, "font-size": 34 }, W).textContent = "NURSES' STATION";
+  A.E("rect", { x: 1650, y: 690, width: 150, height: 104, rx: 10, fill: "#1d2c40" }, W);           // monitor
+  X.mon = A.E("rect", { x: 1660, y: 700, width: 130, height: 84, rx: 6, fill: C_MINT, opacity: 0.35 }, W);
+  A.E("rect", { x: 1715, y: 794, width: 20, height: 8, fill: "#1d2c40" }, W);
+  extend(W, "#cfe2e6", "#9fbcc2");
+
+  // citizens: a warm evening street with two neighbours
+  const CS = $("cscene"); A.defs(CS);
+  const dg = A.E("linearGradient", { id: "dusk", x1: 0, y1: 0, x2: 0, y2: 1 }, CS);
+  A.E("stop", { offset: 0, "stop-color": "#163b66" }, dg); A.E("stop", { offset: 0.55, "stop-color": "#3d74a3" }, dg); A.E("stop", { offset: 1, "stop-color": "#f2b37f" }, dg);
+  A.E("rect", { x: 0, y: 0, width: 1920, height: 1080, fill: "url(#dusk)" }, CS);
+  A.E("circle", { cx: 1000, cy: 860, r: 260, fill: "url(#lamp)", opacity: 0.9 }, CS);
+  const hr = A.rng(21); let hx = -40;
+  const pal = ["#e9c46a", "#f4a261", "#2a9d8f", "#e76f51", "#8ab17d", "#b5838d"];
+  while (hx < 1960) {
+    const w = 170 + hr() * 120, h = 170 + hr() * 120, y = 900 - h, col = pal[Math.floor(hr() * pal.length)];
+    A.E("rect", { x: hx, y, width: w, height: h, fill: col, opacity: 0.55 }, CS);
+    A.E("path", { d: `M${hx - 14},${y} L${hx + w / 2},${y - 70} L${hx + w + 14},${y} Z`, fill: "#7a3b2e", opacity: 0.6 }, CS);
+    A.E("rect", { x: hx + w / 2 - 24, y: 900 - 90, width: 48, height: 90, fill: "#3b2a24", opacity: 0.55 }, CS);
+    for (const wx of [hx + 22, hx + w - 62]) A.E("rect", { x: wx, y: y + 34, width: 40, height: 40, fill: "#ffe2a8", opacity: 0.7 }, CS);
+    hx += w + 30;
+  }
+  A.E("rect", { x: 0, y: 900, width: 1920, height: 180, fill: "#3a4756" }, CS);
+  A.E("rect", { x: 0, y: 900, width: 1920, height: 14, fill: "#56677a" }, CS);
+  X.woman = A.makeAvatar(CS, { hair: "wrap", wrap: "#e76f51", shirt: "#f4a261", pants: "#264653", skirt: "#2a9d8f", phone: "smart", skin: "#7a4a2a" });
+  X.man = A.makeAvatar(CS, { hair: "cap", shirt: "#457b9d", pants: "#1d3557", phone: "feature", beard: true, skin: "#5a3a22" });
+  X.cheer = [0, 1, 2, 3, 4, 5].map(k => A.E("path", { d: "M0,-12 L3,-3 L12,0 L3,3 L0,12 L-3,3 L-12,0 L-3,-3 Z", fill: "#ffd166", opacity: 0 }, CS));
+  extend(CS, "#163b66", "#3a4756");
+
+  // solution: a burst of light and confetti behind the logo
+  const BU = $("burst"); if (PORTRAIT) BU.setAttribute("viewBox", "0 0 1080 1920");
+  X.rings = [0, 1, 2].map(() => A.E("circle", { cx: 175, cy: 355, r: 10, fill: "none", stroke: C_MINT, "stroke-width": 6, opacity: 0 }, BU));
+  const pr = A.rng(4);
+  X.confetti = Array.from({ length: 46 }, () => ({ el: A.E("rect", { width: 12, height: 18, rx: 3, fill: [C_MINT, "#E8A33D", "#F4F7FA", "#E15554"][Math.floor(pr() * 4)], opacity: 0 }, BU),
+    a: -Math.PI * (0.05 + pr() * 0.9), v: 380 + pr() * 520, spin: pr() * 720 - 360 }));
+})();
+
+function marker(m, state, p = 1, pulse = 0) {
+  const S = { idle: null, checking: ["CHECKING…", A.C.amber, A.C.navy], nobed: ["NO BED", A.C.coral, "#fff"], full: ["FULL", A.C.coral, "#fff"],
+    q: ["? beds", "#33557f", A.C.paper], declined: ["DECLINED", A.C.coral, "#fff"], held: ["HELD ✓", A.C.mint, A.C.navy] };
+  if (state && state.startsWith("free:")) { const n = +state.slice(5);
+    return A.setMarker(m, { pill: `${n} free`, color: n ? A.C.mint : A.C.coral, txColor: n ? A.C.navy : "#fff", pillP: p, disc: n ? A.C.mint : A.C.coral }); }
+  const s = S[state];
+  A.setMarker(m, { pill: s ? s[0] : null, color: s ? s[1] : A.C.coral, txColor: s ? s[2] : "#fff", pillP: p, ring: state === "checking" ? 0.9 : 0, pulse,
+    disc: state === "nobed" || state === "full" || state === "declined" ? A.C.coral : state === "held" ? A.C.mint : A.C.mint });
+}
+
+const draw = {
+  title(t) {
+    const ecg = $("ecgpath"); ecg.style.strokeDashoffset = ecg.dataset.len * (1 - clamp(t / 2.2));
+    appear($("t-h1"), prog(t, lineAt("title", 1) - 0.3, 0.8), 60);
+    appear($("t-sub"), prog(t, lineAt("title", 1) + 0.8, 0.8));
+    const ax = -300 + 2500 * A.span(t, 0.2, scene("title").end - scene("title").start);
+    A.poseAmbulance(X.tAmb, ax, 905, t, ax * 1.4, 1, 0.5);
+  },
+  story(t) {
+    const tHit = wordAt("story", 0, "was hit"), mapStart = lineAt("story", 2) - 0.6;
+    const streetOn = 1 - A.span(t, mapStart, mapStart + 0.8);
+    $("street").style.opacity = streetOn; $("accra").style.opacity = 1 - streetOn;
+    $("s-maptag").style.opacity = 1 - streetOn;
+    appear($("s-head"), prog(t, 0.3, 0.8), 20);
+    const on = Math.floor(t * 6) % 2;
+    if (streetOn > 0) {
+      // a man crosses; a car hits him and drives off
+      if (t < tHit) { const w = A.span(t, 0.6, tHit); A.posePerson(X.person, { x: 980, y: 690 + 140 * w, phase: t * 7, walk: t > 0.6 ? 1 : 0 }); }
+      else { const f = A.eo(A.span(t, tHit, tHit + 0.6)); A.posePerson(X.person, { x: 980 + 150 * f, y: 830 + 40 * f, rot: -90 * f }); }
+      const cx = 714 + (t - tHit) * 1100;
+      A.poseCar(X.car, cx, 852, (t - tHit) * 900, 1);
+      const fl = A.span(t, tHit, tHit + 0.45);
+      X.flash.setAttribute("cx", 1000); X.flash.setAttribute("cy", 770);
+      X.flash.setAttribute("r", 40 + 320 * fl); X.flash.setAttribute("opacity", t >= tHit ? 1 - fl : 0);
+      // the ambulance arrives, paramedics run to him
+      const tA = tHit + 1.6;
+      const ax = 2060 - (2060 - 1180) * A.eo(A.span(t, tA, tA + 2.2));
+      A.poseAmbulance(X.amb, ax, 900, t, -ax * 1.3, 1);
+      X.siren.setAttribute("opacity", t > tA + 0.5 ? (on ? 0.07 : 0.02) : 0);
+      const kneel = A.eo(A.span(t, lineAt("story", 1), lineAt("story", 1) + 0.6));
+      [[1240, 960], [1270, 1170]].forEach(([from, to], i) => {
+        const m = A.span(t, tA + 2.3 + i * 0.3, tA + 3.6 + i * 0.3);
+        A.posePerson(X.medics[i], { x: from + (to - from) * A.eo(m), y: 878, phase: t * 9, walk: m > 0 && m < 1 ? 1 : 0, kneel, reach: kneel, op: t > tA + 2.2 + i * 0.3 ? 1 : 0 });
+      });
+    }
+    // the map: Police Hospital -> Ridge -> Korle Bu
+    const a = [lineEnd("story", 2), lineEnd("story", 3), lineEnd("story", 4)];
+    const d = [mapStart + 0.8, a[0] + 1.6, a[1] + 1.6];
+    const pr = d.map((ds, i) => A.ez(A.span(t, ds, a[i])));
+    pr.forEach((p, i) => A.drawRoute(X.seg[i], p));
+    const i = t < d[1] ? 0 : t < d[2] ? 1 : 2;
+    const pos = A.along(X.seg[i], pr[i]);
+    const endT = wordAt("story", 6, "He did not");
+    A.poseTopAmbulance(X.mapAmb, pos.x, pos.y, pos.ang, t, t < endT ? 1 : 0);
+    X.hm.forEach((m, k) => {
+      const s = a[k] + 0.7;
+      if (t < a[k]) marker(m, "idle");
+      else if (t < s) marker(m, "checking", 1, Math.abs(Math.sin(t * 6)));
+      else marker(m, "nobed", A.span(t, s, s + 0.35));
+    });
+    X.accRing.setAttribute("r", 40 + 12 * Math.abs(Math.sin(t * 3)));
+    const keys = [[tHit, 0], [mapStart, 18], [a[0] + 0.7, 40], [a[1] + 0.7, 66], [a[2] + 0.7, 92], [wordAt("story", 6, "118"), 118]];
+    let mins = 0;
+    for (let k = 0; k < keys.length - 1; k++) if (t >= keys[k][0]) mins = keys[k][1] + (keys[k + 1][1] - keys[k][1]) * A.span(t, keys[k][0], keys[k + 1][0]);
+    $("s-timer").textContent = Math.round(mins);
+    $("s-timerbox").style.opacity = A.span(t, tHit + 0.6, tHit + 1.4);
+    $("s-dim").style.opacity = 0.78 * A.span(t, endT, endT + 1.2);
+    $("s-end").style.opacity = A.span(t, endT + 0.4, endT + 1.4);
+  },
+  stats(t) {
+    const p1 = prog(t, lineAt("stats", 1) - 0.2, 0.7), p2 = prog(t, lineAt("stats", 2) - 0.2, 0.7), p3 = prog(t, lineAt("stats", 3) - 0.2, 0.7);
+    appear($("c1"), p1); appear($("c2"), p2); appear($("c3"), p3);
+    const lit = clamp((t - lineAt("stats", 1) - 0.8) / 1.0);
+    $("dots").children[0].style.background = lit > 0 ? `rgba(143,227,198,${0.35 + 0.65 * lit})` : "";
+    $("dots").children[0].style.transform = `scale(${1 + 1.2 * lit})`;
+    $("m-fill").style.width = (100 * ease(clamp((t - lineAt("stats", 2) - 0.4) / 2.0))) + "%";
+  },
+  problem(t) {
+    appear($("p-h2"), prog(t, 0, 0.8));
+    const ds = [1.0, 5.6, 10.2], as = [4.0, 8.6, 13.2];
+    const pr = ds.map((d, i) => A.ez(A.span(t, d, as[i])));
+    pr.forEach((p, i) => A.drawRoute(X.pseg[i], p));
+    const i = t < ds[1] ? 0 : t < ds[2] ? 1 : 2;
+    const pos = A.along(X.pseg[i], pr[i]);
+    A.poseTopAmbulance(X.pAmb, pos.x, pos.y, pos.ang, t, 1);
+    X.pm.forEach((m, k) => {
+      const show = A.span(t, 0.4 + k * 0.3, 0.8 + k * 0.3);
+      if (t < as[k]) marker(m, "q", show);
+      else if (t < as[k] + 0.6) marker(m, "checking", 1, Math.abs(Math.sin(t * 6)));
+      else marker(m, "full", A.span(t, as[k] + 0.6, as[k] + 0.95));
+    });
+    $("p-timer").textContent = Math.round(38 * A.span(t, 1.0, 15.0));
+    $("p-timerbox").style.opacity = A.span(t, 1.0, 1.8);
+  },
+  solution(t) {
+    if (!X.bc) { $("sol-logo").style.transform = ""; const b = $("sol-logo").querySelector(".dot").getBoundingClientRect();
+      X.bc = [b.x + b.width / 2, b.y + b.height / 2]; X.rings.forEach(r => { r.setAttribute("cx", X.bc[0]); r.setAttribute("cy", X.bc[1]); }); }
+    appear($("sol-logo"), prog(t, 0.2, 0.7), 0);
+    $("sol-logo").style.transform = `scale(${0.7 + 0.3 * A.eo(A.span(t, 0.2, 0.9)) + 0.04 * Math.sin(A.span(t, 0.9, 1.6) * Math.PI)})`;
+    $("sol-logo").style.transformOrigin = "left center";
+    appear($("sol-tag"), prog(t, 0.9, 0.8));
+    appear($("board"), prog(t, 1.8, 0.8), 40);
+    for (let i = 0; i < 4; i++) appear($("row" + i), prog(t, 2.2 + i * 0.25, 0.5), 14);
+    X.rings.forEach((r, i) => { const p = A.span(t, 0.3 + i * 0.25, 1.9 + i * 0.25);
+      r.setAttribute("r", 20 + 640 * A.eo(p)); r.setAttribute("opacity", p > 0 ? 0.7 * (1 - p) : 0); });
+    X.confetti.forEach(c => { const u = t - 0.35; if (u < 0) { c.el.setAttribute("opacity", 0); return; }
+      const x = X.bc[0] + Math.cos(c.a) * c.v * u, y = X.bc[1] + Math.sin(c.a) * c.v * u + 260 * u * u;
+      c.el.setAttribute("transform", `translate(${x},${y}) rotate(${c.spin * u})`);
+      c.el.setAttribute("opacity", Math.max(0, 1 - u / 2.6)); });
+  },
+  hospitals(t) {
+    appear($("hd-head"), prog(t, 0.2, 0.6), 20);
+    appear($("portal"), prog(t, 0.5, 0.7), 30);
+    const b2 = X.bed[1], L1 = lineAt("hospitals", 1), L2 = lineAt("hospitals", 2);
+    // a patient is discharged from bed 2 and walks out
+    const up = A.span(t, 0.8, 1.3);
+    b2.blanket.setAttribute("opacity", 1 - up); b2.head.setAttribute("opacity", 1 - up);
+    const w = A.span(t, 1.3, 4.2);
+    A.poseAvatar(X.leaver, { x: b2.x0 + 120 - 640 * w, y: 1000, s: 0.62, walk: w > 0 && w < 1 ? 1 : 0, phase: t * 8, smile: 0.9, op: up >= 1 ? 1 - A.span(t, 3.9, 4.3) : 0, flip: true });
+    // nurse updates the count, then answers the alert
+    const tap1 = 4.4, tap2 = L1 + 3.6;
+    const tapping = (t > tap1 - 0.4 && t < tap1 + 0.3) || (t > tap2 - 0.4 && t < tap2 + 0.3);
+    A.poseAvatar(X.nurse, { x: 1420, y: 905, s: 0.95, front: [24, 118], back: tapping ? [-30, -95] : [-8, 0], smile: t > tap2 ? 1 : 0.5, blink: Math.floor(t * 10) % 37 === 0, head: 6 });
+    $("pw-a").textContent = t > tap1 ? "1 free" : "0 free";
+    $("pw-a").style.color = t > tap1 ? "var(--mint)" : "var(--coral)";
+    $("psync").style.opacity = A.span(t, 5.4, 5.9);
+    X.mon.setAttribute("opacity", 0.35 + 0.3 * Math.abs(Math.sin(t * 2)));
+    // incoming patient alert -> Accept
+    const al = A.span(t, L1 + 0.5, L1 + 0.9);
+    $("alert").style.opacity = al; $("alert").style.transform = `translateX(${(1 - A.eo(al)) * 80}px)`;
+    $("alert").style.boxShadow = t > L1 + 0.5 && t < tap2 ? `0 0 0 ${6 + 6 * Math.abs(Math.sin(t * 5))}px rgba(225,85,84,.35)` : "none";
+    const ok = t > tap2;
+    $("b-acc").parentNode.style.display = ok ? "none" : "flex";
+    $("a-ok").style.display = ok ? "block" : "none";
+    $("alert").style.borderColor = ok ? "var(--mint)" : "var(--coral)";
+    $("alert").style.background = ok ? "#123e3c" : "#3a1e2a";
+    const rp = A.span(t, tap2 - 0.15, tap2 + 0.5);
+    Object.assign($("ripple").style, { left: "120px", top: "170px", opacity: rp > 0 && rp < 1 ? 1 - rp : 0, transform: `scale(${1 + 3 * rp})` });
+    $("b-acc").style.transform = t > tap2 - 0.15 && t < tap2 ? "scale(.94)" : "";
+    // bed 2 is made up, ambulance arrives outside
+    const mk = A.span(t, L2 - 0.4, L2 + 0.4);
+    b2.fresh.setAttribute("opacity", mk);
+    b2.tag.setAttribute("opacity", A.span(t, L2 + 0.2, L2 + 0.6));
+    b2.sparks.forEach((s, k) => { const p = A.span(t, L2 + 0.1 + k * 0.15, L2 + 1.1 + k * 0.15); s.setAttribute("opacity", p > 0 ? Math.sin(p * Math.PI) : 0); });
+    cam($("ward"), lerpKeys(t, [[0, 0], [3.5, 0], [4.3, 820], [L2 - 0.5, 820], [L2 + 0.5, 420]]));
+    if (PORTRAIT) $("portal").style.opacity = A.span(t, 0.5, 1.2) * (1 - A.span(t, L2 + 0.1, L2 + 0.6));
+    const ax = 1240 - 290 * A.eo(A.span(t, L2 + 0.6, L2 + 2.8));
+    A.poseAmbulance(X.winAmb, ax, 372, t, -ax, 1, 0.42);
+  },
+  dispatch(t) {
+    appear($("dp"), prog(t, 0.3, 0.7), 40);
+    const dur = scene("dispatch").end - scene("dispatch").start;
+    const tDec = lineAt("dispatch", 1) + 1.2;
+    const states = ["free:0", "free:3", "free:2"];
+    X.dm.forEach((m, k) => marker(m, states[k], A.span(t, 0.6 + k * 0.3, 1.0 + k * 0.3)));
+    A.drawRoute(X.d1, A.span(t, 2.2, 3.0));
+    X.d1.p.setAttribute("stroke", t < tDec ? A.C.mint : A.C.coral);
+    X.d1.p.setAttribute("opacity", t < tDec ? 1 : 0.45);
+    if (t > 3.2) marker(X.dm[1], t < tDec ? "held" : "declined", t < tDec ? A.span(t, 3.2, 3.5) : A.span(t, tDec, tDec + 0.35));
+    A.drawRoute(X.d2, A.span(t, tDec + 0.3, tDec + 1.1));
+    if (t > tDec + 1.1) marker(X.dm[2], "held", A.span(t, tDec + 1.1, tDec + 1.4));
+    const pos = t < tDec + 1.2 ? A.along(X.d1, 0.6 * A.span(t, 3.6, tDec)) : A.along(X.d2, A.ez(A.span(t, tDec + 1.2, dur - 0.3)));
+    A.poseTopAmbulance(X.dAmb, pos.x, pos.y, pos.ang, t, 1);
+  },
+  citizens(t) {
+    appear($("c-head"), prog(t, 0.2, 0.6), 20);
+    const L1 = lineAt("citizens", 1);
+    // she walks in, checks her phone, holds a bed, celebrates
+    const wi = A.span(t, 0.0, 1.2), tap = 2.7, code = 3.1, joy = A.span(t, 3.5, 4.0);
+    const hop = t > 3.5 && t < 5.5 ? -Math.abs(Math.sin((t - 3.5) * 6)) * 22 : 0;
+    A.poseAvatar(X.woman, { x: -150 + 520 * A.eo(wi), y: 905 + hop, s: 1.25, walk: wi < 1 ? 1 : 0, phase: t * 8,
+      front: wi < 1 ? [10, 0] : [24, 118], back: joy > 0 ? [-150 * joy, -20 * joy] : (t > tap - 0.4 && t < tap + 0.3 ? [-34, -92] : [-8, 0]),
+      smile: t > code ? 1 : 0.45, head: t < code ? 8 : -4 });
+    appear($("ph1"), prog(t, 1.0, 0.6), 20);
+    $("cta").style.transform = t > tap - 0.15 && t < tap + 0.1 ? "scale(.95)" : "";
+    appear($("code"), prog(t, code, 0.5), 10);
+    // he dials the short code on a basic phone; the SMS arrives
+    const mi = A.span(t, L1 - 0.6, L1 + 0.7), sms = L1 + 5.0;
+    A.poseAvatar(X.man, { x: 2080 - 840 * A.eo(mi), y: 905, s: 1.25, walk: mi > 0 && mi < 1 ? 1 : 0, phase: t * 8, flip: true,
+      front: t > sms + 0.4 ? [165, 10] : mi >= 1 ? [24, 118] : [10, 0], back: [-8, 0], smile: t > sms ? 1 : 0.45, head: t > sms + 0.4 ? -6 : 8 });
+    appear($("ph2"), prog(t, L1 + 0.6, 0.6), 30);
+    cam($("cscene"), lerpKeys(t, [[0, 100], [L1 - 0.9, 100], [L1 + 0.3, 940]]));
+    if (PORTRAIT) $("ph1").style.opacity = A.span(t, 1.0, 1.6) * (1 - A.span(t, L1 - 1.0, L1 - 0.5));
+    const screens = ["*920#", "BedAlert\n1. Emergency\n2. Non-emergency\n\n> 1", "Your region:\n1. Ashanti\n2. Greater Accra\n3. Northern\n\n> 2",
+      "Bed held at\nHospital A.\nCode K7P2QX.\nGo now.\nCode also sent\nby SMS."];
+    const k = Math.min(3, Math.max(0, Math.floor((t - L1 - 1.0) / 1.25)));
+    $("ussd").textContent = screens[t < L1 + 1.0 ? 0 : k];
+    appear($("sms"), prog(t, sms, 0.5), 20);
+    X.cheer.forEach((c, i) => { const who = i < 3 ? [370, 420, code + 0.4] : [1240, 420, sms + 0.5];
+      const p = A.span(t, who[2] + (i % 3) * 0.15, who[2] + 1.2 + (i % 3) * 0.15);
+      c.setAttribute("opacity", p > 0 ? Math.sin(p * Math.PI) : 0);
+      c.setAttribute("transform", `translate(${who[0] + [-90, 0, 90][i % 3]},${who[1] - 60 * p}) scale(${1 + p})`); });
+  },
+  trust(t) {
+    appear($("p1"), prog(t, 0.2, 0.7));
+    appear($("p2"), prog(t, lineAt("trust", 1), 0.7));
+    appear($("p3"), prog(t, lineAt("trust", 1) + 2.6, 0.7));
+  },
+  roadmap(t) {
+    appear($("r1"), prog(t, 0.2, 0.6));
+    const n = lineAt("roadmap", 1);
+    appear($("r2"), prog(t, n + 0.6, 0.6)); appear($("r3"), prog(t, n + 4.0, 0.6)); appear($("r4"), prog(t, n + 5.8, 0.6));
+  },
+  ask(t) {
+    ["k1", "k2", "k3"].forEach((k, i) => appear($(k), prog(t, 1.0 + i * 1.3, 0.5), 14));
+    const L1 = lineAt("ask", 1), L2 = lineAt("ask", 2);
+    $("quote").textContent = t < L2 - 0.3 ? "Together, we can end no bed syndrome." : "No patient should die looking for a bed.";
+    $("quote").style.color = t < L2 - 0.3 ? "var(--mint)" : "";
+    appear($("quote"), t < L2 - 0.3 ? prog(t, L1 - 0.2, 0.8) * (1 - A.span(t, L2 - 0.6, L2 - 0.3)) : prog(t, L2 - 0.3, 0.9), 40);
+  },
+  credits(t) {
+    ["pp1", "pp2", "pp3"].forEach((k, i) => appear($(k), prog(t, 0.6 + [0, 4.6, 5.4][i], 0.7), 30));
+  },
+  pioneers(t) {
+    const L = lineAt("pioneers", 0);
+    [1.0, 4.6, 5.3].forEach((c, i) => appear($("pq" + (i + 1)), prog(t, L + c, 0.6), 30));
+    appear($("pq-note"), prog(t, L + 7.2, 0.8), 14);
+  },
+  phase1(t) {
+    const L = lineAt("phase1", 0);
+    for (let i = 0; i < 7; i++) {
+      const p = prog(t, L + 0.2 + i * 0.5, 0.45);
+      appear($("ci" + i), p, 16);
+      $("ci" + i).firstChild.style.transform = `scale(${0.4 + 0.6 * A.eo(A.span(t, L + 0.3 + i * 0.5, L + 0.7 + i * 0.5)) + 0.15 * Math.sin(Math.PI * A.span(t, L + 0.5 + i * 0.5, L + 0.9 + i * 0.5))})`;
+    }
+  },
+  phase2(t) {
+    const marks = [wordAt("phase2", 0, "launch"), wordAt("phase2", 0, "connect"), wordAt("phase2", 0, "pilot")];
+    marks.forEach((m, i) => {
+      const on = t > m - 0.2;
+      $("rs" + i).classList.toggle("on", on);
+      $("rs" + i).style.borderColor = on ? (i === 0 ? "var(--mint)" : "rgba(255,255,255,.35)") : "";
+      $("rs" + i).style.transform = `scale(${1 + 0.04 * Math.sin(Math.PI * A.span(t, m - 0.2, m + 0.4))})`;
+      $("rs" + i).querySelector(".rtag").style.color = on && i === 0 ? "var(--mint)" : "";
+    });
+  },
+  outro(t) {
+    const cues = scene("outro").cues || [1.1, 7.5, 16.5, 24.9, 32.0, 99];
+    cues.slice(0, 5).forEach((c, i) => {
+      const on = A.span(t, c, c + 0.6), off = A.span(t, cues[i + 1] - 0.5, cues[i + 1]);
+      appear($("oc" + i), on * (1 - off), 30);
+    });
+    $("oc4").style.transform = `scale(${0.85 + 0.15 * A.eo(A.span(t, 32.0, 32.8))})`;
+  },
+  sources(t) {},
+};
+
+window.render = function (now) {
+  for (const s of T.scenes) {
+    const el = $(s.id);
+    const o = clamp((now - s.start) / FADE) * (s === T.scenes[T.scenes.length - 1] ? 1 : clamp((s.end - now) / FADE));
+    el.style.opacity = now >= s.start - 0.01 && now <= s.end + 0.01 ? o : 0;
+    if (el.style.opacity > 0) draw[s.id](now - s.start);
+  }
+  const sAt = (id, k, fallback) => (scene(id) ? scene(id)[k] : fallback);
+  const hopeFrom = sAt("solution", "start", 0), hopeTo = sAt("credits", "start", T.duration + 9);
+  $("hope").style.opacity = Math.min(1, clamp((now - hopeFrom) / 1.5) * (1 - clamp((now - hopeTo) / 1.0))
+    + (scene("outro") ? clamp((now - scene("outro").start) / 1.0) * (1 - clamp((now - scene("outro").end) / 1.0)) : 0));
+  const brandFrom = sAt("story", "start", T.scenes.length > 1 ? T.scenes[1].start : 0);
+  const brandTo = sAt("credits", "start", sAt("outro", "start", T.duration + 9));
+  $("brand").style.opacity = clamp((now - brandFrom) / FADE) * (now < brandTo ? 1 : 0);
+  let cap = null;
+  for (const s of T.scenes) if (s.id !== "credits") for (const l of s.lines) if (now >= l.start - 0.05 && now <= l.end + 0.3) cap = l.text;
+  $("cap").textContent = cap || "";
+  $("cap").style.opacity = cap ? 1 : 0;
+};
+</script>
+</body>
+</html>

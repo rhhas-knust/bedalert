@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "main.py": {
+      "maxDuration": 30,
+      "excludeFiles": "{tests/**,scripts/**,.env*,**/__pycache__/**,.pytest_cache/**}"
+    }
+  },
+  "crons": [
+    { "path": "/v1/cron/flush-sms", "schedule": "17 5 * * *" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}

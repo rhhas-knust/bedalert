@@ -1,0 +1,15 @@
+{
+  "_note": "TikTok: where BedAlert is now (Phase 1) and what's next (Phase 2+). Built from Robert's earlier recording.",
+  "recording": "voice/robert-narration.aac",
+  "spans": "voice/robert-narration.spans.json",
+  "scenes": [
+    {"id": "pioneers", "lines": [32], "lead": 1.0, "pad": 1.4},
+    {"id": "solution", "lines": [17], "pad": 0.6},
+    {"id": "phase1", "lines": [27], "gaps": {"27": 0.2}, "pad": 3.4},
+    {"id": "phase2", "lines": [28], "pad": 1.6},
+    {"id": "hospitals", "lines": [18, 19, 20]},
+    {"id": "dispatch", "lines": [21, 22]},
+    {"id": "citizens", "lines": [23, 24]},
+    {"id": "outro", "span": [196.6, 217.3], "pad": 2.8, "cues": [98, 0.1, 9.0, 17.4, 20.9, 99]}
+  ]
+}
