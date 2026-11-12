@@ -4,8 +4,16 @@ Messages are written to `sms_outbox` inside the same transaction as the
 change that caused them, and only sent after that transaction commits
 (`flush_outbox`). So a rolled-back hold never texts anyone, and a failing
 SMS provider never rolls back a hold.
+
+Who calls `flush_outbox`:
+- the request itself, right after its transaction commits, when it queued a
+  message (`main.flush_sms_after_request`). This is the only way that works
+  on serverless hosts such as Vercel, which pause the process between requests;
+- a scheduled job (`/v1/cron/flush-sms`) as a safety net;
+- on long-running hosts, optionally a background thread (`SMS_WORKER=1`).
 """
 
+import contextvars
 import logging
 
 import httpx
@@ -17,7 +25,17 @@ from .db import connection
 log = logging.getLogger("bedalert.sms")
 
 
+# Set per request by the middleware to a mutable dict; queue_sms marks it so
+# the middleware knows to flush. A dict (not a bool) because sync endpoints
+# run in a worker thread with a copy of the context: mutations are shared,
+# re-assignments are not.
+request_sms_flag: contextvars.ContextVar[dict | None] = contextvars.ContextVar("request_sms_flag", default=None)
+
+
 def queue_sms(conn: Connection, to_phone: str, body: str, purpose: str) -> None:
+    flag = request_sms_flag.get()
+    if flag is not None:
+        flag["queued"] = True
     conn.execute(
         "insert into sms_outbox (to_phone, body, purpose) values (%s, %s, %s)",
         (to_phone, body[:459], purpose),  # 3 SMS segments max

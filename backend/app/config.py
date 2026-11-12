@@ -22,6 +22,10 @@ class Settings:
     database_url: str = field(
         default_factory=lambda: _env("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/bedalert")
     )
+    # 'transaction' when DATABASE_URL points at a transaction pooler on a
+    # port other than 6543. Pool size per running instance.
+    db_pooler: str = field(default_factory=lambda: _env("DB_POOLER"))
+    db_pool_max: int = field(default_factory=lambda: _int("DB_POOL_MAX", 10))
     cors_origins: tuple = field(
         default_factory=lambda: tuple(
             o.strip() for o in _env("CORS_ORIGINS", "http://localhost:5173").split(",") if o.strip()
@@ -44,6 +48,9 @@ class Settings:
     at_username: str = field(default_factory=lambda: _env("AT_USERNAME"))
     at_api_key: str = field(default_factory=lambda: _env("AT_API_KEY"))
     at_sender_id: str = field(default_factory=lambda: _env("AT_SENDER_ID"))
+
+    # Vercel Cron sends "Authorization: Bearer $CRON_SECRET" to /v1/cron/*.
+    cron_secret: str = field(default_factory=lambda: _env("CRON_SECRET"))
 
     # Business rules.
     stale_after_minutes: int = field(default_factory=lambda: _int("STALE_AFTER_MINUTES", 60))

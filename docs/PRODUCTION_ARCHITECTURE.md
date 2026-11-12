@@ -200,8 +200,10 @@ bedalert/
 
 **Hosting within free-tier limits:** all web apps are built from ONE Vercel
 project as separate pages with separate bundles (e.g. `/`, `/hospital`,
-`/dispatch`), so the public never loads staff code, and we only ever need one
-Supabase project, one Render service and one Vercel project. Security does
+`/dispatch`), so the public never loads staff code. The API is a second
+Vercel project (a Python function; SMS are sent by the request that queued
+them, with a daily cron as a safety net). So we only ever need one Supabase
+project and two Vercel projects. Security does
 not depend on the split: every API route checks the caller's role.
 
 ---

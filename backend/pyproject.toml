@@ -1,0 +1,17 @@
+# Used by Vercel to build the API (Vercel project root directory: backend).
+# Keep `dependencies` in step with requirements.txt, which local runs use.
+[project]
+name = "bedalert-api"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.121.0",
+    "pydantic>=2.7.4",
+    "psycopg[binary,pool]>=3.2",
+    "pyjwt[crypto]>=2.8",
+    "httpx>=0.27",
+    "python-multipart>=0.0.9",
+]
+
+[tool.vercel]
+entrypoint = "main:app"

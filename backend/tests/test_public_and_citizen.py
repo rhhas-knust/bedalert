@@ -127,3 +127,20 @@ def test_last_bed_under_real_concurrency(client, db):
         codes = list(pool.map(lambda h: client.post("/v1/holds", headers=h, json=body).status_code, tokens))
     assert sorted(codes) == [201] + [409] * 19
     assert db.execute("select count(*) from holds").fetchone()[0] == 1
+
+
+def test_sms_is_sent_by_the_request_that_queued_it(client, db):
+    # Serverless hosts have no background worker: the request flushes its
+    # own messages after commit (SMS_WORKER=0 in tests).
+    hid = add_hospital(db, "Hosp S", wards={"ER": (5, 0)})
+    headers = citizen_headers(client)
+    r = client.post("/v1/holds", headers=headers,
+                    json={"hospital_id": hid, "type": "emergency", "condition_category": "chest_pain"})
+    assert r.status_code == 201, r.text
+    statuses = {row[0] for row in db.execute("select status from sms_outbox")}
+    assert statuses == {"sent"}
+
+
+def test_cron_flush_requires_secret(client, db):
+    assert client.get("/v1/cron/flush-sms").status_code == 401
+    assert client.get("/v1/cron/flush-sms", headers={"Authorization": "Bearer wrong"}).status_code == 401

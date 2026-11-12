@@ -25,7 +25,7 @@ See `docs/PRODUCTION_ARCHITECTURE.md` for the reasoning and the roadmap.
   role-based access on every route, holds that expire instead of bookings
   that consume beds forever, automatic re-routing when a hospital declines
   an ambulance patient, hospital API keys, phone OTP, USSD in the
-  Africa's Talking format, SMS outbox, audit log. 31 tests.
+  Africa's Talking format, SMS outbox, audit log. 33 tests.
 - **Phase 2 (done): the apps.** Four web apps in `frontend/`, built from one
   Vercel project, each loading only its own code:
 
@@ -37,8 +37,9 @@ See `docs/PRODUCTION_ARCHITECTURE.md` for the reasoning and the roadmap.
   | `/admin` | Network admin | BedAlert team: verify hospitals, agencies, roles, data freshness |
 
   Checked end to end in a real browser by `frontend/e2e/smoke.py`.
-- **Next:** go live (Supabase + API host + Vercel), real SMS/USSD through
-  Africa's Talking, then a pilot district.
+- **Going live:** Supabase for the database and staff login; Vercel for
+  both the API (`backend/`, as a Vercel Function) and the apps. Then real
+  SMS/USSD through Africa's Talking, then a pilot district.
 
 ## How a bed hold works
 
@@ -134,5 +135,5 @@ python e2e/smoke.py http://localhost:4173 e2e-screenshots
 
 ## Deploying
 
-See `DEPLOYMENT.md`. Supabase (database + staff login), an API host, and
-Vercel for the web apps (all four from one project).
+See `DEPLOYMENT.md`. Supabase (database + staff login) and two Vercel
+projects from this repo: the API (`backend/`) and the web apps (`frontend/`).
