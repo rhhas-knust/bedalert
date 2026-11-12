@@ -37,6 +37,14 @@ Free accounts can have 2 active projects. If both are in use, pause one
      python -m scripts.grant_role --user-id <uuid> --email you@example.com --role network_admin
    ```
 
+   Or, without Python, in Supabase → SQL Editor:
+
+   ```sql
+   insert into staff (user_id, email) values ('<uuid>', 'you@example.com')
+     on conflict (user_id) do update set email = excluded.email;
+   insert into memberships (user_id, role) values ('<uuid>', 'network_admin');
+   ```
+
 Every table has row level security switched on with no policies, so the
 Supabase browser keys cannot read or write BedAlert data directly. Only the
 API can.
