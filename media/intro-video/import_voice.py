@@ -4,7 +4,7 @@ Record yourself reading RECORDING_SCRIPT.md: every numbered line, in order,
 with a clear pause (about 2 seconds of silence) between lines. Any format
 works (m4a, mp3, wav, ogg, opus...). Then:
 
-    python import_voice.py <recording> <build_dir> [<whisper_model_dir> | <spans.json>]
+    python import_voice.py <recording> <build_dir> [<whisper_model_dir> | <spans.json>] [--script other.json]
 
 A spans.json (see voice/robert-narration.spans.json) gives hand-checked
 [start, end] seconds for every line, plus optional "extra" unscripted parts
@@ -184,9 +184,16 @@ def split_lines_asr(audio: np.ndarray, texts: list, model_dir: str) -> list:
 
 
 def main() -> None:
+    argv = sys.argv[:]
+    script_path = HERE / "script.json"
+    if "--script" in argv:  # e.g. ../update2/script.json
+        i = argv.index("--script")
+        script_path = pathlib.Path(argv[i + 1])
+        del argv[i:i + 2]
+    sys.argv = argv
     recording, out = sys.argv[1], pathlib.Path(sys.argv[2])
     out.mkdir(parents=True, exist_ok=True)
-    script = json.loads((HERE / "script.json").read_text())
+    script = json.loads(script_path.read_text())
     lines = [(scene, line) for scene in script["scenes"] for line in scene["lines"]]
     audio = load(recording)
     third = sys.argv[3] if len(sys.argv) > 3 else None

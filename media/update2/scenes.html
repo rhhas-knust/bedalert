@@ -1,0 +1,322 @@
+<!doctype html>
+<html class="portrait">
+<head>
+<meta charset="utf-8">
+<title>BedAlert update 2</title>
+<!--
+  Vertical (1080x1920) TikTok update: Phase 2 done, the four apps working.
+  Screens in assets/ are real screenshots from media/update2/capture.py.
+  Rendered by media/intro-video/render.py with --portrait --scenes this file.
+-->
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 500; src: url(fonts/space-grotesk-latin-500-normal.woff2); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url(fonts/space-grotesk-latin-700-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 500; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 700; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); }
+  :root { --navy: #0B2545; --ink: #071a33; --teal: #0F6E6E; --mint: #8FE3C6; --amber: #E8A33D; --coral: #E15554; --paper: #F4F7FA; --muted: #9FB3C8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+  body { font-family: Inter, sans-serif; color: var(--paper); }
+  .stage { position: absolute; inset: 0; background:
+    radial-gradient(900px 700px at 80% 8%, rgba(15,110,110,.55), rgba(15,110,110,0) 70%),
+    radial-gradient(800px 700px at 0% 100%, rgba(232,163,61,.14), rgba(232,163,61,0) 70%),
+    linear-gradient(#0d2b52, var(--ink)); }
+  .brand { position: absolute; top: 64px; left: 70px; display: flex; align-items: center; gap: 14px; font-family: "Space Grotesk"; font-weight: 700; font-size: 34px; z-index: 5; }
+  .brand .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 7px rgba(143,227,198,.18); }
+  .brand .tag { font-family: "Plex Mono"; font-weight: 500; font-size: 22px; color: var(--mint); letter-spacing: .12em; margin-left: 10px; padding: 6px 12px; border: 2px solid rgba(143,227,198,.4); border-radius: 10px; }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .kicker { font-family: "Plex Mono"; font-weight: 500; font-size: 28px; letter-spacing: .12em; text-transform: uppercase; color: var(--mint); }
+  .head { position: absolute; left: 70px; right: 70px; top: 170px; }
+  .head h2 { font-family: "Space Grotesk"; font-weight: 700; font-size: 66px; line-height: 1.05; letter-spacing: -.02em; margin-top: 10px; }
+  .caption { position: absolute; left: 50%; bottom: 70px; transform: translateX(-50%); width: max-content; max-width: 960px; padding: 18px 30px;
+    background: rgba(4,14,28,.82); border-radius: 18px; font-size: 40px; line-height: 1.3; text-align: center; font-weight: 600; opacity: 0; z-index: 10; }
+
+  /* phone */
+  .phone { position: absolute; left: 50%; top: 420px; width: 596px; height: 1260px; margin-left: -298px; border-radius: 70px; background: #050b14;
+    padding: 18px; box-shadow: 0 40px 90px rgba(0,0,0,.55), 0 0 0 3px rgba(255,255,255,.12) inset; }
+  .phone .screen { position: relative; width: 560px; height: 1212px; border-radius: 54px; overflow: hidden; background: #f4f7fa; }
+  .screen img { position: absolute; left: 0; top: 0; width: 560px; opacity: 0; }
+  /* cropped desktop / card shots */
+  .card { position: absolute; left: 50%; border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 40px 90px rgba(0,0,0,.5); opacity: 0; }
+  .card img { position: absolute; display: block; }
+  .tap { position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; background: rgba(255,255,255,.35); border: 5px solid #fff;
+    box-shadow: 0 0 0 6px rgba(15,110,110,.5); opacity: 0; z-index: 4; pointer-events: none; }
+  .hl { position: absolute; border: 6px solid var(--amber); border-radius: 20px; opacity: 0; z-index: 3; box-shadow: 0 0 40px rgba(232,163,61,.6); }
+
+  /* hook */
+  #hook .big { position: absolute; left: 70px; right: 70px; top: 300px; font-family: "Space Grotesk"; font-weight: 700; font-size: 128px; line-height: .98; letter-spacing: -.03em; }
+  #hook .big span { color: var(--mint); }
+  .done { display: inline-flex; align-items: center; gap: 16px; margin-top: 34px; font-family: "Plex Mono"; font-weight: 700; font-size: 34px; color: var(--navy); background: var(--mint); padding: 14px 26px; border-radius: 16px; }
+  .fan img { position: absolute; border-radius: 26px; box-shadow: 0 30px 70px rgba(0,0,0,.55); opacity: 0; }
+
+  /* apps grid */
+  .tiles { position: absolute; left: 70px; right: 70px; top: 470px; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+  .tile { background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.14); border-radius: 30px; padding: 26px; opacity: 0; }
+  .tile .ic { font-size: 62px; }
+  .tile .t { font-family: "Space Grotesk"; font-weight: 700; font-size: 40px; margin-top: 10px; }
+  .tile .w { font-size: 26px; color: var(--muted); margin-top: 6px; }
+  .tile .u { font-family: "Plex Mono"; font-size: 24px; color: var(--mint); margin-top: 14px; }
+  .ledger { position: absolute; left: 70px; right: 70px; top: 1290px; text-align: center; padding: 30px; border-radius: 26px; border: 3px dashed rgba(143,227,198,.55);
+    font-family: "Space Grotesk"; font-weight: 700; font-size: 44px; opacity: 0; }
+  .ledger small { display: block; font-family: Inter; font-weight: 400; font-size: 28px; color: var(--muted); margin-top: 8px; }
+
+  .bigline { position: absolute; left: 70px; right: 70px; text-align: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 64px; line-height: 1.08; opacity: 0; }
+
+  /* next */
+  .chips { display: flex; gap: 16px; margin-top: 26px; flex-wrap: wrap; }
+  .chip { font-family: "Plex Mono"; font-weight: 700; font-size: 26px; padding: 10px 18px; border-radius: 12px; background: rgba(143,227,198,.16); color: var(--mint); }
+  .road { position: absolute; left: 70px; right: 70px; top: 560px; }
+  .step { display: flex; gap: 30px; align-items: flex-start; padding: 34px 32px; margin-bottom: 30px; border-radius: 30px; background: rgba(255,255,255,.06); border: 3px solid rgba(255,255,255,.14); opacity: 0; }
+  .step .n { flex: none; width: 92px; height: 92px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 50px; background: rgba(143,227,198,.15); }
+  .step .t { font-family: "Space Grotesk"; font-weight: 700; font-size: 46px; }
+  .step .d { font-size: 30px; color: var(--muted); margin-top: 8px; line-height: 1.3; }
+  .step .tg { font-family: "Plex Mono"; font-size: 22px; letter-spacing: .1em; color: var(--amber); }
+
+  /* outro */
+  #outro .talk { position: absolute; left: 70px; right: 70px; top: 300px; font-family: "Space Grotesk"; font-weight: 700; font-size: 120px; line-height: 1; letter-spacing: -.03em; opacity: 0; }
+  #outro .who { position: absolute; left: 70px; right: 70px; top: 560px; display: flex; flex-direction: column; gap: 18px; }
+  #outro .who div { font-size: 44px; font-weight: 600; opacity: 0; }
+  #outro .end { position: absolute; left: 70px; right: 70px; top: 900px; font-family: "Space Grotesk"; font-weight: 700; font-size: 70px; line-height: 1.06; color: var(--mint); opacity: 0; }
+  .credits { position: absolute; left: 70px; right: 70px; top: 1180px; padding-top: 34px; border-top: 2px solid rgba(255,255,255,.15); opacity: 0; }
+  .credits .k { font-family: "Plex Mono"; font-size: 24px; letter-spacing: .12em; color: var(--muted); }
+  .credits .p { margin-top: 18px; font-size: 34px; font-weight: 600; }
+  .credits .r { font-size: 27px; color: var(--muted); font-weight: 400; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="stage"></div>
+<div class="brand"><div class="dot"></div>BedAlert <span class="tag">UPDATE · PHASE 2</span></div>
+
+<section class="scene" id="hook">
+  <div class="big">Phase 2<br>is <span>done.</span><br><div class="done">✓ The apps work</div></div>
+  <div class="fan" id="fan"></div>
+</section>
+
+<section class="scene" id="apps">
+  <div class="head"><div class="kicker">What we built</div><h2>Four apps.<br>One live list of free beds.</h2></div>
+  <div class="tiles">
+    <div class="tile" id="t0"><div class="ic">👪</div><div class="t">Find a bed</div><div class="w">For families</div><div class="u">bedalert / </div></div>
+    <div class="tile" id="t1"><div class="ic">🏥</div><div class="t">Hospital portal</div><div class="w">For nurses &amp; ward staff</div><div class="u">/hospital</div></div>
+    <div class="tile" id="t2"><div class="ic">🚑</div><div class="t">Dispatch</div><div class="w">For ambulance controllers</div><div class="u">/dispatch</div></div>
+    <div class="tile" id="t3"><div class="ic">🛡️</div><div class="t">Network admin</div><div class="w">For the BedAlert team</div><div class="u">/admin</div></div>
+  </div>
+  <div class="ledger" id="ledger">● Live bed list<small>Every app reads and updates the same beds, in real time.</small></div>
+</section>
+
+<section class="scene" id="family">
+  <div class="head"><div class="kicker">👪 Family app</div><h2>Hold a bed in seconds</h2></div>
+  <div class="phone"><div class="screen" id="fscreen"></div></div>
+</section>
+
+<section class="scene" id="hospital">
+  <div class="head"><div class="kicker">🏥 Hospital portal</div><h2 id="hosp-h">The nurse sees you coming</h2></div>
+  <div class="phone" id="hphone"><div class="screen" id="hscreen"></div></div>
+  <div id="hcards"></div>
+</section>
+
+<section class="scene" id="dispatch">
+  <div class="head"><div class="kicker">🚑 Dispatch console</div><h2>Best hospitals, ranked</h2></div>
+  <div id="dcards"></div>
+</section>
+
+<section class="scene" id="reroute">
+  <div class="head"><div class="kicker">↪ Automatic re-route</div><h2>Declined? Next bed. Instantly.</h2></div>
+  <div id="rcards"></div>
+  <div class="bigline" id="nocalls" style="top:1290px">No phone calls.<br><span style="color:var(--mint)">No lost minutes.</span></div>
+</section>
+
+<section class="scene" id="tools">
+  <div class="head"><div class="kicker">🏥 For hospitals</div><h2 id="tools-h">One tap, or plug in your system</h2></div>
+  <div id="tcards"></div>
+</section>
+
+<section class="scene" id="next">
+  <div class="head"><div class="kicker">What’s next</div><h2>Road to a real pilot</h2>
+    <div class="chips"><div class="chip">✓ Phase 1 · engine</div><div class="chip">✓ Phase 2 · apps</div></div></div>
+  <div class="road">
+    <div class="step" id="st0"><div class="n">🌐</div><div><div class="tg">NOW</div><div class="t">Go live online</div><div class="d">Secure database and hosting, being set up now</div></div></div>
+    <div class="step" id="st1"><div class="n">📱</div><div><div class="tg">PHASE 3</div><div class="t">SMS &amp; USSD</div><div class="d">Alerts by text, and a short code for any phone, no internet needed</div></div></div>
+    <div class="step" id="st2"><div class="n">📍</div><div><div class="tg">PHASE 4</div><div class="t">Pilot in Kumasi</div><div class="d">A few hospitals and an ambulance station, measured minute by minute</div></div></div>
+  </div>
+</section>
+
+<section class="scene" id="outro">
+  <div class="talk" id="o-talk">Let’s talk.</div>
+  <div class="who"><div id="o0">🏥 Hospitals</div><div id="o1">🚑 Ambulance services</div><div id="o2">🤝 Partners &amp; funders</div></div>
+  <div class="end" id="o-end">Follow BedAlert.<br><span style="color:var(--paper)">Let’s end no bed syndrome, together.</span></div>
+  <div class="credits" id="o-cred">
+    <div class="k">THE TEAM</div>
+    <div class="p">Robert Hasford<div class="r">BSc Biomedical Engineering · KNUST · Class of 2026</div></div>
+    <div class="p">Jayne &amp; Welam<div class="r">Medical Laboratory Science · University of Ghana</div></div>
+  </div>
+</section>
+
+<div class="caption" id="cap"></div>
+
+<script>
+const T = window.TIMINGS;
+const FADE = 0.35;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const span = (t, a, b) => clamp((t - a) / (b - a));
+const prog = (t, a, d) => eo(span(t, a, a + d));
+const scene = (id) => T.scenes.find((s) => s.id === id);
+const lineAt = (id, i) => { const s = scene(id); return s.lines[i].start - s.start; };
+function appear(el, p, dy = 30) { el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * dy}px)`; }
+
+// --- the real screenshots. TAPS (from capture.py's taps.json): per screenshot,
+// its CSS width `w`, a `tap` point and a `box`, all in CSS px.
+const TAPS = window.TAPS || {};
+const info = (n) => TAPS[n] || {};
+function img(src) { const i = document.createElement("img"); i.src = "assets/" + src + ".png"; return i; }
+
+// A phone screen showing a sequence of screenshots (390 CSS px wide).
+function phoneSeq(screenId, names) {
+  const sc = $(screenId), els = {};
+  names.forEach((n) => { els[n] = img(n); sc.appendChild(els[n]); });
+  const tap = document.createElement("div"); tap.className = "tap"; sc.appendChild(tap);
+  return { els, tap, k: 560 / 390 };
+}
+// An element screenshot shown `w` px wide at `top`. Options: maxH (px shown),
+// cropW (CSS px of the left part to show, for very wide elements).
+function cropCard(parent, name, w, top, opt = {}) {
+  const cssW = opt.cropW || info(name).w || 400, k = w / cssW;
+  const c = document.createElement("div"); c.className = "card";
+  c.style.width = w + "px"; c.style.top = top + "px"; c.style.marginLeft = -w / 2 + "px";
+  if (opt.maxH) c.style.height = opt.maxH + "px";
+  const i = img(name); i.style.position = "relative"; i.style.width = (info(name).w || cssW) * k + "px";
+  c.appendChild(i);
+  const tap = document.createElement("div"); tap.className = "tap"; c.appendChild(tap);
+  $(parent).appendChild(c);
+  return { el: c, tap, k, name };
+}
+function showTap(tap, p, k, t, at) {
+  if (!p) return;
+  tap.style.left = p.x * k + "px"; tap.style.top = p.y * k + "px";
+  const u = span(t, at - 0.25, at + 0.45);
+  tap.style.opacity = u > 0 && u < 1 ? Math.sin(Math.PI * u) : 0;
+  tap.style.transform = `scale(${0.6 + 0.6 * u})`;
+}
+function boxEl(card, cls, css = "") {  // a div over the recorded `box` of a card
+  const b = info(card.name).box; if (!b) return document.createElement("div");
+  const d = document.createElement("div"); d.className = cls;
+  d.style.cssText += `position:absolute;left:${b.x * card.k}px;top:${b.y * card.k}px;width:${b.w * card.k}px;height:${b.h * card.k}px;${css}`;
+  card.el.appendChild(d); return d;
+}
+function seqShow(els, list, t) {  // list: [[name, from, to]]
+  for (const [n, a, b] of list) els[n].style.opacity = clamp((t - a) / 0.22) * clamp((b - t) / 0.22);
+}
+
+// hook: three real screens fan in
+const fan = [["f6-held", 330, 110, 1010, -9], ["h2-card-accepted", 520, 560, 1080, 4], ["f7-confirmed", 330, 690, 970, 8]]
+  .map(([n, w, x, y, rot]) => { const i = img(n); i.style.width = w + "px"; i.style.left = x + "px"; i.style.top = y + "px"; i.dataset.rot = rot; $("fan").appendChild(i); return i; });
+
+const F = phoneSeq("fscreen", ["f1-home", "f2-list", "f3-phone", "f5-details", "f6-held"]);
+const H = phoneSeq("hscreen", ["h1-incoming", "f7-confirmed"]);
+const HC1 = cropCard("hcards", "h1-card", 940, 600);
+const HC2 = cropCard("hcards", "h2-card-accepted", 940, 600);
+const D1 = cropCard("dcards", "d1-options", 900, 420, { maxH: 1180 });
+const D2 = cropCard("dcards", "d2-held", 940, 600);
+const R1 = cropCard("rcards", "h4-declining", 900, 440);
+const R2 = cropCard("rcards", "d3-rerouted", 900, 440);
+const RH = boxEl(R2, "hl");
+const B1 = cropCard("tcards", "h3-beds", 760, 420, { maxH: 700 });
+const K1 = cropCard("tcards", "a1-apikey", 960, 1170);
+// never show a whole key, even a throwaway demo one
+const kb = info("a1-apikey").box;
+if (kb) { const m = document.createElement("div");
+  m.style.cssText = `position:absolute;left:${(kb.x + 110) * K1.k}px;top:${kb.y * K1.k}px;width:${(kb.w - 110) * K1.k}px;height:${kb.h * K1.k}px;backdrop-filter:blur(8px);background:rgba(236,253,245,.35);border-radius:8px`;
+  K1.el.appendChild(m); }
+const A1 = cropCard("tcards", "a2-admin", 960, 480, { cropW: 600 });
+
+const draw = {
+  hook(t) {
+    const L1 = lineAt("hook", 1);
+    appear(document.querySelector("#hook .big"), prog(t, 0.05, 0.6), 40);
+    appear(document.querySelector("#hook .done"), prog(t, 1.0, 0.5), 20);
+    fan.forEach((i, k) => { const p = prog(t, L1 + 0.2 + k * 0.35, 0.7); i.style.opacity = p;
+      i.style.transform = `translateY(${(1 - p) * 260}px) rotate(${i.dataset.rot * p}deg)`; });
+  },
+  apps(t) {
+    for (let i = 0; i < 4; i++) appear($("t" + i), prog(t, 0.3 + i * 0.45, 0.5), 30);
+    appear($("ledger"), prog(t, 2.4, 0.6), 20);
+    $("ledger").style.boxShadow = `0 0 ${30 + 20 * Math.sin(t * 4)}px rgba(143,227,198,${0.25 * prog(t, 2.4, 0.6)})`;
+  },
+  family(t) {
+    seqShow(F.els, [["f1-home", -1, 1.8], ["f2-list", 1.8, 4.4], ["f3-phone", 4.4, 6.0], ["f5-details", 6.0, 7.3], ["f6-held", 7.3, 99]], t);
+    const taps = [["f1-home", 1.45], ["f2-list", 4.05], ["f3-phone", 5.65], ["f5-details", 6.95]];
+    const cur = taps.find(([, at]) => t > at - 0.3 && t < at + 0.5);
+    if (cur) showTap(F.tap, info(cur[0]).tap, F.k, t, cur[1]); else F.tap.style.opacity = 0;
+    document.querySelector("#family .phone").style.transform = `scale(${1 + 0.03 * Math.sin(Math.PI * span(t, 7.3, 8.1))})`;
+  },
+  hospital(t) {
+    const L1 = lineAt("hospital", 1);
+    $("hosp-h").textContent = t < L1 - 0.3 ? "The nurse sees you coming" : "“Hospital confirmed”";
+    seqShow(H.els, [["h1-incoming", -1, 1.6], ["f7-confirmed", L1 - 0.2, 99]], t);
+    $("hphone").style.opacity = t < 1.6 ? 1 : clamp((t - (L1 - 0.3)) / 0.3);
+    const cardsOn = clamp((t - 1.5) / 0.3) * clamp((L1 - 0.3 - t) / 0.3);
+    HC1.el.style.opacity = cardsOn * (t < 3.15 ? 1 : 0);
+    HC2.el.style.opacity = cardsOn * (t >= 3.15 ? 1 : 0);
+    HC1.el.style.transform = HC2.el.style.transform = `scale(${0.92 + 0.08 * eo(span(t, 1.5, 2.1))})`;
+    showTap(HC1.tap, info("h1-card").tap, HC1.k, t, 2.95);
+  },
+  dispatch(t) {
+    D1.el.style.opacity = clamp(t / 0.3) * clamp((4.1 - t) / 0.25);
+    D1.el.style.transform = `scale(${0.94 + 0.06 * eo(span(t, 0, 0.6))})`;
+    showTap(D1.tap, info("d1-options").tap, D1.k, t, 3.6);
+    D2.el.style.opacity = clamp((t - 4.1) / 0.3);
+    D2.el.style.transform = `scale(${0.94 + 0.06 * eo(span(t, 4.1, 4.7))})`;
+  },
+  reroute(t) {
+    const L1 = lineAt("reroute", 1);
+    R1.el.style.opacity = clamp(t / 0.3) * clamp((3.3 - t) / 0.25);
+    R1.el.style.transform = `scale(${0.94 + 0.06 * eo(span(t, 0, 0.6))}) translateX(${-60 * eo(span(t, 2.9, 3.3))}px)`;
+    showTap(R1.tap, info("h4-declining").tap, R1.k, t, 2.6);
+    R2.el.style.opacity = clamp((t - 3.3) / 0.3);
+    R2.el.style.transform = `scale(${0.94 + 0.06 * eo(span(t, 3.3, 3.9))})`;
+    RH.style.opacity = clamp((t - 3.9) / 0.3) * (0.7 + 0.3 * Math.sin(t * 6));
+    appear($("nocalls"), prog(t, L1 - 0.1, 0.6), 30);
+  },
+  tools(t) {
+    const L1 = lineAt("tools", 1);
+    $("tools-h").textContent = t < L1 - 0.3 ? "One tap, or plug in your system" : "Every hospital checked";
+    B1.el.style.opacity = clamp(t / 0.3) * clamp((L1 - 0.3 - t) / 0.3);
+    B1.el.style.transform = `scale(${0.94 + 0.06 * eo(span(t, 0, 0.6))})`;
+    K1.el.style.opacity = clamp((t - 2.8) / 0.4) * clamp((L1 - 0.3 - t) / 0.3);
+    K1.el.style.transform = `translateY(${(1 - eo(span(t, 2.8, 3.4))) * 60}px)`;
+    A1.el.style.opacity = clamp((t - (L1 - 0.3)) / 0.35);
+    A1.el.style.transform = `scale(${0.94 + 0.06 * eo(span(t, L1 - 0.3, L1 + 0.3))})`;
+  },
+  next(t) {
+    appear(document.querySelector("#next .chips"), prog(t, 0.2, 0.5), 14);
+    [0.6, 2.9, 5.2].forEach((c, i) => { appear($("st" + i), prog(t, c, 0.55), 30);
+      $("st" + i).style.borderColor = t > c ? (i === 0 ? "var(--mint)" : "rgba(255,255,255,.3)") : ""; });
+  },
+  outro(t) {
+    const L1 = lineAt("outro", 1);
+    appear($("o-talk"), prog(t, 0.05, 0.6), 30);
+    [0.6, 1.3, 2.1].forEach((c, i) => appear($("o" + i), prog(t, c, 0.5), 20));
+    appear($("o-end"), prog(t, L1 - 0.1, 0.7), 30);
+    appear($("o-cred"), prog(t, L1 + 2.2, 0.7), 20);
+  },
+};
+
+window.render = function (now) {
+  const last = T.scenes[T.scenes.length - 1];
+  for (const s of T.scenes) {
+    const el = $(s.id);
+    const o = clamp((now - s.start) / FADE + (s === T.scenes[0] ? 1 : 0)) * (s === last ? 1 : clamp((s.end - now) / FADE));
+    el.style.opacity = now >= s.start - 0.01 && now <= s.end + 0.01 ? o : 0;
+    if (el.style.opacity > 0) draw[s.id](now - s.start);
+  }
+  let cap = null;
+  for (const s of T.scenes) for (const l of s.lines) if (now >= l.start - 0.05 && now <= l.end + 0.3) cap = l.text;
+  $("cap").textContent = cap || "";
+  $("cap").style.opacity = cap ? 1 : 0;
+};
+</script>
+</body>
+</html>

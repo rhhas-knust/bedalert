@@ -1,6 +1,8 @@
 """Generate narration WAVs (one per line) + timings.json with Kokoro TTS.
 
-    python narrate.py <kokoro-v1.0.onnx> <voices-v1.0.bin> <out_dir>
+    python narrate.py <kokoro-v1.0.onnx> <voices-v1.0.bin> <out_dir> [script.json]
+
+The script defaults to script.json next to this file.
 """
 import json
 import pathlib
@@ -13,7 +15,7 @@ from kokoro_onnx import Kokoro
 HERE = pathlib.Path(__file__).parent
 model, voices, out = sys.argv[1], sys.argv[2], pathlib.Path(sys.argv[3])
 out.mkdir(parents=True, exist_ok=True)
-script = json.loads((HERE / "script.json").read_text())
+script = json.loads(pathlib.Path(sys.argv[4] if len(sys.argv) > 4 else HERE / "script.json").read_text())
 kokoro = Kokoro(model, voices)
 
 GAP = 0.35  # silence between lines

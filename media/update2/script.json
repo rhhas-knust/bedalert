@@ -1,0 +1,40 @@
+{
+ "_note": "BedAlert update #2 (TikTok, vertical): Phase 2 done, the four apps working. 'text' = caption, 'say' = how the AI voice pronounces it.",
+ "voice": "af_heart",
+ "speed": 0.95,
+ "scenes": [
+  {"id": "hook", "pad": 0.5, "lines": [
+   {"text": "BedAlert update: phase two is done.", "say": "BedAlert update. Phase two is done."},
+   {"text": "Last time we promised you apps. Here they are, working.", "say": "Last time, we promised you apps. Here they are, working."}
+  ]},
+  {"id": "apps", "pad": 0.6, "lines": [
+   {"text": "Four apps, all connected to one live list of free beds.", "say": "Four apps, all connected to one live list of free beds."}
+  ]},
+  {"id": "family", "pad": 0.5, "lines": [
+   {"text": "In an emergency, a family opens BedAlert and sees free beds near them.", "say": "In an emergency, a family opens BedAlert, and sees free beds near them."},
+   {"text": "They confirm their phone number and hold a bed in seconds.", "say": "They confirm their phone number, and hold a bed in seconds."}
+  ]},
+  {"id": "hospital", "pad": 0.5, "lines": [
+   {"text": "At the hospital, the nurse sees the patient coming and taps accept.", "say": "At the hospital, the nurse sees the patient coming, and taps accept."},
+   {"text": "The family's phone shows: hospital confirmed. Go straight there.", "say": "The family's phone shows: hospital confirmed. Go straight there."}
+  ]},
+  {"id": "dispatch", "pad": 0.4, "lines": [
+   {"text": "Ambulance controllers see the best hospitals ranked, and hold a bed before the ambulance moves.", "say": "Ambulance controllers see the best hospitals, ranked. And hold a bed before the ambulance moves."}
+  ]},
+  {"id": "reroute", "pad": 0.6, "lines": [
+   {"text": "If a hospital has to decline, BedAlert moves the ambulance to the next free bed.", "say": "If a hospital has to decline, BedAlert moves the ambulance to the next free bed."},
+   {"text": "Automatically. No phone calls, no lost minutes.", "say": "Automatically. No phone calls. No lost minutes.", "speed": 0.9}
+  ]},
+  {"id": "tools", "pad": 0.5, "lines": [
+   {"text": "Hospitals update their beds with one tap, or connect their own system with a secure key.", "say": "Hospitals update their beds with one tap, or connect their own system with a secure key."},
+   {"text": "And our team checks every hospital before it appears.", "say": "And our team checks every hospital before it appears."}
+  ]},
+  {"id": "next", "pad": 0.6, "lines": [
+   {"text": "Next: we go live online, add SMS and USSD for any phone, then a pilot with hospitals in Kumasi.", "say": "Next: we go live online. We add SMS and USSD, for any phone. Then, a pilot with hospitals in Kumasi."}
+  ]},
+  {"id": "outro", "pad": 3.2, "lines": [
+   {"text": "Hospitals, ambulance services, partners: let's talk.", "say": "Hospitals, ambulance services, partners: let's talk."},
+   {"text": "Follow BedAlert, and let's end no bed syndrome together.", "say": "Follow BedAlert. And let's end no bed syndrome, together.", "speed": 0.9}
+  ]}
+ ]
+}
