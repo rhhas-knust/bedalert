@@ -1,0 +1,61 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>BedAlert Phase 2 cover</title>
+<!-- TikTok cover, 1080x1920. Render with cover.py. Safe area: x 60–940, y 170–1560
+     (TikTok puts its buttons on the right and the caption at the bottom). -->
+<style>
+  @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url(fonts/space-grotesk-latin-700-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2); }
+  @font-face { font-family: "Inter"; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2); }
+  @font-face { font-family: "Plex Mono"; font-weight: 700; src: url(fonts/ibm-plex-mono-latin-700-normal.woff2); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; color: #F4F7FA; font-family: Inter; position: relative;
+    background: radial-gradient(1000px 800px at 85% 10%, #0F6E6E 0%, rgba(15,110,110,0) 70%),
+                radial-gradient(900px 700px at 0% 95%, rgba(232,163,61,.18), rgba(232,163,61,0) 70%),
+                linear-gradient(#0d2b52, #071a33); }
+  .top { position: absolute; left: 60px; right: 140px; top: 175px; }
+  .tag { display: flex; align-items: center; gap: 14px; font-family: "Plex Mono"; font-weight: 700; font-size: 30px; letter-spacing: .12em; color: #8FE3C6; }
+  .tag i { width: 20px; height: 20px; border-radius: 50%; background: #8FE3C6; box-shadow: 0 0 0 7px rgba(143,227,198,.2); }
+  .phase { font-family: "Space Grotesk"; font-weight: 700; font-size: 200px; line-height: .9; white-space: nowrap; letter-spacing: -.04em; margin-top: 26px; }
+  .phase span { color: #8FE3C6; }
+  .done { display: inline-flex; vertical-align: middle; align-items: center; gap: 16px; margin-top: 26px; background: #8FE3C6; color: #0B2545;
+    font-family: "Space Grotesk"; font-weight: 700; font-size: 56px; padding: 14px 30px 16px; border-radius: 22px; transform: rotate(-2deg); }
+  .sub { font-size: 40px; font-weight: 600; margin-top: 30px; line-height: 1.2; }
+  .sub em { font-style: normal; color: #8FE3C6; }
+
+  .shots { position: absolute; left: 0; right: 0; top: 700px; height: 620px; }
+  .ph { position: absolute; width: 300px; border-radius: 40px; background: #050b14; padding: 10px; box-shadow: 0 30px 70px rgba(0,0,0,.6); }
+  .ph img { display: block; width: 280px; border-radius: 32px; }
+  .cd { position: absolute; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.6); background: #fff; }
+  .cd img { display: block; }
+
+  .apps { position: absolute; left: 60px; right: 140px; top: 1390px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .app { background: rgba(7,26,51,.92); border: 2px solid rgba(255,255,255,.16); border-radius: 20px; padding: 14px 6px; text-align: center; }
+  .app .e { font-size: 42px; }
+  .app .n { font-family: "Space Grotesk"; font-weight: 700; font-size: 24px; margin-top: 4px; line-height: 1.1; }
+  .foot { position: absolute; left: 60px; right: 140px; top: 1525px; display: flex; align-items: center; gap: 12px; font-size: 25px; color: #9FB3C8; }
+  .av { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-family: "Space Grotesk"; font-weight: 700; font-size: 24px; color: #0B2545; }
+</style></head>
+<body>
+<div class="top">
+  <div class="tag"><i></i>BEDALERT · BUILD UPDATE 🇬🇭</div>
+  <div class="phase">PHASE <span>2</span></div>
+  <div class="done">✓ DONE</div>
+  <div class="sub">The apps are <em>working.</em><br>Watch a bed get held in seconds.</div>
+</div>
+
+<div class="shots">
+  <div class="ph" style="left:560px; top:0px; transform: rotate(6deg)"><img src="assets/f7-confirmed.png"></div>
+  <div class="cd" style="left:60px; top:170px; width:520px; transform: rotate(-4deg)"><img src="assets/d3-rerouted.png" style="width:520px"></div>
+</div>
+
+<div class="apps">
+  <div class="app"><div class="e">👪</div><div class="n">Families</div></div>
+  <div class="app"><div class="e">🏥</div><div class="n">Hospitals</div></div>
+  <div class="app"><div class="e">🚑</div><div class="n">Ambulances</div></div>
+  <div class="app"><div class="e">🛡️</div><div class="n">Admin</div></div>
+</div>
+<div class="foot">
+  <div class="av" style="background:#8FE3C6">R</div><div class="av" style="background:#E8A33D">J</div><div class="av" style="background:#F4F7FA">W</div>
+  <span>Students at KNUST &amp; University of Ghana</span>
+</div>
+</body></html>
